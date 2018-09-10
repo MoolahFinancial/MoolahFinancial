@@ -1,13 +1,13 @@
 language: node_js
 node_js:
- — “8.9.4”
+ - “8.9.4”
 branches:
  only:
- — master
+ - master
 before_script:
- — npm install -g ionic cordova
+ - npm install -g ionic cordova
 script:
- — ionic cordova build ios --release
+ - ionic cordova build ios --release
 deploy:
  provider: pages
  skip-cleanup: true
