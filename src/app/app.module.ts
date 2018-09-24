@@ -6,7 +6,9 @@ import { MyApp } from './app.component';
 import { AccountPage } from '../pages/account/account';
 import { HomePage } from '../pages/home/home';
 import { InvestPage } from '../pages/invest/invest';
+import { LoginPage } from '../pages/login/login';
 import { PerformancePage } from '../pages/performance/performance';
+import { RegisterPage } from '../pages/register/register';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -18,7 +20,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AccountPage,
     HomePage,
     InvestPage,
+    LoginPage,
     PerformancePage,
+    RegisterPage,
     TabsPage
   ],
   imports: [
@@ -31,7 +35,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AccountPage,
     HomePage,
     InvestPage,
+    LoginPage,
     PerformancePage,
+    RegisterPage,
     TabsPage
   ],
   providers: [
