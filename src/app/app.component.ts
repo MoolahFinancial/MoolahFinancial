@@ -9,6 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  // Our main home page (The TabsPage contains the home, account, invest, and performance)
   rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
