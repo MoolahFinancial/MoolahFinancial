@@ -2,7 +2,7 @@
   <ion-title>Sign In</ion-title>
   <ion-list>
     <ion-item>
-      <ion-input placeholder="Username" [(ngModel)]="username"></ion-input>
+      <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
     </ion-item>
     <ion-item>
         <ion-input placeholder="Password" type="Password" [(ngModel)]="password"></ion-input>
@@ -11,7 +11,9 @@
 
   <button ion-button full color="light" (click)="login()">Sign in</button>
 
-  <p>Don't have an account?  </p> 
-  <ion-label  [navPush]="goToRegisterPage">Click here</ion-label>
+  <p>Don't have an account? </p> 
+  <button ion-button clear (click)="register()">Click here</button>
+  <br/>
+  <button ion-button color="secondary" clear>Forgot password?</button>
 
 </ion-content>

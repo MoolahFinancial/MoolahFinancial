@@ -29,7 +29,7 @@ export class LoginPage {
     this.navCtrl.push(TabsPage);
   }
 
-  goToRegisterPage(){
+  register(){
     this.navCtrl.push(RegisterPage);
   }
 
