@@ -3,6 +3,7 @@ os: osx
 osx_image: xcode9.4
 
 before_install:
+  - npm config set loglevel warn
   - npm update
   
 node_js:
