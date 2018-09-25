@@ -14,6 +14,7 @@ before_script:
  - npm install -g ionic cordova
 script:
  - ionic cordova build ios --release
+ - npm t
  
 notifications:
     slack: moolahfinancial:e6ZfUHKytRlTodjUX8Ck3N40
