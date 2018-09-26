@@ -67,7 +67,7 @@
     "ionic-mocks-jest": "^1.3.3",
     "jest": "^23.6.0",
     "reflect-metadata": "^0.1.12",
-    "ts-jest": "^23.10.1",
+    "ts-jest": "^23.10.2",
     "typescript": "^2.9.2"
   },
   "description": "An Ionic project",
