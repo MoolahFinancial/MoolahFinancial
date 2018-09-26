@@ -6,7 +6,7 @@ before_install:
   - npm config set loglevel warn
   
 node_js:
- - "stable"
+ - "8.11.3"
 branches:
  only:
  - master
