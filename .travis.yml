@@ -14,6 +14,7 @@ before_script:
  - npm install -g ionic cordova
 script:
  - ionic cordova build ios --release
+after_script:
  - npm t
  
 notifications:
