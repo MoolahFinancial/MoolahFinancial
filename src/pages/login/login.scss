@@ -1,6 +1,11 @@
 page-login {
     ion-title * {
-        margin-top: 30vh;
+        margin-top: 10vh;
         margin-bottom: 5vh;
+    }
+    .displayed {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 }
