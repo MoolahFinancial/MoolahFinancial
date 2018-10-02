@@ -97,7 +97,7 @@ export class DatabaseProvider {
   // Method to fill up our database using a dump file
   fillDatabase(){
     this.http.get('assets/startDump.sql') // Retrieve our sql file
-    .map(res => res.text()
+    .map(res => res.text())
     .subscribe(sql => {
       // Pass in the text from the file and interpret it as sql queries (note: we can also interpret the string as JSON if we wanted to)
       this.sqlitePorter.importSqlToDb(this.database, sql)
