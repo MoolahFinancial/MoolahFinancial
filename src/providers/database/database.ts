@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
@@ -13,7 +13,7 @@ export class DatabaseProvider {
   database: SQLiteObject;
   private databaseReady: BehaviorSubject<boolean>;
 
-  constructor(public http: HttpClient, private sqlitePorter: SQLitePorter, private storage: Storage, private sqlite: SQLite, private platform: Platform) {
+  constructor(public http: Http/*HttpClient*/, private sqlitePorter: SQLitePorter, private storage: Storage, private sqlite: SQLite, private platform: Platform) {
     this.databaseReady = new BehaviorSubject(false); // By default, our database is not yet ready
     // Once our platform is ready, create or open our database
     this.platform.ready().then(() => {
@@ -41,21 +41,21 @@ export class DatabaseProvider {
     return this.databaseReady.asObservable();
   }
 
-  // Method to fill up our database using a dump file
-  fillDatabase(){
-    // Retrieve the contents of our sql file
-    this.http.get<string>('assets/startDump.sql')
-    .subscribe(sql => { 
-        // Pass in the text from the file and interpret it as sql queries (note: we can also interpret the string as JSON if we wanted to)
-        this.sqlitePorter.importSqlToDb(this.database, sql)
-        .then(data => {
-            this.databaseReady.next(true);
-            // Set the database as being filled out as true (to avoid populating the db with the same dummy data)
-            this.storage.set('database_filled', true);
-        })
-        .catch(e => console.log(e));
-    });
-  }
+  // // Method to fill up our database using a dump file
+  // fillDatabase(){
+  //   // Retrieve the contents of our sql file
+  //   this.http.get<string>('assets/startDump.sql')
+  //   .subscribe(sql => { 
+  //       // Pass in the text from the file and interpret it as sql queries (note: we can also interpret the string as JSON if we wanted to)
+  //       this.sqlitePorter.importSqlToDb(this.database, sql)
+  //       .then(data => {
+  //           this.databaseReady.next(true);
+  //           // Set the database as being filled out as true (to avoid populating the db with the same dummy data)
+  //           this.storage.set('database_filled', true);
+  //       })
+  //       .catch(e => console.log(e));
+  //   });
+  // }
 
   /*
   * NOTE: Below here is where we perform some sql queries on our database
@@ -94,19 +94,19 @@ export class DatabaseProvider {
 
 
 
-  // // Method to fill up our database using a dump file
-  // fillDatabase(){
-  //   this.http.get('assets/startDump.sql') // Retrieve our sql file
-  //   .map(res => res.text()
-  //   .subscribe(sql => {
-  //     // Pass in the text from the file and interpret it as sql queries (note: we can also interpret the string as JSON if we wanted to)
-  //     this.sqlitePorter.importSqlToDb(this.database, sql)
-  //     .then(data => {
-  //       this.databaseReady.next(true); // Set the database as being filled out as true
-  //       // Set the database as being filled out as true (to avoid populating the db with the same dummy data)
-  //       this.storage.set('database_filled', true);
-  //     })
-  //     .catch(e => console.log(e));
-  //   });
-  // }
+  // Method to fill up our database using a dump file
+  fillDatabase(){
+    this.http.get('assets/startDump.sql') // Retrieve our sql file
+    .map(res => res.text()
+    .subscribe(sql => {
+      // Pass in the text from the file and interpret it as sql queries (note: we can also interpret the string as JSON if we wanted to)
+      this.sqlitePorter.importSqlToDb(this.database, sql)
+      .then(data => {
+        this.databaseReady.next(true); // Set the database as being filled out as true
+        // Set the database as being filled out as true (to avoid populating the db with the same dummy data)
+        this.storage.set('database_filled', true);
+      })
+      .catch(e => console.log(e));
+    });
+  }
 }
