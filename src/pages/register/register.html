@@ -16,5 +16,22 @@
 
 
 <ion-content padding>
-  <h1>Do you need an account? Too bad</h1>
+  <h1>May the sqlite odds forever be in your favor</h1>
+  <ion-item>
+    <ion-label stacked>What is your first name?</ion-label>
+    <ion-inpout [[ngModel]]="user.firstName"></ion-inpout>
+    <ion-label stacked>What is your middle name?</ion-label>
+    <ion-inpout [[ngModel]]="user.middleName"></ion-inpout>
+    <ion-label stacked>What is your last name?</ion-label>
+    <ion-inpout [[ngModel]]="user.lastName"></ion-inpout>
+  </ion-item>
+  <button ion-button full (click)="addUser()">Create Account</button>
+
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <h2>{{ user.firstName }}</h2>
+      <h2>{{ user.middleName }}</h2>
+      <h2>{{ user.lastName }}</h2>
+    </ion-item>
+  </ion-list>
 </ion-content>
