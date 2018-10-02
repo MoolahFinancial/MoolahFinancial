@@ -37,7 +37,7 @@ export class DatabaseProvider {
   }
 
   // Method to make sure our database is ready
-  getDatabaseState() { 
+  public getDatabaseState() { 
     return this.databaseReady.asObservable();
   }
 
