@@ -13,7 +13,12 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
 import { DatabaseProvider } from '../providers/database/database';
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpModule } from '@angular/http';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
+import { SQLite } from '@ionic-native/sqlite';
 
 @NgModule({
   declarations: [
@@ -28,6 +33,8 @@ import { DatabaseProvider } from '../providers/database/database';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -45,7 +52,9 @@ import { DatabaseProvider } from '../providers/database/database';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DatabaseProvider
+    DatabaseProvider,
+    SQLitePorter,
+    SQLite
   ]
 })
 export class AppModule {}
