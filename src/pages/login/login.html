@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding center text-center>
+<ion-content padding center text-center class="no-scroll">
   <ion-title>Sign In</ion-title>
   <ion-list>
     <ion-item>
@@ -16,13 +16,13 @@
     <ion-item>
         <ion-input placeholder="Password" type="Password" [(ngModel)]="password"></ion-input>
       </ion-item>
+
   </ion-list>
 
   <button ion-button full color="light" (click)="login()">Sign in</button>
 
   <p>Don't have an account? </p>
-  <button ion-button clear (click)="register()">Click here</button>
+  <button ion-button clear (click)="register()">CLICK HERE</button>
   <br/>
-  <button ion-button color="secondary" clear>Forgot password?</button>
-
+  <button ion-button color="secondary" clear>FORGOT PASSWORD?</button>
 </ion-content>
