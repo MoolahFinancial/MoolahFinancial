@@ -10,8 +10,8 @@ node_js:
 branches:
  only:
  - master
- - move_folders
 before_script:
+ - cd ../front_end
  - npm install -g ionic cordova
 script:
  - ionic cordova build ios --release
