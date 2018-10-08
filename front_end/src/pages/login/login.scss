@@ -1,0 +1,14 @@
+page-login {
+    ion-title * {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+    .displayed {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .no-scroll {
+      overflow: hidden;
+    }
+}
