@@ -1,3 +1,4 @@
+using moolahFinancialAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace moolahFinancialAPI.Controllers
 {
     public class UserController : ApiController
     {
-        // GET: api/User
-        public IEnumerable<string> Get()
+        // GET: api/Users
+        public List<User> GetAllUsers()
         {
-            return new string[] { "value1", "value2" };
+            return null;
         }
 
         // GET: api/User/5
