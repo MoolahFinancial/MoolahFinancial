@@ -1,4 +1,5 @@
 using moolahFinancialAPI.Models;
+using moolahFinancialAPI.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,28 +9,17 @@ using System.Web.Http;
 
 namespace moolahFinancialAPI.Controllers
 {
-    public class UserController : ApiController
+  public class UserController : ApiController
+  {
+    // GET: api/Users
+    public GetUserByIdResponse GetUserById(GetUserByIdRequest request)
     {
-        // GET: api/Users
-        public List<User> GetAllUsers()
-        {
-            return null;
-        }
+      var response = new GetUserByIdResponse();
 
-        // GET: api/User/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST: api/User
-        public void Post([FromBody]string value)
-        {
-        }
 
-        // DELETE: api/User/5
-        public void Delete(int id)
-        {
-        }
+
+      return response;
     }
+  }
 }

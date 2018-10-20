@@ -265,8 +265,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interface\UserInterface.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\Portfolio.cs" />
+    <Compile Include="Models\PortfolioTag.cs" />
+    <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rest\GetUserByIdRequest.cs" />
+    <Compile Include="Rest\GetUserByIdResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
