@@ -5,6 +5,6 @@ namespace moolahFinancialAPI.Rest
 {
   public class GetUserByIdResponse
   {
-    public List<User> Users;
+    public User User;
   }
 }
