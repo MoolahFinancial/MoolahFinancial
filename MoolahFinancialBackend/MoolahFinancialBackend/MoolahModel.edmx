@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MoolahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="first_line" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="second_line" Type="nvarchar" MaxLength="255" />
+          <Property Name="suite_number" Type="nvarchar" MaxLength="255" />
+          <Property Name="city" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="state" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="postal_code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="is_deleted" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="portfolio_id" Type="int" Nullable="false" />
+          <Property Name="news_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="time_of_story" Type="datetime" Nullable="false" />
+          <Property Name="author" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="source" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="updated_at" Type="datetime" Nullable="false" />
+          <Property Name="article_url" Type="nvarchar" MaxLength="255" />
+          <Property Name="content" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="portfolio">
+          <Key>
+            <PropertyRef Name="portfolio_id" />
+          </Key>
+          <Property Name="portfolio_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="updated_at" Type="datetime" Nullable="false" />
+          <Property Name="risk" Type="int" Nullable="false" />
+          <Property Name="is_active" Type="int" Nullable="false" />
+          <Property Name="is_deleted" Type="bit" Nullable="false" />
+          <Property Name="photo" Type="image" />
+        </EntityType>
+        <EntityType Name="portfolio_tag">
+          <Key>
+            <PropertyRef Name="portfolio_id" />
+            <PropertyRef Name="tag_id" />
+          </Key>
+          <Property Name="portfolio_id" Type="int" Nullable="false" />
+          <Property Name="tag_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="question_id" />
+          </Key>
+          <Property Name="question_id" Type="int" Nullable="false" />
+          <Property Name="question_text" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tag">
+          <Key>
+            <PropertyRef Name="tag_id" />
+          </Key>
+          <Property Name="tag_id" Type="int" Nullable="false" />
+          <Property Name="tag_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="portfolio_id" Type="int" Nullable="false" />
+          <Property Name="transaction_id" Type="int" Nullable="false" />
+          <Property Name="investment_time" Type="datetime" Nullable="false" />
+          <Property Name="investment_amount" Type="money" Nullable="false" />
+          <Property Name="is_sale" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="middle_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="date_of_birth" Type="datetime" Nullable="false" />
+          <Property Name="citizenship" Type="nvarchar" MaxLength="255" />
+          <Property Name="notification_preference" Type="int" Nullable="false" />
+          <Property Name="ssn" Type="int" />
+          <Property Name="primary_phone" Type="nvarchar" MaxLength="30" />
+          <Property Name="secondary_phone" Type="nvarchar" MaxLength="30" />
+          <Property Name="is_deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_tag">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="tag_id" />
+          </Key>
+          <Property Name="question_id" Type="int" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="tag_id" Type="int" Nullable="false" />
+          <Property Name="question_answer" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_address_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="address" Type="Self.address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_portfolio">
+          <End Role="portfolio" Type="Self.portfolio" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="portfolio">
+              <PropertyRef Name="portfolio_id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="portfolio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_portfolio_tag_portfolio">
+          <End Role="portfolio" Type="Self.portfolio" Multiplicity="1" />
+          <End Role="portfolio_tag" Type="Self.portfolio_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="portfolio">
+              <PropertyRef Name="portfolio_id" />
+            </Principal>
+            <Dependent Role="portfolio_tag">
+              <PropertyRef Name="portfolio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_portfolio_tag_tag">
+          <End Role="tag" Type="Self.tag" Multiplicity="1" />
+          <End Role="portfolio_tag" Type="Self.portfolio_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tag">
+              <PropertyRef Name="tag_id" />
+            </Principal>
+            <Dependent Role="portfolio_tag">
+              <PropertyRef Name="tag_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_portfolio">
+          <End Role="portfolio" Type="Self.portfolio" Multiplicity="1" />
+          <End Role="transaction" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="portfolio">
+              <PropertyRef Name="portfolio_id" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="portfolio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="transaction" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_question">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="question_id" />
+            </Principal>
+            <Dependent Role="user_tag">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_tag">
+          <End Role="tag" Type="Self.tag" Multiplicity="1" />
+          <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tag">
+              <PropertyRef Name="tag_id" />
+            </Principal>
+            <Dependent Role="user_tag">
+              <PropertyRef Name="tag_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_tag">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoolahModelStoreContainer">
+          <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="portfolio" EntityType="Self.portfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="portfolio_tag" EntityType="Self.portfolio_tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tag" EntityType="Self.tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transaction" EntityType="Self.transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_tag" EntityType="Self.user_tag" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_address_user" Association="Self.FK_address_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_portfolio" Association="Self.FK_News_portfolio">
+            <End Role="portfolio" EntitySet="portfolio" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_portfolio_tag_portfolio" Association="Self.FK_portfolio_tag_portfolio">
+            <End Role="portfolio" EntitySet="portfolio" />
+            <End Role="portfolio_tag" EntitySet="portfolio_tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_portfolio_tag_tag" Association="Self.FK_portfolio_tag_tag">
+            <End Role="tag" EntitySet="tag" />
+            <End Role="portfolio_tag" EntitySet="portfolio_tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_portfolio" Association="Self.FK_transaction_portfolio">
+            <End Role="portfolio" EntitySet="portfolio" />
+            <End Role="transaction" EntitySet="transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_user" Association="Self.FK_transaction_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="transaction" EntitySet="transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_tag_question" Association="Self.FK_user_tag_question">
+            <End Role="question" EntitySet="question" />
+            <End Role="user_tag" EntitySet="user_tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_tag_tag" Association="Self.FK_user_tag_tag">
+            <End Role="tag" EntitySet="tag" />
+            <End Role="user_tag" EntitySet="user_tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_tag_user" Association="Self.FK_user_tag_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_tag" EntitySet="user_tag" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoolahModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="first_line" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="second_line" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="suite_number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="postal_code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_address_user" FromRole="address" ToRole="user" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="portfolio_id" Type="Int32" Nullable="false" />
+          <Property Name="news_id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="time_of_story" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="author" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="source" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="article_url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="portfolio" Relationship="Self.FK_News_portfolio" FromRole="News" ToRole="portfolio" />
+        </EntityType>
+        <EntityType Name="portfolio">
+          <Key>
+            <PropertyRef Name="portfolio_id" />
+          </Key>
+          <Property Name="portfolio_id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="risk" Type="Int32" Nullable="false" />
+          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_portfolio" FromRole="portfolio" ToRole="News" />
+          <NavigationProperty Name="transactions" Relationship="Self.FK_transaction_portfolio" FromRole="portfolio" ToRole="transaction" />
+          <NavigationProperty Name="tags" Relationship="Self.portfolio_tag" FromRole="portfolio" ToRole="tag" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="question_id" />
+          </Key>
+          <Property Name="question_id" Type="Int32" Nullable="false" />
+          <Property Name="question_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user_tag" Relationship="Self.FK_user_tag_question" FromRole="question" ToRole="user_tag" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tag">
+          <Key>
+            <PropertyRef Name="tag_id" />
+          </Key>
+          <Property Name="tag_id" Type="Int32" Nullable="false" />
+          <Property Name="tag_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user_tag" Relationship="Self.FK_user_tag_tag" FromRole="tag" ToRole="user_tag" />
+          <NavigationProperty Name="portfolios" Relationship="Self.portfolio_tag" FromRole="tag" ToRole="portfolio" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="portfolio_id" Type="Int32" Nullable="false" />
+          <Property Name="transaction_id" Type="Int32" Nullable="false" />
+          <Property Name="investment_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="investment_amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="is_sale" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="portfolio" Relationship="Self.FK_transaction_portfolio" FromRole="transaction" ToRole="portfolio" />
+          <NavigationProperty Name="user" Relationship="Self.FK_transaction_user" FromRole="transaction" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middle_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="citizenship" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="notification_preference" Type="Int32" Nullable="false" />
+          <Property Name="ssn" Type="Int32" />
+          <Property Name="primary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="secondary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="addresses" Relationship="Self.FK_address_user" FromRole="user" ToRole="address" />
+          <NavigationProperty Name="transactions" Relationship="Self.FK_transaction_user" FromRole="user" ToRole="transaction" />
+          <NavigationProperty Name="user_tag" Relationship="Self.FK_user_tag_user" FromRole="user" ToRole="user_tag" />
+        </EntityType>
+        <EntityType Name="user_tag">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="tag_id" />
+          </Key>
+          <Property Name="question_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="tag_id" Type="Int32" Nullable="false" />
+          <Property Name="question_answer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="question" Relationship="Self.FK_user_tag_question" FromRole="user_tag" ToRole="question" />
+          <NavigationProperty Name="tag" Relationship="Self.FK_user_tag_tag" FromRole="user_tag" ToRole="tag" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_tag_user" FromRole="user_tag" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_address_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="address" Type="Self.address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_portfolio">
+          <End Role="portfolio" Type="Self.portfolio" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="portfolio">
+              <PropertyRef Name="portfolio_id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="portfolio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_portfolio">
+          <End Role="portfolio" Type="Self.portfolio" Multiplicity="1" />
+          <End Role="transaction" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="portfolio">
+              <PropertyRef Name="portfolio_id" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="portfolio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_question">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="question_id" />
+            </Principal>
+            <Dependent Role="user_tag">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_tag">
+          <End Role="tag" Type="Self.tag" Multiplicity="1" />
+          <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tag">
+              <PropertyRef Name="tag_id" />
+            </Principal>
+            <Dependent Role="user_tag">
+              <PropertyRef Name="tag_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="transaction" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_tag">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="portfolio_tag">
+          <End Role="portfolio" Type="Self.portfolio" Multiplicity="*" />
+          <End Role="tag" Type="Self.tag" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="addresses" EntityType="Self.address" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="portfolios" EntityType="Self.portfolio" />
+          <EntitySet Name="questions" EntityType="Self.question" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tags" EntityType="Self.tag" />
+          <EntitySet Name="transactions" EntityType="Self.transaction" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="user_tag" EntityType="Self.user_tag" />
+          <AssociationSet Name="FK_address_user" Association="Self.FK_address_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="address" EntitySet="addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_portfolio" Association="Self.FK_News_portfolio">
+            <End Role="portfolio" EntitySet="portfolios" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_portfolio" Association="Self.FK_transaction_portfolio">
+            <End Role="portfolio" EntitySet="portfolios" />
+            <End Role="transaction" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_tag_question" Association="Self.FK_user_tag_question">
+            <End Role="question" EntitySet="questions" />
+            <End Role="user_tag" EntitySet="user_tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_tag_tag" Association="Self.FK_user_tag_tag">
+            <End Role="tag" EntitySet="tags" />
+            <End Role="user_tag" EntitySet="user_tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_user" Association="Self.FK_transaction_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="transaction" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_tag_user" Association="Self.FK_user_tag_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_tag" EntitySet="user_tag" />
+          </AssociationSet>
+          <AssociationSet Name="portfolio_tag" Association="Self.portfolio_tag">
+            <End Role="portfolio" EntitySet="portfolios" />
+            <End Role="tag" EntitySet="tags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoolahModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="addresses">
+            <EntityTypeMapping TypeName="MoolahModel.address">
+              <MappingFragment StoreEntitySet="address">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="first_line" ColumnName="first_line" />
+                <ScalarProperty Name="second_line" ColumnName="second_line" />
+                <ScalarProperty Name="suite_number" ColumnName="suite_number" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="MoolahModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="portfolio_id" ColumnName="portfolio_id" />
+                <ScalarProperty Name="news_id" ColumnName="news_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="time_of_story" ColumnName="time_of_story" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="article_url" ColumnName="article_url" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="portfolios">
+            <EntityTypeMapping TypeName="MoolahModel.portfolio">
+              <MappingFragment StoreEntitySet="portfolio">
+                <ScalarProperty Name="portfolio_id" ColumnName="portfolio_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="risk" ColumnName="risk" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="MoolahModel.question">
+              <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="question_text" ColumnName="question_text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MoolahModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tags">
+            <EntityTypeMapping TypeName="MoolahModel.tag">
+              <MappingFragment StoreEntitySet="tag">
+                <ScalarProperty Name="tag_id" ColumnName="tag_id" />
+                <ScalarProperty Name="tag_name" ColumnName="tag_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transactions">
+            <EntityTypeMapping TypeName="MoolahModel.transaction">
+              <MappingFragment StoreEntitySet="transaction">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="portfolio_id" ColumnName="portfolio_id" />
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="investment_time" ColumnName="investment_time" />
+                <ScalarProperty Name="investment_amount" ColumnName="investment_amount" />
+                <ScalarProperty Name="is_sale" ColumnName="is_sale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="MoolahModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="citizenship" ColumnName="citizenship" />
+                <ScalarProperty Name="notification_preference" ColumnName="notification_preference" />
+                <ScalarProperty Name="ssn" ColumnName="ssn" />
+                <ScalarProperty Name="primary_phone" ColumnName="primary_phone" />
+                <ScalarProperty Name="secondary_phone" ColumnName="secondary_phone" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_tag">
+            <EntityTypeMapping TypeName="MoolahModel.user_tag">
+              <MappingFragment StoreEntitySet="user_tag">
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="tag_id" ColumnName="tag_id" />
+                <ScalarProperty Name="question_answer" ColumnName="question_answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="portfolio_tag" TypeName="MoolahModel.portfolio_tag" StoreEntitySet="portfolio_tag">
+            <EndProperty Name="portfolio">
+              <ScalarProperty Name="portfolio_id" ColumnName="portfolio_id" />
+            </EndProperty>
+            <EndProperty Name="tag">
+              <ScalarProperty Name="tag_id" ColumnName="tag_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
