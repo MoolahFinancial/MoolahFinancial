@@ -7,6 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Here is the account page</h2>
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+      {{ item }}
+    </button>
+  </ion-list>
 </ion-content>
