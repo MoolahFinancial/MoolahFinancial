@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)" detail-push>
       {{ item }}
     </button>
   </ion-list>

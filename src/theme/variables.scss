@@ -14,7 +14,10 @@ $app-direction: ltr;
 
 @import "ionic.globals";
 
-
+//Enable the right-arrow icon on lists
+$item-md-detail-push-show: true;
+$item-wp-detail-push-show: true;
+$item-ios-detail-push-show: true;
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
