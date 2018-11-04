@@ -11,9 +11,9 @@ import { PerformancePage } from '../performance/performance';
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab2Root = AccountPage;
-  tab3Root = InvestPage;
-  tab4Root = PerformancePage;
+  tab2Root = InvestPage;
+  tab3Root = PerformancePage;
+  tab4Root = AccountPage;
 
   constructor() {
 
