@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,15 +16,16 @@ namespace MoolahFinancialBackend.Controllers
     {
         private MoolahEntities db = new MoolahEntities();
 
-        // GET: api/Users
-        public IQueryable<user> Getusers()
+        [Route("api/Users")]
+        public IQueryable<user> GetAllUsers()
         {
             return db.users;
         }
 
         // GET: api/Users/5
         [ResponseType(typeof(user))]
-        public IHttpActionResult Getuser(int id)
+        [Route("api/Users/{id}")]
+        public IHttpActionResult GetUserById(int id)
         {
             user user = db.users.Find(id);
             if (user == null)
