@@ -16,6 +16,7 @@ namespace MoolahFinancialBackend.Controllers
     {
         private MoolahEntities db = new MoolahEntities();
 
+        // GET
         [Route("api/Users")]
         public IQueryable<user> GetAllUsers()
         {
@@ -36,8 +37,9 @@ namespace MoolahFinancialBackend.Controllers
             return Ok(user);
         }
 
-        // PUT: api/Users/5
+        // PUT
         [ResponseType(typeof(void))]
+        [Route("api/Users/edit/{id}")]
         public IHttpActionResult Putuser(int id, user user)
         {
             if (!ModelState.IsValid)
@@ -71,7 +73,8 @@ namespace MoolahFinancialBackend.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Users
+        // POST
+        [Route("api/Users/post/{id}")]
         [ResponseType(typeof(user))]
         public IHttpActionResult Postuser(user user)
         {
@@ -101,7 +104,8 @@ namespace MoolahFinancialBackend.Controllers
             return CreatedAtRoute("DefaultApi", new { id = user.user_id }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE
+        [Route("api/Users/delete/{id}")]
         [ResponseType(typeof(user))]
         public IHttpActionResult Deleteuser(int id)
         {
