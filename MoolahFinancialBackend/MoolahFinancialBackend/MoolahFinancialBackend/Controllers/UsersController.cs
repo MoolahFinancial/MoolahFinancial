@@ -74,7 +74,7 @@ namespace MoolahFinancialBackend.Controllers
         }
 
         // POST
-        [Route("api/Users/post/{id}")]
+        [Route("api/Users/post")]
         [ResponseType(typeof(user))]
         public IHttpActionResult Postuser(user user)
         {
