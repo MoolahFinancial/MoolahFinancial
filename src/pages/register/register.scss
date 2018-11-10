@@ -26,19 +26,25 @@ page-register {
     width: 207%;
   }
 
+  ion-input {
+    ::placeholder {
+        color: #9297a0;
+    }
+  }
+
   ion-list {
     margin: 0;
   }
 
-  .heading-text {
-    flex: 1;
-    align-items: center;
-    text-align: center;
-  }
-
-  .heading-text h3 {
-    color: #fff;
-  }
+  // .heading-text {
+  //   flex: 1;
+  //   align-items: center;
+  //   text-align: center;
+  // }
+  //
+  // .heading-text h3 {
+  //   color: #fff;
+  // }
   .account-form {
     flex: 1;
   }
