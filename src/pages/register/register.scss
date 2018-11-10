@@ -1,7 +1,50 @@
+.ios, .md {
 page-register {
   .displayed {
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
+
+  .scroll-content {
+    //background-color: map-get($colors, primary);
+    display: flex;
+    flex-direction: column;
+  }
+
+  ion-item {
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    background-color: #e8ebef !important;
+    opacity: 0.7;
+    font-size: .9em;
+  }
+
+  ion-list {
+    margin: 0;
+  }
+
+  .heading-text {
+    flex: 1;
+    align-items: center;
+    text-align: center;
+  }
+
+  .heading-text h3 {
+    color: #fff;
+  }
+  .account-form {
+    flex: 1;
+  }
+  .continue-button {
+          width: 100%;
+          border-radius: 30px;
+          margin-top: 30px;
+          font-size: 0.9em;
+          //background-color: transparent;
+          background-color: map-get($colors, primary);
+          border: 1px solid #fff;
+      }
+}
 }
