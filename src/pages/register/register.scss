@@ -6,6 +6,21 @@ page-register {
     margin-right: auto;
   }
 
+  ion-icon {
+    text-align: center;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  p {
+    color: #9297a0;
+    font-size: .7em;
+    text-align: center;
+    padding-top: -10px;
+  }
+
   .scroll-content {
     //background-color: map-get($colors, primary);
     display: flex;
