@@ -18,6 +18,7 @@ $app-direction: ltr;
 $item-md-detail-push-show: true;
 $item-wp-detail-push-show: true;
 $item-ios-detail-push-show: true;
+
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
@@ -89,3 +90,12 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+// @font-face {
+//   font-family: DefaultFont;
+//   src: url(".../assets/fonts/roboto-regular.ttf");
+// }
+//
+// body, span, button, h1, h2, h3, h4, h5, h6 {
+//   font-family: 'DefaultFont' !important;
+// }

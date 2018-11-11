@@ -1,3 +1,4 @@
+.ios, .md {
 page-login {
     ion-title * {
         margin-top: 5vh;
@@ -8,7 +9,28 @@ page-login {
       margin-left: auto;
       margin-right: auto;
     }
-    .no-scroll {
-      overflow: hidden;
+    .scroll-content {
+      display: flex;
+      flex-direction: column;
     }
+
+    ion-item {
+      border-radius: 10px;
+      padding-left: 10px;
+      margin-bottom: 10px;
+      background-color: #e8ebef !important;
+      opacity: 0.7;
+      font-size: .9em;
+    }
+
+    ion-input {
+      ::placeholder {
+          color: #9297a0;
+      }
+    }
+
+    ion-list {
+      margin: 0;
+    }
+}
 }

@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content padding center text-center class="no-scroll">
-  <ion-title>Sign In</ion-title>
+<!--  <ion-title>Sign In</ion-title>
+  <ion-row>
+    <ion-col>
   <ion-list>
     <ion-item>
       <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
@@ -16,8 +18,26 @@
     <ion-item>
         <ion-input placeholder="Password" type="Password" [(ngModel)]="password"></ion-input>
       </ion-item>
-
   </ion-list>
+  </ion-col>
+  </ion-row> -->
+  <h4 padding>Sign In</h4>
+  <ion-row class ="login-form">
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+          <ion-input [(ngModel)]="email" placeholder="Email" type="email"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label><ion-icon name="eye"></ion-icon></ion-label>
+          <ion-input [(ngModel)]="password" placeholder="Password" type="password"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 
   <button ion-button full color="light" (click)="login()">Sign in</button>
 
