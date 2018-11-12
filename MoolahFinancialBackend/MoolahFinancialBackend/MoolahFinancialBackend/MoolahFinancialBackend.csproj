@@ -212,7 +212,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MoolahModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\News.cs">
+    <Compile Include="Models\news.cs">
       <DependentUpon>MoolahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\portfolio.cs">

@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="183f171279314906a9a44f1230e53bba" Name="Diagram1">
         <EntityTypeShape EntityType="MoolahModel.address" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoolahModel.News" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="MoolahModel.portfolio" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MoolahModel.question" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="MoolahModel.sysdiagram" Width="1.5" PointX="7.75" PointY="9.5" IsExpanded="true" />
@@ -15,13 +14,14 @@
         <EntityTypeShape EntityType="MoolahModel.user" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MoolahModel.user_tag" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
         <AssociationConnector Association="MoolahModel.FK_address_user" ManuallyRouted="false" />
-        <AssociationConnector Association="MoolahModel.FK_News_portfolio" ManuallyRouted="false" />
         <AssociationConnector Association="MoolahModel.FK_transaction_portfolio" ManuallyRouted="false" />
         <AssociationConnector Association="MoolahModel.FK_user_tag_question" ManuallyRouted="false" />
         <AssociationConnector Association="MoolahModel.FK_user_tag_tag" ManuallyRouted="false" />
         <AssociationConnector Association="MoolahModel.FK_transaction_user" ManuallyRouted="false" />
         <AssociationConnector Association="MoolahModel.FK_user_tag_user" ManuallyRouted="false" />
         <AssociationConnector Association="MoolahModel.portfolio_tag" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MoolahModel.news" Width="1.5" PointX="3" PointY="16.25" />
+        <AssociationConnector Association="MoolahModel.FK_news_portfolio" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

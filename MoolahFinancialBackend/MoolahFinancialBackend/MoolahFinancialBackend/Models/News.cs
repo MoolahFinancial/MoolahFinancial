@@ -12,7 +12,7 @@ namespace MoolahFinancialBackend.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class news
     {
         public int portfolio_id { get; set; }
         public int news_id { get; set; }
