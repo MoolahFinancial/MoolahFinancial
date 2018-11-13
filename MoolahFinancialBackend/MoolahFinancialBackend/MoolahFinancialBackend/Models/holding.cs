@@ -12,16 +12,14 @@ namespace MoolahFinancialBackend.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class transaction
+    public partial class holding
     {
-        public int user_id { get; set; }
+        public int holding_id { get; set; }
+        public string holding_name { get; set; }
+        public decimal weight { get; set; }
+        public decimal fees_per_year { get; set; }
         public int portfolio_id { get; set; }
-        public int transaction_id { get; set; }
-        public System.DateTime investment_time { get; set; }
-        public decimal investment_amount { get; set; }
-        public bool is_sale { get; set; }
     
-        public virtual user user { get; set; }
         public virtual portfolio portfolio { get; set; }
     }
 }
