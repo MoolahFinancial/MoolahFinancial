@@ -16,7 +16,13 @@ namespace MoolahFinancialBackend.Controllers
     {
         private MoolahEntities db = new MoolahEntities();
 
-        // GET
+        /*
+         * Method: GetAllUsers()
+         * Description: Retrieves all the users in the database (both deleted and non-deleted users)
+         * HTTP Method: Get
+         * Example call: api/Users
+         */
+        
         [Route("api/Users")]
         public IQueryable<user> GetAllUsers()
         {
@@ -24,6 +30,11 @@ namespace MoolahFinancialBackend.Controllers
         }
 
         // GET: api/Users/5
+        /// <summary>  
+        /// Returns a given user based on the passed in id.
+        /// </summary>  
+        /// <param name="id"></param>  
+        /// <returns></returns> 
         [ResponseType(typeof(user))]
         [Route("api/Users/{id}")]
         public IHttpActionResult GetUserById(int id)
