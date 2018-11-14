@@ -8,8 +8,30 @@
 </ion-header>
 
 <ion-content class="invest-cards">
+  <ion-searchbar
+       (ionInput)="filterTech($event.target.value)"></ion-searchbar>
+       <!-- 
+<ul class="filters" radio-group>
+  <li>
+    <ion-label>Auto</ion-label>
+    <ion-radio value="auto" (ionSelect)="onFilter($event)"></ion-radio>
+  </li>
+  <li>
+    <ion-label>Tech</ion-label>
+    <ion-radio value="tech" (ionSelect)="onFilter($event)"></ion-radio>
+  </li>
+  <li>
+    <ion-label>All</ion-label>
+    <ion-radio value="all" checked (ionSelect)="onFilter($event)"></ion-radio>
+  </li>
+</ul> -->
 
-  <ion-card>
+<ion-card *ngFor="let technology of technologies">
+  <img src="{{technology.image}}"/>
+  <div class="card-title">{{technology.name}}</div>
+  <div class="card-subtitle">{{technology.risk}}</div>
+</ion-card>
+  <!-- <ion-card>
     <img src="assets/imgs/card-amsterdam.png"/>
     <div class="card-title">Smart Beta</div>
     <div class="card-subtitle">Moderate/Risky</div>
@@ -25,5 +47,5 @@
     <img src="assets/imgs/work-7.jpg"/>
     <div class="card-title">Whole Foods</div>
     <div class="card-subtitle">Very Low</div>
-  </ion-card>
+  </ion-card> -->
 </ion-content>
