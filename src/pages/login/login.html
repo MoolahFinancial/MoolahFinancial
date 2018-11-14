@@ -36,14 +36,14 @@
           <ion-input [(ngModel)]="password" placeholder="Password" type="password"></ion-input>
         </ion-item>
       </ion-list>
-    </ion-col>
       <button ion-button full color="light" (click)="login()">Sign in</button>
+      <button ion-button clear (click)="register()">SIGN UP</button>
+      <button ion-button color="secondary" clear>FORGOT PASSWORD?</button>
+    </ion-col>
+
   </ion-row>
 
 
 
-  <p>Don't have an account? </p>
-  <button ion-button clear (click)="register()">CLICK HERE</button>
-  <br/>
-  <button ion-button color="secondary" clear>FORGOT PASSWORD?</button>
+
 </ion-content>
