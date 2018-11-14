@@ -21,13 +21,25 @@ export class InvestPage {
         name: 'Whole Foods',
         risk: 'Moderate/Risky',
         image: 'assets/imgs/card-amsterdam.png',
-        type: 'tech'
+        type: 'food'
       },
       {
         name: 'Tesla Motors',
         risk: 'Very Risky',
-        image: 'assets/imgs/moon.jpg',
+        image: 'assets/imgs/audi.jpg',
         type: 'auto'
+      },
+      {
+        name: 'Facebook',
+        risk: 'Low Risk',
+        image: 'assets/imgs/work-7.jpg',
+        type: 'tech'
+      },
+      {
+        name: 'Twitter',
+        risk: 'Very Risky',
+        image: 'assets/imgs/moon.jpg',
+        type: 'tech'
       }
     ];
   }

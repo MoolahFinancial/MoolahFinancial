@@ -10,21 +10,18 @@
 <ion-content class="invest-cards">
   <ion-searchbar
        (ionInput)="filterTech($event.target.value)"></ion-searchbar>
-       <!-- 
-<ul class="filters" radio-group>
-  <li>
-    <ion-label>Auto</ion-label>
-    <ion-radio value="auto" (ionSelect)="onFilter($event)"></ion-radio>
-  </li>
-  <li>
-    <ion-label>Tech</ion-label>
-    <ion-radio value="tech" (ionSelect)="onFilter($event)"></ion-radio>
-  </li>
-  <li>
-    <ion-label>All</ion-label>
-    <ion-radio value="all" checked (ionSelect)="onFilter($event)"></ion-radio>
-  </li>
-</ul> -->
+
+<ion-list>
+  <ion-item>
+    <ion-label fixed>Category</ion-label>
+    <ion-select>
+      <ion-option value="all" (ionSelect)="onFilter($event)">All</ion-option>
+      <ion-option value="auto" (ionSelect)="onFilter($event)">Auto</ion-option>
+      <ion-option value="tech" (ionSelect)="onFilter($event)">Tech</ion-option>
+            <ion-option value="food" (ionSelect)="onFilter($event)">Food</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
 
 <ion-card *ngFor="let technology of technologies">
   <img src="{{technology.image}}"/>
