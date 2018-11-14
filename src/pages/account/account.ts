@@ -15,4 +15,12 @@ export class AccountPage {
     console.log("Selected Item", item);
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad AccountPage');
+  }
+
+  logout() {
+    
+  }
+
 }

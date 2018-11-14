@@ -4,4 +4,13 @@ page-home {
     margin-left: auto;
     margin-right: auto;
   }
+  .logout-button {
+          width: 100%;
+          border-radius: 30px;
+          margin-top: 30px;
+          font-size: 0.9em;
+          //background-color: transparent;
+          background-color: map-get($colors, primary);
+          border: 1px solid #fff;
+      }
 }
