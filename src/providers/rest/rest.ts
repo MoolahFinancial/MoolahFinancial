@@ -11,8 +11,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RestProvider {
 
-  //apiUrl = 'http://moolah-financial-api.azurewebsites.net/';
-  apiUrl = 'https://jsonplaceholder.typicode.com';
+  //apiUrl = 'http://moolah-financial-api.azurewebsites.net/api';
+  apiUrl = 'https://jsonplaceholder.typicode.com'; //this one works
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
