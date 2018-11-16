@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { App, NavController} from 'ionic-angular';
 import { LoginPage } from '../login/login';
-// import { App } from '..src/app/app.component';
 
 @Component({
   selector: 'page-home',
@@ -25,8 +24,6 @@ export class AccountPage {
     console.log("Logout");
     var nav = this.app.getRootNav();
     nav.setRoot(LoginPage);
-    //this.navCtrl.push(LoginPage);
-    //this.navCtrl.RootNav.setRoot(LoginPage);
   }
 
 }
