@@ -91,11 +91,15 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 
-// @font-face {
-//   font-family: DefaultFont;
-//   src: url(".../assets/fonts/roboto-regular.ttf");
-// }
-//
-// body, span, button, h1, h2, h3, h4, h5, h6 {
-//   font-family: 'DefaultFont' !important;
-// }
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Raleway Thin"), local("Raleway Thin"), url("#{$font-path}/raleway_thin-webfont.woff") format("woff"), url("#{$font-path}/raleway_thin-webfont.ttf") format("truetype");
+}
+
+$font-family-base: "Raleway";
+
+// $font-family-ios-base: "Raleway", -apple-system, "Roboto", sans-serif;
+// $font-family-md-base: "Raleway", -apple-system, "Roboto", sans-serif;
+// $font-family-wp-base: "Raleway", -apple-system, "Roboto", sans-serif;
