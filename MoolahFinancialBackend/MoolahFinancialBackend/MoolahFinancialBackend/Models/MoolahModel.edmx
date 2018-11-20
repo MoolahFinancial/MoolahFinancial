@@ -120,6 +120,7 @@
           <Property Name="primary_phone" Type="nvarchar" MaxLength="30" />
           <Property Name="secondary_phone" Type="nvarchar" MaxLength="30" />
           <Property Name="is_deleted" Type="bit" Nullable="false" />
+          <Property Name="risk" Type="decimal" Precision="2" Scale="2" />
         </EntityType>
         <EntityType Name="user_tag">
           <Key>
@@ -347,29 +348,8 @@
           <Property Name="investment_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="investment_amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="is_sale" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="user" Relationship="Self.FK_transaction_user" FromRole="transaction" ToRole="user" />
           <NavigationProperty Name="portfolio" Relationship="MoolahModel.FK_transaction_portfolio" FromRole="transaction" ToRole="portfolio" />
-        </EntityType>
-        <EntityType Name="user">
-          <Key>
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="middle_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="citizenship" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="notification_preference" Type="Int32" Nullable="false" />
-          <Property Name="ssn" Type="Int32" />
-          <Property Name="primary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="secondary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="transactions" Relationship="Self.FK_transaction_user" FromRole="user" ToRole="transaction" />
-          <NavigationProperty Name="user_tag" Relationship="Self.FK_user_tag_user" FromRole="user" ToRole="user_tag" />
-          <NavigationProperty Name="addresses" Relationship="MoolahModel.FK_address_user" FromRole="user" ToRole="address" />
+          <NavigationProperty Name="user" Relationship="MoolahModel.FK_transaction_user" FromRole="transaction" ToRole="user" />
         </EntityType>
         <EntityType Name="user_tag">
           <Key>
@@ -382,7 +362,7 @@
           <Property Name="question_answer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="question" Relationship="Self.FK_user_tag_question" FromRole="user_tag" ToRole="question" />
           <NavigationProperty Name="tag" Relationship="Self.FK_user_tag_tag" FromRole="user_tag" ToRole="tag" />
-          <NavigationProperty Name="user" Relationship="Self.FK_user_tag_user" FromRole="user_tag" ToRole="user" />
+          <NavigationProperty Name="user" Relationship="MoolahModel.FK_user_tag_user" FromRole="user_tag" ToRole="user" />
         </EntityType>
         <Association Name="FK_user_tag_question">
           <End Role="question" Type="Self.question" Multiplicity="0..1" />
@@ -408,36 +388,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_transaction_user">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="transaction" Type="Self.transaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="transaction">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_tag_user">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="user_tag">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="MoolahEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="questions" EntityType="Self.question" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tags" EntityType="Self.tag" />
           <EntitySet Name="transactions" EntityType="Self.transaction" />
-          <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="user_tag" EntityType="Self.user_tag" />
           <AssociationSet Name="FK_user_tag_question" Association="Self.FK_user_tag_question">
             <End Role="question" EntitySet="questions" />
@@ -445,14 +400,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_user_tag_tag" Association="Self.FK_user_tag_tag">
             <End Role="tag" EntitySet="tags" />
-            <End Role="user_tag" EntitySet="user_tag" />
-          </AssociationSet>
-          <AssociationSet Name="FK_transaction_user" Association="Self.FK_transaction_user">
-            <End Role="user" EntitySet="users" />
-            <End Role="transaction" EntitySet="transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_tag_user" Association="Self.FK_user_tag_user">
-            <End Role="user" EntitySet="users" />
             <End Role="user_tag" EntitySet="user_tag" />
           </AssociationSet>
           <EntitySet Name="holdings" EntityType="MoolahModel.holding" />
@@ -475,9 +422,18 @@
             <End Role="tag" EntitySet="tags" />
           </AssociationSet>
           <EntitySet Name="addresses" EntityType="MoolahModel.address" />
+          <EntitySet Name="users" EntityType="MoolahModel.user" />
           <AssociationSet Name="FK_address_user" Association="MoolahModel.FK_address_user">
             <End Role="user" EntitySet="users" />
             <End Role="address" EntitySet="addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_user" Association="MoolahModel.FK_transaction_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="transaction" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_tag_user" Association="MoolahModel.FK_user_tag_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_tag" EntitySet="user_tag" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="holding">
@@ -584,6 +540,28 @@
           <Property Name="is_primary_address" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="user" Relationship="MoolahModel.FK_address_user" FromRole="address" ToRole="user" />
         </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="middle_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="citizenship" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="notification_preference" Type="Int32" Nullable="false" />
+          <Property Name="ssn" Type="Int32" />
+          <Property Name="primary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="secondary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
+          <Property Name="risk" Type="Decimal" Precision="2" Scale="2" />
+          <NavigationProperty Name="addresses" Relationship="MoolahModel.FK_address_user" FromRole="user" ToRole="address" />
+          <NavigationProperty Name="transactions" Relationship="MoolahModel.FK_transaction_user" FromRole="user" ToRole="transaction" />
+          <NavigationProperty Name="user_tag" Relationship="MoolahModel.FK_user_tag_user" FromRole="user" ToRole="user_tag" />
+        </EntityType>
         <Association Name="FK_address_user">
           <End Type="MoolahModel.user" Role="user" Multiplicity="1" />
           <End Type="MoolahModel.address" Role="address" Multiplicity="*" />
@@ -592,6 +570,30 @@
               <PropertyRef Name="user_id" />
             </Principal>
             <Dependent Role="address">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_user">
+          <End Type="MoolahModel.user" Role="user" Multiplicity="1" />
+          <End Type="MoolahModel.transaction" Role="transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_user">
+          <End Type="MoolahModel.user" Role="user" Multiplicity="1" />
+          <End Type="MoolahModel.user_tag" Role="user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_tag">
               <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -638,25 +640,6 @@
                 <ScalarProperty Name="investment_time" ColumnName="investment_time" />
                 <ScalarProperty Name="investment_amount" ColumnName="investment_amount" />
                 <ScalarProperty Name="is_sale" ColumnName="is_sale" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="MoolahModel.user">
-              <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-                <ScalarProperty Name="citizenship" ColumnName="citizenship" />
-                <ScalarProperty Name="notification_preference" ColumnName="notification_preference" />
-                <ScalarProperty Name="ssn" ColumnName="ssn" />
-                <ScalarProperty Name="primary_phone" ColumnName="primary_phone" />
-                <ScalarProperty Name="secondary_phone" ColumnName="secondary_phone" />
-                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -733,6 +716,26 @@
                 <ScalarProperty Name="second_line" ColumnName="second_line" />
                 <ScalarProperty Name="first_line" ColumnName="first_line" />
                 <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="MoolahModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="risk" ColumnName="risk" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+                <ScalarProperty Name="secondary_phone" ColumnName="secondary_phone" />
+                <ScalarProperty Name="primary_phone" ColumnName="primary_phone" />
+                <ScalarProperty Name="ssn" ColumnName="ssn" />
+                <ScalarProperty Name="notification_preference" ColumnName="notification_preference" />
+                <ScalarProperty Name="citizenship" ColumnName="citizenship" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
