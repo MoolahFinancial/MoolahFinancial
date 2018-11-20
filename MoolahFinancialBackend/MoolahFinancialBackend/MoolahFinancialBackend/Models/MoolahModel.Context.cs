@@ -25,7 +25,6 @@ namespace MoolahFinancialBackend.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<question> questions { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tag> tags { get; set; }
@@ -35,5 +34,6 @@ namespace MoolahFinancialBackend.Models
         public virtual DbSet<holding> holdings { get; set; }
         public virtual DbSet<news> news { get; set; }
         public virtual DbSet<portfolio> portfolios { get; set; }
+        public virtual DbSet<address> addresses { get; set; }
     }
 }

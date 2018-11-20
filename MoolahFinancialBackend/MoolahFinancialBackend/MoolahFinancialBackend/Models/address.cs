@@ -22,7 +22,8 @@ namespace MoolahFinancialBackend.Models
         public string city { get; set; }
         public string state { get; set; }
         public string postal_code { get; set; }
-        public string is_deleted { get; set; }
+        public bool is_deleted { get; set; }
+        public bool is_primary_address { get; set; }
     
         public virtual user user { get; set; }
     }
