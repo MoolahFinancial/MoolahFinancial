@@ -98,8 +98,15 @@ $colors: (
   src: local("Raleway Thin"), local("Raleway Thin"), url("#{$font-path}/raleway_thin-webfont.woff") format("woff"), url("#{$font-path}/raleway_thin-webfont.ttf") format("truetype");
 }
 
-$font-family-base: "Raleway";
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Montserrat Regular"), local("Montserrat Regular"), url("#{$font-path}//Montserrat/Montserrat-Semibold.ttf") format("woff"), url("#{$font-path}/Montserrat/Montserrat-Regular.ttf") format("truetype");
+}
 
-// $font-family-ios-base: "Raleway", -apple-system, "Roboto", sans-serif;
-// $font-family-md-base: "Raleway", -apple-system, "Roboto", sans-serif;
-// $font-family-wp-base: "Raleway", -apple-system, "Roboto", sans-serif;
+$font-family-base: "Montserrat";
+
+// $font-family-ios-base: "Montserrat", -apple-system, "Roboto", sans-serif;
+// $font-family-md-base: "Montserrat", -apple-system, "Roboto", sans-serif;
+// $font-family-wp-base: "Montserrat", -apple-system, "Roboto", sans-serif;
