@@ -481,7 +481,7 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetUserById(System.Int32)">
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetUser(System.Int32)">
             <summary>  
             Returns a given user based on the passed in id.
             </summary>  

@@ -37,7 +37,7 @@ namespace MoolahFinancialBackend.Controllers
         /// <returns></returns> 
         [ResponseType(typeof(user))]
         [Route("api/Users/{id}")]
-        public IHttpActionResult GetUserById(int id)
+        public IHttpActionResult GetUser(int id)
         {
             user user = db.users.Find(id);
             if (user == null)
@@ -51,7 +51,7 @@ namespace MoolahFinancialBackend.Controllers
         // PUT
         [ResponseType(typeof(void))]
         [Route("api/Users/edit/{id}")]
-        public IHttpActionResult Putuser(int id, user user)
+        public IHttpActionResult PutUser(int id, user user)
         {
             if (!ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace MoolahFinancialBackend.Controllers
         // POST
         [Route("api/Users/post")]
         [ResponseType(typeof(user))]
-        public IHttpActionResult Postuser(user user)
+        public IHttpActionResult PostUser(user user)
         {
             if (!ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace MoolahFinancialBackend.Controllers
         // DELETE
         [Route("api/Users/delete/{id}")]
         [ResponseType(typeof(user))]
-        public IHttpActionResult Deleteuser(int id)
+        public IHttpActionResult DeleteUser(int id)
         {
             user user = db.users.Find(id);
             if (user == null)

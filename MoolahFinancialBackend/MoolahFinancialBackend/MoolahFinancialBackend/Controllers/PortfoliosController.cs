@@ -24,8 +24,13 @@ namespace MoolahFinancialBackend.Controllers
         }
 
         // GET: api/Portfolio/5
+        /// <summary>  
+        /// Returns a given portfolio based on the passed in id.
+        /// </summary>  
+        /// <param name="id"></param>  
+        /// <returns></returns> 
         [ResponseType(typeof(portfolio))]
-        public IHttpActionResult Getportfolio(int id)
+        public IHttpActionResult GetPortfolio(int id)
         {
             portfolio portfolio = db.portfolios.Find(id);
             if (portfolio == null)
@@ -38,7 +43,7 @@ namespace MoolahFinancialBackend.Controllers
 
         // PUT: api/Portfolio/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putportfolio(int id, portfolio portfolio)
+        public IHttpActionResult PutPortfolio(int id, portfolio portfolio)
         {
             if (!ModelState.IsValid)
             {
@@ -74,7 +79,7 @@ namespace MoolahFinancialBackend.Controllers
         // POST: api/Portfolio
         [ResponseType(typeof(portfolio))]
         [Route("api/Portfolios/post")]
-        public IHttpActionResult Postportfolio(portfolio portfolio)
+        public IHttpActionResult PostPortfolio(portfolio portfolio)
         {
             if (!ModelState.IsValid)
             {
@@ -89,7 +94,7 @@ namespace MoolahFinancialBackend.Controllers
 
         // DELETE: api/Portfolio/5
         [ResponseType(typeof(portfolio))]
-        public IHttpActionResult Deleteportfolio(int id)
+        public IHttpActionResult DeletePortfolio(int id)
         {
             portfolio portfolio = db.portfolios.Find(id);
             if (portfolio == null)
