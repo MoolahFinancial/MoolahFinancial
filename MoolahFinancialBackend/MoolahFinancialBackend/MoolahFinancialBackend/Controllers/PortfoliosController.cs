@@ -73,6 +73,7 @@ namespace MoolahFinancialBackend.Controllers
 
         // POST: api/Portfolio
         [ResponseType(typeof(portfolio))]
+        [Route("api/Portfolios/post")]
         public IHttpActionResult Postportfolio(portfolio portfolio)
         {
             if (!ModelState.IsValid)
