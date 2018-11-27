@@ -81,6 +81,11 @@ namespace MoolahFinancialBackend.Controllers
         [Route("api/Portfolios/post")]
         public IHttpActionResult PostPortfolio(portfolio portfolio)
         {
+            // Set the created_at DateTime variable to be the current time (YYYY-MM-DD HH:MM:SS)
+            portfolio.created_at = DateTime.Now;
+            // When the portfolio is created, the updated_at time should be the same as the created_at time
+            portfolio.updated_at = DateTime.Now;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -89,7 +94,7 @@ namespace MoolahFinancialBackend.Controllers
             db.portfolios.Add(portfolio);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = portfolio.portfolio_id }, portfolio);
+            return CreatedAtRoute("DefaultApi", new { controller = "Portfolios", id = portfolio.portfolio_id }, portfolio);
         }
 
         // DELETE: api/Portfolio/5

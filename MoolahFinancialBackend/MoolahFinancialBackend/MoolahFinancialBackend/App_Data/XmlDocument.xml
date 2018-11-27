@@ -481,6 +481,13 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.PortfoliosController.GetPortfolio(System.Int32)">
+            <summary>  
+            Returns a given portfolio based on the passed in id.
+            </summary>  
+            <param name="id"></param>  
+            <returns></returns> 
+        </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetUser(System.Int32)">
             <summary>  
             Returns a given user based on the passed in id.
