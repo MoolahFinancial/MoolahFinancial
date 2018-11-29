@@ -54,7 +54,7 @@ describe('Dates service', () =>
       expect.assertions(1);
       let currentMonth        = date.returnCurrentMonth();
 
-      expect(currentMonth).toBe("September");
+      expect(currentMonth).toBe("November");
    });
 
 
