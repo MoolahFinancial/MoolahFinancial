@@ -1,0 +1,30 @@
+Below are the scripts being used within postman to test our APIs
+
+Testing in Postman: https://www.getpostman.com/docs/v6/postman/scripts/test_examples
+
+GET http://moolah-financial-api.azurewebsites.net/api/users
+  Tests:
+    pm.test("Get Correct User Data", function () {
+      var users = pm.response.json();
+      pm.expect(users[0]).to.have.property('addresses');
+      pm.expect(users[0]).to.have.property('transactions');
+      pm.expect(users[0]).to.have.property('user_tag');
+      pm.expect(users[0]).to.have.property('user_id');
+      pm.expect(users[0]).to.have.property('first_name');
+      pm.expect(users[0]).to.have.property('middle_name');
+      pm.expect(users[0]).to.have.property('last_name');
+      pm.expect(users[0]).to.have.property('email');
+      pm.expect(users[0]).to.have.property('password');
+      pm.expect(users[0]).to.have.property('date_of_birth');
+      pm.expect(users[0]).to.have.property('citizenship');
+      pm.expect(users[0]).to.have.property('ssn');
+      pm.expect(users[0]).to.have.property('notification_preference');
+      pm.expect(users[0]).to.have.property('primary_phone');
+      pm.expect(users[0]).to.have.property('secondary_phone');
+      pm.expect(users[0]).to.have.property('is_deleted');
+      pm.expect(users[0]).to.have.property('risk');
+    });
+    pm.test("Response time is less than 10000ms", function () {
+      pm.expect(pm.response.responseTime).to.be.below(10000);
+    });
+    

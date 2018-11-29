@@ -19,8 +19,8 @@ namespace MoolahFinancialBackend.Models
         public int tag_id { get; set; }
         public string question_answer { get; set; }
     
+        public virtual user user { get; set; }
         public virtual question question { get; set; }
         public virtual tag tag { get; set; }
-        public virtual user user { get; set; }
     }
 }
