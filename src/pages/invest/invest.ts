@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +8,20 @@ import { NavController} from 'ionic-angular';
 })
 export class InvestPage {
 
+  portfolio: any;
+
   public technologies : Array<any>;
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController, public restProvider: RestProvider) {
+    this.getPort();
+  }
+
+  getPort(){
+    this.restProvider.getPort()
+    .then(data => {
+      this.port = data;
+      console.log(this.port);
+    });
+  }
 
   ionViewDidLoad() {
     this.declareTechnologies();

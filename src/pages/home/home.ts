@@ -9,9 +9,11 @@ import { RestProvider } from '../../providers/rest/rest';
 export class HomePage {
 
   users: any;
+  port: any;
 
   constructor(public navCtrl: NavController, public restProvider: RestProvider) {
     this.getUsers();
+    this.getPort();
   }
 
   getUsers() {
@@ -19,6 +21,14 @@ export class HomePage {
     .then(data => {
       this.users = data;
       console.log(this.users);
+    });
+  }
+
+  getPort(){
+    this.restProvider.getPort()
+    .then(data => {
+      this.port = data;
+      console.log(this.port);
     });
   }
 

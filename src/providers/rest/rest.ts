@@ -25,6 +25,19 @@ export class RestProvider {
       console.log(err);
     });
   });
+
+
+}
+
+  getPort() {
+  return new Promise(resolve => {
+    this.http.get(this.apiUrl+'/Portfolios').subscribe(data => {
+      resolve(data);
+    }, err => {
+      console.log(err);
+    });
+  });
+
 }
 
 /*

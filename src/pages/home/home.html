@@ -14,4 +14,9 @@
       <p>{{user.email}}</p>
     </ion-item>
   </ion-list>
+  <ion-list inset>
+    <ion-item *ngFor="let prt of port">
+      <h2>{{prt.title}}</h2>
+    </ion-item>
+  </ion-list>
 </ion-content>
