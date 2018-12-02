@@ -27,6 +27,16 @@ export class RestProvider {
   });
 }
 
+getPortfolios() {
+return new Promise(resolve => {
+  this.http.get(this.apiUrl+'/Portfolios').subscribe(data => {
+    resolve(data);
+  }, err => {
+    console.log(err);
+  });
+});
+}
+
 /*
 
 Format for adding additional methods for the provider

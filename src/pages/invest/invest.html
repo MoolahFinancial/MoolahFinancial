@@ -23,6 +23,14 @@
   </ion-item>
 </ion-list>
 
+
+  <ion-card *ngFor="let port of portfolio">
+    <img src="assets/imgs/card-amsterdam.png"/>
+    <div class="card-title">{{port.title}}</div>
+    <div class="card-subtitle">{{port.risk}}</div>
+  </ion-card>
+
+
 <ion-card *ngFor="let technology of technologies">
   <img src="{{technology.image}}"/>
   <div class="card-title">{{technology.name}}</div>
