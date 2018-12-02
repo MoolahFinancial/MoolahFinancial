@@ -223,6 +223,7 @@
     <Compile Include="Models\portfolio.cs">
       <DependentUpon>MoolahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PortfolioModel.cs" />
     <Compile Include="Models\question.cs">
       <DependentUpon>MoolahModel.tt</DependentUpon>
     </Compile>
