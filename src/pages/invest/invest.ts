@@ -12,14 +12,14 @@ export class InvestPage {
 
   public technologies : Array<any>;
   constructor(public navCtrl: NavController, public restProvider: RestProvider) {
-    this.getPort();
+    this.getPortfolios();
   }
 
-  getPort(){
-    this.restProvider.getPort()
+  getPortfolios() {
+    this.restProvider.getPortfolios()
     .then(data => {
-      this.port = data;
-      console.log(this.port);
+      this.portfolio = data;
+      console.log(this.portfolio);
     });
   }
 

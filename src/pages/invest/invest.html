@@ -22,12 +22,13 @@
     </ion-select>
   </ion-item>
 </ion-list>
-<ion-card inset *ngFor="let prt of port">
-  <ion-item *ngFor="let prt of port">
-    <img src="assets/imgs/moon.jpg"/>
-    <h2>{{prt.title}}</h2>
-  </ion-item>
-</ion-card>
+
+
+  <ion-card *ngFor="let port of portfolio">
+    <img src="assets/imgs/card-amsterdam.png"/>
+    <div class="card-title">{{port.title}}</div>
+    <div class="card-subtitle">{{port.risk}}</div>
+  </ion-card>
 
 
 <ion-card *ngFor="let technology of technologies">
