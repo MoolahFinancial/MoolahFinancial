@@ -294,6 +294,7 @@
     <Content Include="Models\MoolahModel.edmx.diagram">
       <DependentUpon>MoolahModel.edmx</DependentUpon>
     </Content>
+    <Content Include=".editorconfig" />
     <None Include="Properties\PublishProfiles\moolah-financial-api - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
