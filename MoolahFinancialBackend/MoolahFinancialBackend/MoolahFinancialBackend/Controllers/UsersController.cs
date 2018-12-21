@@ -22,11 +22,23 @@ namespace MoolahFinancialBackend.Controllers
          * HTTP Method: Get
          * Example call: api/Users
          */
-        
+
+        /// <summary>  
+        /// Returns all of the users stored in the database (both deleted an non-deleted users)
+        /// </summary> 
         [Route("api/Users")]
         public IQueryable<user> GetAllUsers()
         {
             return db.users;
+        }
+
+        /// <summary>  
+        /// Returns all active users in the database (non-deleted users)
+        /// </summary> 
+        [Route("api/ActiveUsers")]
+        public IQueryable<user> GetAllActiveUsers()
+        { 
+            return db.users.Where(c => c.is_deleted == false);
         }
 
         // GET: api/Users/5

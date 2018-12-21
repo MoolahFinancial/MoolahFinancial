@@ -488,6 +488,16 @@
             <param name="id"></param>  
             <returns></returns> 
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetAllUsers">
+            <summary>  
+            Returns all of the users stored in the database (both deleted an non-deleted users)
+            </summary> 
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetAllActiveUsers">
+            <summary>  
+            Returns all active users in the database (non-deleted users)
+            </summary> 
+        </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetUser(System.Int32)">
             <summary>  
             Returns a given user based on the passed in id.
