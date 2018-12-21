@@ -238,7 +238,6 @@
     <Compile Include="Models\user.cs">
       <DependentUpon>MoolahModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserResponse.cs" />
     <Compile Include="Models\user_tag.cs">
       <DependentUpon>MoolahModel.tt</DependentUpon>
     </Compile>

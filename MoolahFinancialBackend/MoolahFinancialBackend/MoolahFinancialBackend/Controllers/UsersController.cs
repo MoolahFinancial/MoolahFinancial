@@ -84,7 +84,7 @@ namespace MoolahFinancialBackend.Controllers
             db.SaveChanges();
 
             // Returns a 200 http status with a success message
-            return Ok<string>("Account sucessfully deactivated.");
+            return Ok(new { success = true, message = "Account sucessfully deactivated." });
         }
 
         /// <summary>  
