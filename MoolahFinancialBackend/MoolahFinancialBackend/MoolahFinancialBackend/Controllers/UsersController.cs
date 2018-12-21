@@ -65,8 +65,7 @@ namespace MoolahFinancialBackend.Controllers
         /// Sets an existing user as being deleted. This API doesn't delete a user from the table
         /// but sets is_deleted as being true (don't want to actually delete users).
         /// </summary>  
-        /// <param name="id"></param>  
-        /// <param name="user"></param> 
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(void))]
@@ -84,7 +83,8 @@ namespace MoolahFinancialBackend.Controllers
 
             db.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            // Returns a 200 http status with a success message
+            return Ok<string>("Account sucessfully deactivated.");
         }
 
         /// <summary>  
