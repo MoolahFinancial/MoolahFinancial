@@ -488,6 +488,12 @@
             <param name="id"></param>  
             <returns></returns> 
         </member>
+        <member name="T:MoolahFinancialBackend.Controllers.UsersController">
+            <summary>
+            The User Controller class.
+            Contains all APIs for interacting with the User table.
+            </summary>
+        </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetAllUsers">
             <summary>  
             Returns all of the users stored in the database (both deleted an non-deleted users)
@@ -503,6 +509,14 @@
             Returns a given user based on the passed in id.
             </summary>  
             <param name="id"></param>  
+            <returns></returns> 
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.PutUser(System.Int32,MoolahFinancialBackend.Models.user)">
+            <summary>  
+            Updates the data for an existing user.
+            </summary>  
+            <param name="id"></param>  
+            <param name="user"></param> 
             <returns></returns> 
         </member>
     </members>

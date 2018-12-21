@@ -12,16 +12,13 @@ using MoolahFinancialBackend.Models;
 
 namespace MoolahFinancialBackend.Controllers
 {
+    /// <summary>
+    /// The User Controller class.
+    /// Contains all APIs for interacting with the User table.
+    /// </summary>
     public class UsersController : ApiController
     {
         private MoolahEntities db = new MoolahEntities();
-
-        /*
-         * Method: GetAllUsers()
-         * Description: Retrieves all the users in the database (both deleted and non-deleted users)
-         * HTTP Method: Get
-         * Example call: api/Users
-         */
 
         /// <summary>  
         /// Returns all of the users stored in the database (both deleted an non-deleted users)
@@ -41,7 +38,6 @@ namespace MoolahFinancialBackend.Controllers
             return db.users.Where(c => c.is_deleted == false);
         }
 
-        // GET: api/Users/5
         /// <summary>  
         /// Returns a given user based on the passed in id.
         /// </summary>  
@@ -60,7 +56,12 @@ namespace MoolahFinancialBackend.Controllers
             return Ok(user);
         }
 
-        // PUT
+        /// <summary>  
+        /// Updates the data for an existing user.
+        /// </summary>  
+        /// <param name="id"></param>  
+        /// <param name="user"></param> 
+        /// <returns></returns> 
         [ResponseType(typeof(void))]
         [Route("api/Users/edit/{id}")]
         public IHttpActionResult PutUser(int id, user user)
