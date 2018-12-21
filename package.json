@@ -64,7 +64,6 @@
     "rxjs": "^6.3.2",
     "rxjs-compat": "^6.3.2",
     "sw-toolbox": "3.6.0",
-    "uk.co.workingedge.cordova.plugin.sqliteporter": "^1.0.5",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -80,7 +79,6 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "uk.co.workingedge.cordova.plugin.sqliteporter": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
