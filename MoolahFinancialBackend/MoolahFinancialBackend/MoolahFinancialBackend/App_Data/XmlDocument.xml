@@ -531,7 +531,7 @@
             <summary>  
             Creates a new user
             </summary>
-            <param name="user">The object representing the new user to be inserted into the database</param> 
+            <param name="user"></param> 
             <returns></returns>
         </member>
     </members>

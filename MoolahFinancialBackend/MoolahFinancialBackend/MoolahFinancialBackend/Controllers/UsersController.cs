@@ -50,7 +50,7 @@ namespace MoolahFinancialBackend.Controllers
         /// <returns></returns> 
         [HttpGet]
         [ResponseType(typeof(user))]
-        [Route("{id}")]
+        [Route("{id:int:min(1)}")]
         public IHttpActionResult GetUser(int id)
         {
             user user = db.users.Find(id);
@@ -70,7 +70,7 @@ namespace MoolahFinancialBackend.Controllers
         /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(void))]
-        [Route("deactivate/{id}")]
+        [Route("deactivate/{id:int:min(1)}")]
         public IHttpActionResult DeactivateUser(int id)
         {
             if (!ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace MoolahFinancialBackend.Controllers
         /// <returns></returns> 
         [HttpPut]
         [ResponseType(typeof(void))]
-        [Route("edit/{id}")]
+        [Route("edit/{id:int:min(1)}")]
         public IHttpActionResult PutUser(int id, user user)
         {
             if (!ModelState.IsValid)
@@ -130,41 +130,72 @@ namespace MoolahFinancialBackend.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /*
+         * TODO: CHANGE date_of_birth to be nullable or initialize it 
+         * (vs uses 01/01/1000 while sql server uses 1753-01-01 00:00:00 as the min default date)
+         * More info: https://stackoverflow.com/questions/4608734/the-conversion-of-a-datetime2-data-type-to-a-datetime-data-type-resulted-in-an-o
+         * SqlException: The conversion of a datetime2 data type to a datetime data type resulted in an out-of-range value.
+         * The statement has been terminated.
+         *
+         */
         /// <summary>  
         /// Creates a new user
         /// </summary>
-        /// <param name="user">The object representing the new user to be inserted into the database</param> 
+        /// <param name="user"></param> 
         /// <returns></returns>
         [HttpPost]
         [Route("register", Name = "RegisterUser")]
         [ResponseType(typeof(user))]
         public IHttpActionResult RegisterUser(user user)
         {
-            if (!ModelState.IsValid)
+            // Return an error message if the email already belongs to a different user
+            if(db.users.Any(c => c.email == user.email))
             {
-                return BadRequest(ModelState);
+                // Returns a HTTP 409 Conflict error to explain it's a conflict error
+                return Conflict();
             }
+            
+            // TODO: Added for temp debugging, remove in final version
+            user.date_of_birth = DateTime.Now;
 
             db.users.Add(user);
+            db.SaveChanges();
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.user_id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            user = db.users.FirstOrDefault(c => c.email == user.email);
 
-            return CreatedAtRoute("DefaultApi", new { id = user.user_id }, user);
+            return Ok(new { success = true, message = "Successfully created the user account", user });
         }
+
+        //[HttpPost]
+        //[Route("fsdafaaffd", Name = "afdfadsfdf")]
+        //[ResponseType(typeof(user))]
+        //public IHttpActionResult RegisterUser2(user user)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    db.users.Add(user);
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (UserExists(user.user_id))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return CreatedAtRoute("DefaultApi", new { id = user.user_id }, user);
+        //}
 
         //// DELETE
         //[HttpDelete]
