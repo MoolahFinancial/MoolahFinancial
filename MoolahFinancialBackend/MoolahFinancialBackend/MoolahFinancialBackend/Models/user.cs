@@ -28,7 +28,7 @@ namespace MoolahFinancialBackend.Models
         public string last_name { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public System.DateTime date_of_birth { get; set; }
+        public Nullable<System.DateTime> date_of_birth { get; set; }
         public string citizenship { get; set; }
         public int notification_preference { get; set; }
         public Nullable<int> ssn { get; set; }

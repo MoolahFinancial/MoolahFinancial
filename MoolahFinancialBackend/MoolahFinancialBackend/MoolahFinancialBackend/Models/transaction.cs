@@ -21,7 +21,7 @@ namespace MoolahFinancialBackend.Models
         public decimal investment_amount { get; set; }
         public bool is_sale { get; set; }
     
-        public virtual user user { get; set; }
         public virtual portfolio portfolio { get; set; }
+        public virtual user user { get; set; }
     }
 }

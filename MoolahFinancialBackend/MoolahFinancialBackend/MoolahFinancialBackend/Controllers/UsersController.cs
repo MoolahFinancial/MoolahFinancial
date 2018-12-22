@@ -154,9 +154,6 @@ namespace MoolahFinancialBackend.Controllers
                 // Returns a HTTP 409 Conflict error to explain it's a conflict error
                 return Conflict();
             }
-            
-            // TODO: Added for temp debugging, remove in final version
-            user.date_of_birth = DateTime.Now;
 
             db.users.Add(user);
             db.SaveChanges();
