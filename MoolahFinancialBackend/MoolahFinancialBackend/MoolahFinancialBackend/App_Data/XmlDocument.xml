@@ -508,7 +508,7 @@
             <summary>  
             Returns a given user based on the passed in id.
             </summary>  
-            <param name="id"></param>  
+            <param name="id">The user id to search for </param>  
             <returns></returns> 
         </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.DeactivateUser(System.Int32)">
@@ -526,6 +526,13 @@
             <param name="id"></param>  
             <param name="user"></param> 
             <returns></returns> 
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.RegisterUser(MoolahFinancialBackend.Models.user)">
+            <summary>  
+            Creates a new user
+            </summary>
+            <param name="user">The object representing the new user to be inserted into the database</param> 
+            <returns></returns>
         </member>
     </members>
 </doc>

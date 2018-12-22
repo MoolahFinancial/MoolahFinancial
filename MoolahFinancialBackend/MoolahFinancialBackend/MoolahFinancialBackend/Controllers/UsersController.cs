@@ -18,6 +18,7 @@ namespace MoolahFinancialBackend.Controllers
     /// The User Controller class.
     /// Contains all APIs for interacting with the User table.
     /// </summary>
+    [RoutePrefix("api/users")]
     public class UsersController : ApiController
     {
         private MoolahEntities db = new MoolahEntities();
@@ -26,7 +27,7 @@ namespace MoolahFinancialBackend.Controllers
         /// Returns all of the users stored in the database (both deleted an non-deleted users)
         /// </summary> 
         [HttpGet]
-        [Route("api/Users")]
+        [Route("")]
         public IQueryable<user> GetAllUsers()
         {
             return db.users;
@@ -36,7 +37,7 @@ namespace MoolahFinancialBackend.Controllers
         /// Returns all active users in the database (non-deleted users)
         /// </summary> 
         [HttpGet]
-        [Route("api/ActiveUsers")]
+        [Route("activeUsers")]
         public IQueryable<user> GetAllActiveUsers()
         { 
             return db.users.Where(c => c.is_deleted == false);
@@ -45,11 +46,11 @@ namespace MoolahFinancialBackend.Controllers
         /// <summary>  
         /// Returns a given user based on the passed in id.
         /// </summary>  
-        /// <param name="id"></param>  
+        /// <param name="id">The user id to search for </param>  
         /// <returns></returns> 
         [HttpGet]
         [ResponseType(typeof(user))]
-        [Route("api/Users/{id}")]
+        [Route("{id}")]
         public IHttpActionResult GetUser(int id)
         {
             user user = db.users.Find(id);
@@ -69,7 +70,7 @@ namespace MoolahFinancialBackend.Controllers
         /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(void))]
-        [Route("api/Users/deactivate/{id}")]
+        [Route("deactivate/{id}")]
         public IHttpActionResult DeactivateUser(int id)
         {
             if (!ModelState.IsValid)
@@ -95,7 +96,7 @@ namespace MoolahFinancialBackend.Controllers
         /// <returns></returns> 
         [HttpPut]
         [ResponseType(typeof(void))]
-        [Route("api/Users/edit/{id}")]
+        [Route("edit/{id}")]
         public IHttpActionResult PutUser(int id, user user)
         {
             if (!ModelState.IsValid)
@@ -129,11 +130,15 @@ namespace MoolahFinancialBackend.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST
+        /// <summary>  
+        /// Creates a new user
+        /// </summary>
+        /// <param name="user">The object representing the new user to be inserted into the database</param> 
+        /// <returns></returns>
         [HttpPost]
-        [Route("api/Users/post")]
+        [Route("register", Name = "RegisterUser")]
         [ResponseType(typeof(user))]
-        public IHttpActionResult PostUser(user user)
+        public IHttpActionResult RegisterUser(user user)
         {
             if (!ModelState.IsValid)
             {
