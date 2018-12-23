@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
-import { RestProvider } from '../../providers/rest/rest';
+import { PortfolioProvider } from '../../providers/portfolio/portfolio';
 
 @Component({
   selector: 'page-home',
@@ -11,12 +11,12 @@ export class InvestPage {
   portfolio: any;
 
   public technologies : Array<any>;
-  constructor(public navCtrl: NavController, public restProvider: RestProvider) {
+  constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider) {
     this.getPortfolios();
   }
 
   getPortfolios() {
-    this.restProvider.getPortfolios()
+    this.portfolioProvider.getPortfolios()
     .then(data => {
       this.portfolio = data;
       console.log(this.portfolio);

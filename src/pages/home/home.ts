@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { RestProvider } from '../../providers/rest/rest';
+import { UserProvider } from '../../providers/user/user';
 
 @Component({
   selector: 'page-home',
@@ -10,12 +10,12 @@ export class HomePage {
 
   users: any;
 
-  constructor(public navCtrl: NavController, public restProvider: RestProvider) {
+  constructor(public navCtrl: NavController, public userProvider: UserProvider) {
     this.getUsers();
   }
 
   getUsers() {
-    this.restProvider.getUsers()
+    this.userProvider.getUsers()
     .then(data => {
       this.users = data;
       console.log(this.users);
