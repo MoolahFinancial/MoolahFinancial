@@ -15,6 +15,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RegisterPage {
 
+  // Variables to hold the user input from the register form
+  // NOTE: These use the ngModel which creates a two-way binding (values are automatically updated upon a change in a textField)
+  firstName = "";
+  lastName = "";
+  email = "";
+  password = "";
+  confirmPassword = "";
+  
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -22,8 +32,9 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
-  register(){
-    
+  registerUser(){
+    console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
+
   }
 
 }

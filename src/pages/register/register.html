@@ -27,7 +27,7 @@
       <ion-list>
         <ion-item class ="first">
           <ion-label><ion-icon name="person"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="firstname" placeholder="First Name" type="text"></ion-input>
+          <ion-input [(ngModel)]="firstName" placeholder="First Name" type="text"></ion-input>
         </ion-item>
 
 
@@ -48,14 +48,14 @@
 
       </ion-list>
 
-      <button ion-button (click)="register()" class="continue-button">Register</button>
+      <button ion-button (click)="registerUser()" class="continue-button">Register</button>
     </ion-col>
     
     <ion-col>
       <ion-list>
       <ion-item class ="first">
         <ion-label><ion-icon name="person"></ion-icon></ion-label>
-        <ion-input [(ngModel)]="lastname" placeholder="Last Name" type="text"></ion-input>
+        <ion-input [(ngModel)]="lastName" placeholder="Last Name" type="text"></ion-input>
       </ion-item>
       </ion-list>
     </ion-col>
