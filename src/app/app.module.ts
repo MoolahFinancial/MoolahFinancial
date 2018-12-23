@@ -16,7 +16,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpClientModule } from '@angular/common/http';
-import { RestProvider } from '../providers/rest/rest';
+
+// Import our providers
 import { PortfolioProvider } from '../providers/portfolio/portfolio';
 import { UserProvider } from '../providers/user/user';
 
@@ -53,7 +54,6 @@ import { UserProvider } from '../providers/user/user';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestProvider,
     PortfolioProvider,
     UserProvider
   ]
