@@ -17,7 +17,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
-import { LoginServiceProvider } from '../providers/login-service/login-service';
+import { PortfolioProvider } from '../providers/portfolio/portfolio';
+import { UserProvider } from '../providers/user/user';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,
-    LoginServiceProvider
+    PortfolioProvider,
+    UserProvider
   ]
 })
 export class AppModule {}
