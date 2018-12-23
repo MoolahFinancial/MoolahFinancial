@@ -26,4 +26,11 @@ export class UserProvider {
     });
   }
 
+  registerUser(firstName, lastName, email, password) {
+    console.log('Register Info: ', firstName, lastName, email, password);
+  }
+
+  loginUser(email, password) {
+    console.log('Login Info: ', email, password);
+  }
 }

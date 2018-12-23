@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the RegisterPage page.
@@ -22,10 +24,9 @@ export class RegisterPage {
   email = "";
   password = "";
   confirmPassword = "";
-  
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
   }
 
   ionViewDidLoad() {
@@ -33,8 +34,11 @@ export class RegisterPage {
   }
 
   registerUser(){
-    console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
+    //console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
 
+    this.userProvider.registerUser(this.firstName, this.lastName, this.email, this.password);
+
+    //this.navCtrl.push(TabsPage);
   }
 
 }
