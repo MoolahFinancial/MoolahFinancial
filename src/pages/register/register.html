@@ -22,7 +22,46 @@
   <ion-icon name="leaf"></ion-icon>
   <h3>Register</h3>
   <p>Let's start with the basics</p>
-  <ion-row class ="register-form">
+
+
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)">
+    <ion-row class ="register-form">
+      <ion-col>
+        <ion-list>
+          <ion-item class ="first">
+            <ion-label><ion-icon name="person"></ion-icon></ion-label>
+            <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+            <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label><ion-icon name="eye"></ion-icon></ion-label>
+            <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label><ion-icon name="eye"></ion-icon></ion-label>
+            <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
+          </ion-item>
+        </ion-list>
+        <!--Button is disabled untill all of the validation checks (in register.ts) are passed-->
+        <button ion-button class="continue-button" [disabled]="!registerForm.valid">Register</button>
+
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item class ="first">
+            <ion-label><ion-icon name="person"></ion-icon></ion-label>
+            <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <!--TODO: Delete this old form (keeping it for reference for now)-->
+  <!-- <ion-row class ="register-form">
     <ion-col>
       <ion-list>
         <ion-item class ="first">
@@ -59,5 +98,5 @@
       </ion-item>
       </ion-list>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 </ion-content>
