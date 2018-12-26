@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Import our pages
 import { AccountPage } from '../pages/account/account';
 import { HomePage } from '../pages/home/home';
 import { InvestPage } from '../pages/invest/invest';

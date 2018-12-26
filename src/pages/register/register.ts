@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
 import { UserProvider } from '../../providers/user/user';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { TabsPage } from '../tabs/tabs';
+import { EmailValidator } from '../../validators/emailValidator';
 
 /**
  * Generated class for the RegisterPage page.
@@ -18,14 +19,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class RegisterPage {
 
-  // Variables to hold the user input from the register form
-  // NOTE: These use the ngModel which creates a two-way binding (values are automatically updated upon a change in a textField)
-  // firstName = "";
-  // lastName = "";
-  // email = "";
-  // password = "";
-  // confirmPassword = "";
-
+  // Variables to hold values inside the register form
   registerForm: FormGroup;
   post: any; // A reference for our submitted form
   firstName: string = '';
@@ -35,14 +29,14 @@ export class RegisterPage {
   confirmPassword: string = '';
 
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public userProvider: UserProvider) {
     this.registerForm = formBuilder.group({
       'firstName': [null, Validators.required],
       'lastName': [null, Validators.required],
-      'email': [null, Validators.required],
-      'password': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(20)])],
-      'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(20)])]
+      'email': [null, Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])
+      , EmailValidator.checkEmail],
+      'password': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])],
+      'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])]
     });
   }
  
@@ -51,11 +45,13 @@ export class RegisterPage {
   }
 
   registerUser(post) {
-    this.firstName = post.firstName;
-    this.lastName = post.lastName;
-    this.email = post.email;
+    this.firstName = post.firstName.toLowerCase();
+    this.lastName = post.lastName.toLowerCase();
+    this.email = post.email.toLowerCase();
     this.password = post.password;
     this.confirmPassword = post.confirmPassword;
+
+    console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
   }
 
 

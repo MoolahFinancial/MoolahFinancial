@@ -23,7 +23,6 @@
   <h3>Register</h3>
   <p>Let's start with the basics</p>
 
-
   <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)">
     <ion-row class ="register-form">
       <ion-col>
@@ -32,10 +31,16 @@
             <ion-label><ion-icon name="person"></ion-icon></ion-label>
             <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
           </ion-item>
+          <div class="alert" *ngIf="!registerForm.controls['firstName'].valid && registerForm.controls['firstName'].touched">
+            This is required.
+          </div>
           <ion-item>
             <ion-label><ion-icon name="mail"></ion-icon></ion-label>
             <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
           </ion-item>
+          <div class="alert" *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
+            Please enter a valid email address.
+          </div>
           <ion-item>
               <ion-label><ion-icon name="eye"></ion-icon></ion-label>
             <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
@@ -44,10 +49,7 @@
               <ion-label><ion-icon name="eye"></ion-icon></ion-label>
             <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
           </ion-item>
-        </ion-list>
-        <!--Button is disabled untill all of the validation checks (in register.ts) are passed-->
-        <button ion-button class="continue-button" [disabled]="!registerForm.valid">Register</button>
-
+        </ion-list>     
       </ion-col>
       <ion-col>
         <ion-list>
@@ -58,45 +60,8 @@
         </ion-list>
       </ion-col>
     </ion-row>
+    <!--Button is disabled until all of the validation checks (in register.ts) are passed-->
+    <button ion-button class="continue-button" [disabled]="!registerForm.valid">Register</button>
   </form>
 
-  <!--TODO: Delete this old form (keeping it for reference for now)-->
-  <!-- <ion-row class ="register-form">
-    <ion-col>
-      <ion-list>
-        <ion-item class ="first">
-          <ion-label><ion-icon name="person"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="firstName" placeholder="First Name" type="text"></ion-input>
-        </ion-item>
-
-
-        <ion-item>
-          <ion-label><ion-icon name="mail"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="email" placeholder="Email" type="email"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label><ion-icon name="eye"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="password" placeholder="Password" type="password"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label><ion-icon name="eye"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="confirmPassword" placeholder="Confirm password" type="password"></ion-input>
-        </ion-item>
-
-      </ion-list>
-
-      <button ion-button (click)="registerUser()" class="continue-button">Register</button>
-    </ion-col>
-    
-    <ion-col>
-      <ion-list>
-      <ion-item class ="first">
-        <ion-label><ion-icon name="person"></ion-icon></ion-label>
-        <ion-input [(ngModel)]="lastName" placeholder="Last Name" type="text"></ion-input>
-      </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row> -->
 </ion-content>

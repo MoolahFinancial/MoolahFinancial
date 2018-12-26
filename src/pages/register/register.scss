@@ -64,13 +64,17 @@ page-register {
     flex: 1;
   }
   .continue-button {
-          width: 200%;
-          border-radius: 30px;
-          margin-top: 30px;
-          font-size: 0.9em;
-          //background-color: transparent;
-          background-color: map-get($colors, primary);
-          border: 1px solid #fff;
-      }
+    width: 100%;
+    border-radius: 30px;
+    margin-top: 30px;
+    font-size: 0.9em;
+    //background-color: transparent;
+    background-color: map-get($colors, primary);
+    border: 1px solid #fff;
+  }
+  
+  .alert {
+    background-color:red;
+  }
 }
 }
