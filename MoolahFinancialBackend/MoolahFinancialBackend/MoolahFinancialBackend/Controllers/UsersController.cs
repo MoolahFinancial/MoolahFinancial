@@ -63,6 +63,24 @@ namespace MoolahFinancialBackend.Controllers
         }
 
         /// <summary>  
+        /// Returns true if the passed in email already belongs to a user in the database (false if the email isn't claimed)
+        /// </summary>  
+        /// <param name="email">The email that is being checked </param>  
+        /// <returns></returns> 
+        [HttpGet]
+        [ResponseType(typeof(bool))]
+        [Route("checkEmail/{email}/")]
+        public bool CheckEmail(string email)
+        {
+            if (db.users.Any(c => c.email == email))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>  
         /// Sets an existing user as being deleted. This API doesn't delete a user from the table
         /// but sets is_deleted as being true (don't want to actually delete users).
         /// </summary>  
@@ -130,14 +148,6 @@ namespace MoolahFinancialBackend.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        /*
-         * TODO: CHANGE date_of_birth to be nullable or initialize it 
-         * (vs uses 01/01/1000 while sql server uses 1753-01-01 00:00:00 as the min default date)
-         * More info: https://stackoverflow.com/questions/4608734/the-conversion-of-a-datetime2-data-type-to-a-datetime-data-type-resulted-in-an-o
-         * SqlException: The conversion of a datetime2 data type to a datetime data type resulted in an out-of-range value.
-         * The statement has been terminated.
-         *
-         */
         /// <summary>  
         /// Creates a new user
         /// </summary>
@@ -160,7 +170,7 @@ namespace MoolahFinancialBackend.Controllers
 
             user = db.users.FirstOrDefault(c => c.email == user.email);
 
-            return Ok(new { success = true, message = "Successfully created the user account", user });
+            return Ok(new { success = true, successMessage = "Successfully created the user account", user });
         }
 
         //[HttpPost]
