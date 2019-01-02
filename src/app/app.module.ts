@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 // Import our providers
 import { PortfolioProvider } from '../providers/portfolio/portfolio';
 import { UserProvider } from '../providers/user/user';
+import { EmailValidator } from '../validators/emailValidator';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { UserProvider } from '../providers/user/user';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PortfolioProvider,
-    UserProvider
+    UserProvider,
+    EmailValidator // Needs to be included as a provider since it is an injectable
   ]
 })
 export class AppModule {}

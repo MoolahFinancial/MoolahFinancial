@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the UserProvider provider.
@@ -28,6 +29,16 @@ export class UserProvider {
 
   registerUser(firstName, lastName, email, password) {
     console.log('Register Info: ', firstName, lastName, email, password);
+  }
+
+  checkEmailAvailable(email: string) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+'/users/checkEmail/'+email).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
   }
 
   loginUser(email, password) {
