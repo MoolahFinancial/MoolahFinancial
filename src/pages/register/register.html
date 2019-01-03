@@ -38,9 +38,21 @@
             <ion-label><ion-icon name="mail"></ion-icon></ion-label>
             <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
           </ion-item>
-          <div class="alert" *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
-            Please enter a valid email address.
+          <div *ngIf="registerForm.get('email').status === 'PENDING'; else emailError">
+            Checking Email Availability...
           </div>
+          <ng-template #emailError>
+            <div class="alert" *ngIf="registerForm.get('email').errors && registerForm.get('email').errors.emailTaken; else invalidEmail">
+              A user with this email already exists.
+            </div>         
+          </ng-template>
+
+          <ng-template #invalidEmail>
+            <div class="alert" *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
+              Please enter a valid email address.
+            </div>
+          </ng-template>
+          
           <ion-item>
               <ion-label><ion-icon name="eye"></ion-icon></ion-label>
             <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>

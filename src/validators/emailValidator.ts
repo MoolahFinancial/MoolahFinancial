@@ -53,7 +53,7 @@ export class EmailValidator {
                     console.log('Resolve(usernameInUse: true): ', this.emailClaimed);
                     // The email is claimed, so we return saying that the email is already taken
                     resolve({
-                        "usernameInUse": true
+                        "emailTaken": true
                     }); 
                 }
 

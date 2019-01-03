@@ -34,13 +34,13 @@ export class RegisterPage {
     this.registerForm = formBuilder.group({
       'firstName': [null, Validators.required],
       'lastName': [null, Validators.required],
-      'email': [null, Validators.compose([Validators.required, Validators.email])
-      , emailValidator.checkEmail.bind(emailValidator)],
-      // 'email': [null, Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])
+      'email': [null, Validators.compose([Validators.required, Validators.email]), 
+      emailValidator.checkEmail.bind(emailValidator)],
       // , emailValidator.checkEmail.bind(emailValidator)],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])],
       'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])]
     });
+
   }
  
   ionViewDidLoad() {
