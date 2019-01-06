@@ -4,6 +4,7 @@ import { UserProvider } from '../../providers/user/user';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
 import { EmailValidator } from '../../validators/emailValidator';
+import { PasswordValidator } from '../../validators/passwordValidator';
 
 /**
  * Generated class for the RegisterPage page.
@@ -39,8 +40,10 @@ export class RegisterPage {
       // , emailValidator.checkEmail.bind(emailValidator)],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])],
       'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])]
+    }, {
+      validator: PasswordValidator.confirmPasswordMatch.bind(this)
     });
-
+    
   }
  
   ionViewDidLoad() {

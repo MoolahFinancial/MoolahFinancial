@@ -50,7 +50,7 @@ export class EmailValidator {
                     // Otherwise, we return null since the email is unclaimed
                     resolve(null);
                 } else {
-                    console.log('Resolve(usernameInUse: true): ', this.emailClaimed);
+                    console.log('Resolve(DoesMatchPassword: true): ', this.emailClaimed);
                     // The email is claimed, so we return saying that the email is already taken
                     resolve({
                         "emailTaken": true
