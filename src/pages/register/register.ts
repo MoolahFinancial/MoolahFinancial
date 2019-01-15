@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
+import { UserProvider } from '../../providers/user/user.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
 import { EmailValidator } from '../../validators/emailValidator';
@@ -37,7 +37,6 @@ export class RegisterPage {
       'lastName': [null, Validators.required],
       'email': [null, Validators.compose([Validators.required, Validators.email]), 
       emailValidator.checkEmail.bind(emailValidator)],
-      // , emailValidator.checkEmail.bind(emailValidator)],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])],
       'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])]
     }, {

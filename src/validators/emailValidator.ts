@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { UserProvider } from '../providers/user/user';
+import { UserProvider } from '../providers/user/user.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()

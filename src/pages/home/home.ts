@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
+import { UserProvider } from '../../providers/user/user.service';
 
 @Component({
   selector: 'page-home',
