@@ -44,7 +44,7 @@
           <ng-template #emailError>
             <div class="alert" *ngIf="registerForm.get('email').errors && registerForm.get('email').errors.emailTaken; else invalidEmail">
               A user with this email already exists.
-            </div>         
+            </div>
           </ng-template>
 
           <ng-template #invalidEmail>
@@ -52,7 +52,7 @@
               Please enter a valid email address.
             </div>
           </ng-template>
-          
+
           <ion-item>
               <ion-label><ion-icon name="eye"></ion-icon></ion-label>
             <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
@@ -62,7 +62,7 @@
             <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
           </ion-item>
           <!-- <p class="alert" *ngIf="registerForm.errors.MatchPassword">Password does not match</p> -->
-        </ion-list>     
+        </ion-list>
       </ion-col>
       <ion-col>
         <ion-list>
@@ -74,7 +74,7 @@
       </ion-col>
     </ion-row>
     <!--Button is disabled until all of the validation checks (in register.ts) are passed-->
-    <button ion-button class="continue-button" [disabled]="!registerForm.valid">Register</button>
+    <button ion-button class="continue-button" [disabled]="!registerForm.valid" (click)="register()">Register</button>
   </form>
 
 </ion-content>

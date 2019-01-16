@@ -30,21 +30,21 @@ export class RegisterPage {
   confirmPassword: string = '';
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder, public userProvider: UserProvider, public emailValidator: EmailValidator) {
     this.registerForm = formBuilder.group({
       'firstName': [null, Validators.required],
       'lastName': [null, Validators.required],
-      'email': [null, Validators.compose([Validators.required, Validators.email]), 
+      'email': [null, Validators.compose([Validators.required, Validators.email]),
       emailValidator.checkEmail.bind(emailValidator)],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])],
       'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])]
     }, {
       validator: PasswordValidator.confirmPasswordMatch.bind(this)
     });
-    
+
   }
- 
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
@@ -59,7 +59,9 @@ export class RegisterPage {
     console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
   }
 
-
+  register(){
+    
+  }
   // registerUser(){
   //   //console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
 
