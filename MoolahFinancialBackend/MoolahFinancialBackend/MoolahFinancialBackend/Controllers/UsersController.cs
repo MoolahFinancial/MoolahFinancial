@@ -81,6 +81,21 @@ namespace MoolahFinancialBackend.Controllers
         }
 
         /// <summary>  
+        /// Returns a user if the passed in email and password match a given user within the database
+        /// </summary>  
+        /// <param name="email">The email that the user is using to login </param>  
+        /// <param name="password">The corresponding needed for a user to login </param>  
+        /// <returns></returns> 
+        [HttpGet]
+        [Route("login", Name = "LoginUser")]
+        [ResponseType(typeof(user))]
+        public IHttpActionResult Login(string email, string password)
+        {
+
+            return Ok();
+        }
+
+        /// <summary>  
         /// Sets an existing user as being deleted. This API doesn't delete a user from the table
         /// but sets is_deleted as being true (don't want to actually delete users).
         /// </summary>  
