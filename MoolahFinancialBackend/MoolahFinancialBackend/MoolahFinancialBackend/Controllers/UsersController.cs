@@ -91,8 +91,16 @@ namespace MoolahFinancialBackend.Controllers
         [ResponseType(typeof(user))]
         public IHttpActionResult Login(string email, string password)
         {
+            var user = db.users.FirstOrDefault(c => c.email == email && c.password == password);
+            
+            // If the user variable isn't null, we found a matching user account with the same email and password
+            if(user != null)
+            {
+                return Ok(new { success = true, successMessage = "Successfully logged in", user });
+            }
 
-            return Ok();
+            // Otherwise, we return with a message saying there is no matching user account in the database
+            return Ok(new { success = false, errorMessage = "No matching account found"});
         }
 
         /// <summary>  
