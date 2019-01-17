@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
 import { EmailValidator } from '../../validators/emailValidator';
 import { PasswordValidator } from '../../validators/passwordValidator';
+import { SignupPage } from '../signup/signup';
 
 /**
  * Generated class for the RegisterPage page.
@@ -60,7 +61,7 @@ export class RegisterPage {
   }
 
   register(){
-    
+    this.navCtrl.push(SignupPage);
   }
   // registerUser(){
   //   //console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
