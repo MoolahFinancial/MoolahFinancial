@@ -24,16 +24,18 @@
   <p>Let's start with the basics</p>
 
   <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)">
-    <ion-row class ="register-form">
-      <ion-col>
         <ion-list>
-          <ion-item class ="first">
+          <ion-item>
             <ion-label><ion-icon name="person"></ion-icon></ion-label>
             <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
           </ion-item>
           <div class="alert" *ngIf="!registerForm.controls['firstName'].valid && registerForm.controls['firstName'].touched">
             This is required.
           </div>
+          <ion-item>
+            <ion-label><ion-icon name="person"></ion-icon></ion-label>
+            <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
+          </ion-item>
           <ion-item>
             <ion-label><ion-icon name="mail"></ion-icon></ion-label>
             <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
@@ -63,16 +65,7 @@
           </ion-item>
           <!-- <p class="alert" *ngIf="registerForm.errors.MatchPassword">Password does not match</p> -->
         </ion-list>
-      </ion-col>
-      <ion-col>
-        <ion-list>
-          <ion-item class ="first">
-            <ion-label><ion-icon name="person"></ion-icon></ion-label>
-            <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
+
     <!--Button is disabled until all of the validation checks (in register.ts) are passed-->
     <button ion-button class="continue-button" [disabled]="!registerForm.valid" (click)="register()">Register</button>
   </form>
