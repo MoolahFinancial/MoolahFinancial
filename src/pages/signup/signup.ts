@@ -7,7 +7,16 @@ import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
   templateUrl: 'signup.html'
 })
 export class SignupPage {
+
   constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider) {
 
+  }
+
+  itemSelected(item: string) {
+    console.log("Selected Item", item);
+  }
+
+  continue(){
+    
   }
 }

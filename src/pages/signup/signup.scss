@@ -5,26 +5,15 @@ page-home {
     margin-right: auto;
   }
 
-    ion-card {
-      position: relative;
-      text-align: center;
-    }
-
-     .card-title {
-       position: absolute;
-       top: 36%;
-       font-size: 2.0em;
-       width: 100%;
-       font-weight: bold;
-       color: #fff;
-     }
-
-     .card-subtitle {
-       font-size: 1.0em;
-       position: absolute;
-       top: 52%;
-       width: 100%;
-       color: #fff;
-     }
+  .cont-button {
+          width: 100%;
+          border-radius: 30px;
+          margin-top: 30px;
+          font-size: 0.9em;
+          //background-color: transparent;
+          background-color: map-get($colors, primary);
+          border: 1px solid #fff;
+          //font-family: Raleway;
+      }
 
 }
