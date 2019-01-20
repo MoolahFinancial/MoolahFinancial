@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { UserProvider } from '../../providers/user/user.service';
 
 /**
  * Generated class for the LoginPage page.
@@ -23,18 +24,16 @@ export class LoginPage {
   username:string;
   password:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, private formBuilder: FormBuilder) {
     this.loginForm = formBuilder.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'password': [null, Validators.compose([Validators.required, Validators.maxLength(255)])]
     });
   }
 
-  loginUser(post){
-    console.log(post.email.toLowerCase());
-    console.log(post.password);
+  loginUser(post: any){
 
-    
+    this.userProvider.loginUser(post.email.toLowerCase(), post.password);
 
     this.navCtrl.push(TabsPage);
   }
