@@ -16,28 +16,21 @@
 -->
 
   <h4 padding>Sign In</h4>
-  <ion-row class ="login-form">
-    <ion-col>
-      <ion-list>
-        <ion-item>
-          <ion-label><ion-icon name="mail"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="email" placeholder="Email" type="email"></ion-input>
-        </ion-item>
-
-
-        <ion-item>
-          <ion-label><ion-icon name="eye"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="password" placeholder="Password" type="password"></ion-input>
-        </ion-item>
-      </ion-list>
-      <button ion-button full color="light" (click)="login()">Sign in</button>
-      <button ion-button clear (click)="register()">SIGN UP</button>
-      <button ion-button color="secondary" clear>FORGOT PASSWORD?</button>
-    </ion-col>
-
-  </ion-row>
-
-
-
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <ion-list>
+      <ion-item>
+        <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+        <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><ion-icon name="eye"></ion-icon></ion-label>
+        <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <!--Button is disabled until all of the validation checks (in register.ts) are passed-->
+    <button ion-button full color="light" [disabled]="!loginForm.valid">Sign in</button>
+  </form>
+  <button ion-button clear (click)="register()">SIGN UP</button>
+  <button ion-button color="secondary" clear>FORGOT PASSWORD?</button>
 
 </ion-content>
