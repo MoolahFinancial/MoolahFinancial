@@ -30,17 +30,17 @@ export class LoginPage {
     });
   }
 
-  loginUser(){
+  loginUser(post){
+    console.log(post.email.toLowerCase());
+    console.log(post.password);
+
+    
+
     this.navCtrl.push(TabsPage);
   }
 
-  login(){
-    console.log("Username: " + this.username);
-    console.log("Password: " + this.password);
-    this.navCtrl.push(TabsPage);
-  }
-
-  register(){
+  // Navigates users to the Register page upon pressing the 'Sign Up' button
+  goToRegisterPage(){
     this.navCtrl.push(RegisterPage);
   }
 

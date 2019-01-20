@@ -42,7 +42,7 @@ export class UserProvider {
     });
   }
 
-  loginUser(email, password) {
+  loginUser(email: string, password: string) {
     console.log('Login Info: ', email, password);
   }
 }
