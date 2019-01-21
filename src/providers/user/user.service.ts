@@ -32,8 +32,11 @@ export class UserProvider {
   }
 
   checkEmailAvailable(email: string) {
+    // Add the email param to the url for the api call
+    const apiParams = { params: new HttpParams().set('email', email) };
+
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/users/checkEmail/'+email).subscribe(data => {
+      this.http.get(this.apiUrl + '/users/checkEmail/', apiParams ).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -43,8 +46,8 @@ export class UserProvider {
 
   // Returns user info if the email and password are correct
   loginUser(email: string, password: string) {
-    
-    // Add the email and password params to the api call
+
+    // Add the email and password params to the url for the api call
     const apiParams = { params: new HttpParams().set('email', email).set('password', password) };
 
     return this.http.get(this.apiUrl + '/users/login', apiParams );
