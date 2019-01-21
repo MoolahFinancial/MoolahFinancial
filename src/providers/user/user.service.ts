@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { User } from './user.model';
 import 'rxjs/add/operator/map';
 
+interface loginData {
+  success: string;
+  errorMessage: string;
+}
 /*
   Generated class for the UserProvider provider.
 
@@ -50,6 +54,6 @@ export class UserProvider {
     // Add the email and password params to the url for the api call
     const apiParams = { params: new HttpParams().set('email', email).set('password', password) };
 
-    return this.http.get(this.apiUrl + '/users/login', apiParams );
+    return this.http.get<loginData>(this.apiUrl + '/users/login', apiParams );
   }
 }
