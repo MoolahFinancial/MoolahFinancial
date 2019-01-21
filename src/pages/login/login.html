@@ -23,8 +23,9 @@
         <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label><ion-icon name="eye"></ion-icon></ion-label>
-        <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+        <!-- <ion-label><ion-icon name="eye" (click)="togglePassword()"></ion-icon></ion-label> -->
+        <ion-icon [name]="passwordIcon" class="passwordIcon" item-start (click)="togglePassword()"></ion-icon>
+        <ion-input [type]="passwordType" class="no-margin" formControlName="password" placeholder="Password"></ion-input>
       </ion-item>
     </ion-list>
     <!--Button is disabled until all of the validation checks (in register.ts) are passed-->

@@ -14,6 +14,22 @@ page-login {
       flex-direction: column;
     }
 
+    .passwordIcon{
+      font-size:2rem !important;
+      position: relative !important;
+      top: 5px !important;
+      margin: 0 auto !important;
+    }
+
+    .item-inner {
+      padding-left: 0px!important;
+      margin-left: 0px!important;
+    }
+
+    .no-margin {
+      margin-left: 0px !important;
+    }
+
     ion-item {
       border-radius: 10px;
       padding-left: 10px;
@@ -27,6 +43,11 @@ page-login {
       ::placeholder {
           color: #9297a0;
       }
+    }
+
+    ion-icon {
+      color: #9297a0;
+      font-size: 16px; 
     }
 
     ion-list {

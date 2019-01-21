@@ -19,16 +19,24 @@ import { UserProvider } from '../../providers/user/user.service';
 })
 export class LoginPage {
 
-  // Variables to hold values inside the register form
+  // Variables to hold values inside the login form
   loginForm: FormGroup;
-  username:string;
-  password:string;
+
+  // Variables to toggle the password from being hidden or visible
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, private formBuilder: FormBuilder) {
-    this.loginForm = formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
-      'password': [null, Validators.compose([Validators.required, Validators.maxLength(255)])]
+      'password': [null, Validators.required]
     });
+  }
+
+  // Toggles the password text and icon depending on whether the password is hidden or visible
+  public togglePassword(){
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
   }
 
   loginUser(post: any){

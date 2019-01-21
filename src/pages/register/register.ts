@@ -33,7 +33,7 @@ export class RegisterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder, public userProvider: UserProvider, public emailValidator: EmailValidator) {
-    this.registerForm = formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       'firstName': [null, Validators.required],
       'lastName': [null, Validators.required],
       'email': [null, Validators.compose([Validators.required, Validators.email])],
