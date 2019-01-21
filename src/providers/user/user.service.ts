@@ -11,7 +11,6 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class UserProvider {
-
   apiUrl = 'http://moolah-financial-api.azurewebsites.net/api';
   
   constructor(public http: HttpClient) {
@@ -34,7 +33,7 @@ export class UserProvider {
 
   checkEmailAvailable(email: string) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/users/checkEmail/'+email).subscribe(data => {
+      this.http.get(this.apiUrl + '/users/checkEmail/'+email).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -42,7 +41,12 @@ export class UserProvider {
     });
   }
 
+  // Returns user info if the email and password are correct
   loginUser(email: string, password: string) {
-    console.log('Login Info: ', email, password);
+    
+    // Add the email and password params to the api call
+    const apiParams = { params: new HttpParams().set('email', email).set('password', password) };
+
+    return this.http.get(this.apiUrl + '/users/login', apiParams );
   }
 }

@@ -41,9 +41,17 @@ export class LoginPage {
 
   loginUser(post: any){
 
-    this.userProvider.loginUser(post.email.toLowerCase(), post.password);
+    this.userProvider.loginUser(post.email.toLowerCase(), post.password).subscribe(data => {
+      if(data.success) {
+        this.navCtrl.push(TabsPage);
+      } else {
+        window.alert(data.errorMessage);
+      }
+    });
 
-    this.navCtrl.push(TabsPage);
+
+
+    // this.navCtrl.push(TabsPage);
   }
 
   // Navigates users to the Register page upon pressing the 'Sign Up' button
