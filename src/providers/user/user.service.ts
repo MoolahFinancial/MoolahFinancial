@@ -3,16 +3,13 @@ import { Injectable } from '@angular/core';
 import { User } from './user.model';
 import 'rxjs/add/operator/map';
 
+// The interface used to represent the json data that is returned from the login function
 interface loginData {
   success: string;
   errorMessage: string;
+  user: User;
 }
-/*
-  Generated class for the UserProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
   apiUrl = 'http://moolah-financial-api.azurewebsites.net/api';

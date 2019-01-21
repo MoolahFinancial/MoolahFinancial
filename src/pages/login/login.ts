@@ -43,6 +43,7 @@ export class LoginPage {
 
     this.userProvider.loginUser(post.email.toLowerCase(), post.password).subscribe(data => {
       if(data.success) {
+        console.log(data.user, 'User profile returned from the login service');
         this.navCtrl.push(TabsPage);
       } else {
         window.alert(data.errorMessage);
