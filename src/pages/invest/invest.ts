@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-home',
@@ -21,6 +22,10 @@ export class InvestPage {
       this.portfolio = data;
       console.log(this.portfolio);
     });
+  }
+
+  chooseInvestment() {
+    this.navCtrl.push(TabsPage);
   }
 
   //ionViewDidLoad() {
