@@ -8,10 +8,10 @@
 </ion-header>
 
 <ion-content class="invest-cards">
-  <ion-searchbar
-       (ionInput)="filterTech($event.target.value)"></ion-searchbar>
+  <!--<ion-searchbar
+       (ionInput)="filterTech($event.target.value)"></ion-searchbar>-->
 
-<ion-list>
+<!-- <ion-list>
   <ion-item>
     <ion-label fixed>Category</ion-label>
     <ion-select>
@@ -21,17 +21,17 @@
             <ion-option value="food" (ionSelect)="onFilter($event)">Food</ion-option>
     </ion-select>
   </ion-item>
-</ion-list>
+</ion-list> -->
 
 
-  <ion-card *ngFor="let port of portfolio">
+  <ion-card *ngFor="let port of portfolio" (click)="chooseInvestment()">
     <img src="assets/imgs/card-amsterdam.png"/>
     <div class="card-title">{{port.title}}</div>
     <div class="card-subtitle">{{port.risk}}</div>
   </ion-card>
 
 
-<ion-card *ngFor="let technology of technologies">
+<!--<ion-card *ngFor="let technology of technologies">
   <img src="{{technology.image}}"/>
   <div class="card-title">{{technology.name}}</div>
   <div class="card-subtitle">{{technology.risk}}</div>

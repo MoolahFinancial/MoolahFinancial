@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
+import { InvestPage } from '../invest/invest';
 
 @Component({
   selector: 'page-home',
@@ -17,6 +18,6 @@ export class SignupPage {
   }
 
   continue(){
-    
+    this.navCtrl.push(InvestPage);
   }
 }
