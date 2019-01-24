@@ -12,7 +12,7 @@ interface loginData {
 
 @Injectable()
 export class UserProvider {
-  apiUrl = 'http://moolah-financial-api.azurewebsites.net/api';
+  apiUrl = 'https://moolah-financial-api.azurewebsites.net/api';
   
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');

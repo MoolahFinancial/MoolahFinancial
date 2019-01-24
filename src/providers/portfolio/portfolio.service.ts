@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PortfolioProvider {
 
-  apiUrl = 'http://moolah-financial-api.azurewebsites.net/api';
+  apiUrl = 'https://moolah-financial-api.azurewebsites.net/api';
 
   constructor(public http: HttpClient) {
     console.log('Hello PortfolioProvider Provider');
