@@ -91,17 +91,46 @@ namespace MoolahFinancialBackend.Controllers
         [ResponseType(typeof(user))]
         public IHttpActionResult Login(string email, string password)
         {
-            var user = db.users.FirstOrDefault(c => c.email == email && c.password == password);
-            
+            //TODO: (Optional) Check if the email & password parameters are filled out
+
+            var matchingUser = db.users.FirstOrDefault(u => u.email == email && u.password == password);
+            //TODO: Call method to unhash password
+            //var matchingUser = db.users.ToList().FirstOrDefault(u => u.email == email && HashHelper.HashCode(u.password).Equals(u.password));
+
+            //TODO: Check if the account has been deactivated
+
             // If the user variable isn't null, we found a matching user account with the same email and password
-            if(user != null)
+            if (matchingUser != null)
             {
-                return Ok(new { success = true, successMessage = "Successfully logged in", user });
+                return Ok(new { success = true, successMessage = "Successfully logged in", user = matchingUser });
             }
 
             // Otherwise, we return with a message saying there is no matching user account in the database
-            return Ok(new { success = false, errorMessage = "No matching account found"});
+            return Ok(new { success = false, errorMessage = "No matching account found" });
         }
+
+        ///// <summary>  
+        ///// Returns a user if the passed in email and password match a given user within the database
+        ///// </summary>  
+        ///// <param name="email">The email that the user is using to login </param>  
+        ///// <param name="password">The corresponding needed for a user to login </param>  
+        ///// <returns></returns> 
+        //[HttpGet]
+        //[Route("login", Name = "LoginUser")]
+        //[ResponseType(typeof(user))]
+        //public IHttpActionResult Login(string email, string password)
+        //{
+        //    var matchingUser = db.users.FirstOrDefault(c => c.email == email && c.password == password);
+
+        //    // If the user variable isn't null, we found a matching user account with the same email and password
+        //    if (matchingUser != null)
+        //    {
+        //        return Ok(new { success = true, successMessage = "Successfully logged in", user = matchingUser });
+        //    }
+
+        //    // Otherwise, we return with a message saying there is no matching user account in the database
+        //    return Ok(new { success = false, errorMessage = "No matching account found" });
+        //}
 
         /// <summary>  
         /// Sets an existing user as being deleted. This API doesn't delete a user from the table
@@ -119,9 +148,9 @@ namespace MoolahFinancialBackend.Controllers
                 return BadRequest(ModelState);
             }
 
-            user user = db.users.Find(id);
+            user matchingUser = db.users.Find(id);
 
-            user.is_deleted = true;
+            matchingUser.is_deleted = true;
 
             db.SaveChanges();
 
@@ -188,12 +217,14 @@ namespace MoolahFinancialBackend.Controllers
                 return Conflict();
             }
 
+            // Add and save the new user in the database
             db.users.Add(user);
             db.SaveChanges();
 
+            // Retrieve the newly created user from the database
             user = db.users.FirstOrDefault(c => c.email == user.email);
 
-            return Ok(new { success = true, successMessage = "Successfully created the user account", user });
+            return Ok(new { success = true, successMessage = "Successfully registered the user account", user });
         }
 
         //[HttpPost]
