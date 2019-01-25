@@ -6,6 +6,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MoolahFinancialBackend.Models;
@@ -91,46 +93,40 @@ namespace MoolahFinancialBackend.Controllers
         [ResponseType(typeof(user))]
         public IHttpActionResult Login(string email, string password)
         {
-            //TODO: (Optional) Check if the email & password parameters are filled out
-
-            var matchingUser = db.users.FirstOrDefault(u => u.email == email && u.password == password);
-            //TODO: Call method to unhash password
-            //var matchingUser = db.users.ToList().FirstOrDefault(u => u.email == email && HashHelper.HashCode(u.password).Equals(u.password));
-
-            //TODO: Check if the account has been deactivated
-
-            // If the user variable isn't null, we found a matching user account with the same email and password
-            if (matchingUser != null)
+            // Verify that all of the required fields are filled out. If not, return an error
+            if(String.IsNullOrEmpty(email) || String.IsNullOrEmpty(password))
             {
-                return Ok(new { success = true, successMessage = "Successfully logged in", user = matchingUser });
+                return Ok(new { success = false, message = "At least one of the required fields is empty" });
             }
 
-            // Otherwise, we return with a message saying there is no matching user account in the database
-            return Ok(new { success = false, errorMessage = "No matching account found" });
+            // Tries to retrieve an existing user with the passed in email. If there is no such user, matchingUser is set to null
+            var matchingUser = db.users.FirstOrDefault(u => u.email == email);
+
+            // If there is no user account registered with the passed in email address, return an error
+            if(matchingUser == null)
+            {
+                return Ok(new { success = false, message = "No matching account found" });
+            }
+            // If the account has already been deactivated, throw an error message
+            else if (matchingUser.is_deleted)
+            {
+                return Ok(new { success = false, message = "This account has been deactivated" });
+            }
+
+            // NOTE: While md5 is currently being used to store passwords in development, one would need to change to a more secure solution before production
+            // Verify that the user's passed in password matches our records
+            using (MD5 md5 = MD5.Create())
+            {
+                // If the two passwords don't match, return with an error
+                if (!VerifyPassword(md5, password, matchingUser.password))
+                {
+                    return Ok(new { success = false, message = "The provided password didn't match" });
+                }
+            }
+
+            // If all of the above validations have passed, we have found a matching user account with the same email and password
+            return Ok(new { success = true, message = "Successfully logged in", user = matchingUser });
         }
-
-        ///// <summary>  
-        ///// Returns a user if the passed in email and password match a given user within the database
-        ///// </summary>  
-        ///// <param name="email">The email that the user is using to login </param>  
-        ///// <param name="password">The corresponding needed for a user to login </param>  
-        ///// <returns></returns> 
-        //[HttpGet]
-        //[Route("login", Name = "LoginUser")]
-        //[ResponseType(typeof(user))]
-        //public IHttpActionResult Login(string email, string password)
-        //{
-        //    var matchingUser = db.users.FirstOrDefault(c => c.email == email && c.password == password);
-
-        //    // If the user variable isn't null, we found a matching user account with the same email and password
-        //    if (matchingUser != null)
-        //    {
-        //        return Ok(new { success = true, successMessage = "Successfully logged in", user = matchingUser });
-        //    }
-
-        //    // Otherwise, we return with a message saying there is no matching user account in the database
-        //    return Ok(new { success = false, errorMessage = "No matching account found" });
-        //}
 
         /// <summary>  
         /// Sets an existing user as being deleted. This API doesn't delete a user from the table
@@ -211,10 +207,17 @@ namespace MoolahFinancialBackend.Controllers
         public IHttpActionResult RegisterUser(user user)
         {
             // Return an error message if the email already belongs to a different user
-            if(db.users.Any(c => c.email == user.email))
+            if (db.users.Any(c => c.email == user.email))
             {
                 // Returns a HTTP 409 Conflict error to explain it's a conflict error
                 return Conflict();
+            }
+
+            // NOTE: While md5 is currently being used to store passwords in development, one would need to change to a more secure solution before production
+            // Convert the plain text password to a hashed password
+            using (MD5 md5 = MD5.Create())
+            {
+                user.password = HashPassword(md5, user.password);
             }
 
             // Add and save the new user in the database
@@ -224,7 +227,7 @@ namespace MoolahFinancialBackend.Controllers
             // Retrieve the newly created user from the database
             user = db.users.FirstOrDefault(c => c.email == user.email);
 
-            return Ok(new { success = true, successMessage = "Successfully registered the user account", user });
+            return Ok(new { success = true, message = "Successfully registered the user account", user });
         }
 
         //[HttpPost]
@@ -288,6 +291,53 @@ namespace MoolahFinancialBackend.Controllers
         private bool UserExists(int id)
         {
             return db.users.Count(e => e.user_id == id) > 0;
+        }
+
+        /// <summary>  
+        /// Generates an MD5 hash for passwords. This should be changed to a better algorithm before production (easy to break)
+        /// </summary>  
+        /// <param name="userInput"></param>  
+        /// <param name="md5"></param>  
+        /// <returns></returns> 
+        private string HashPassword(MD5 md5, string userInput)
+        {
+            // Converts the string into a byte array & computes the hash
+            byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(userInput));
+
+            // Creates a StringBuilder to gather the bytes to form a string
+            StringBuilder sBuilder = new StringBuilder();
+            for(int i = 0; i < hash.Length; i++)
+            {
+                sBuilder.Append(hash[i].ToString("x2"));
+            }
+
+            // Returns the hexadecimal string
+            return sBuilder.ToString();
+        }
+
+        /// <summary>  
+        /// Verifies that the usser's passed in password matches with the hashed password stored in the database
+        /// </summary>  
+        /// <param name="md5"></param>  
+        /// <param name="userInput"></param>  
+        /// <param name="storedHash"></param>  
+        /// <returns></returns> 
+        private bool VerifyPassword(MD5 md5, string userInput, string storedHash)
+        {
+            // Get a hash of the user's submitted password
+            string hashOfUserInput = HashPassword(md5, userInput);
+
+            // StringComparer used two compare the two hashed passwords
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            // If the two stored passwords are the same, return true. Otherwise, return false
+            if (0 == comparer.Compare(hashOfUserInput, storedHash))
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }

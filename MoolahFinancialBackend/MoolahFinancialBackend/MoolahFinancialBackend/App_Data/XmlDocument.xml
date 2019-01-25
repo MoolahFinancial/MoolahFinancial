@@ -549,5 +549,13 @@
             <param name="user"></param> 
             <returns></returns>
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.HashPassword(System.Security.Cryptography.MD5,System.String)">
+            <summary>  
+            Generates an MD5 hash for passwords. This should be changed to a better algorithm before production (easy to break)
+            </summary>  
+            <param name="userInput"></param>  
+            <param name="md5"></param>  
+            <returns></returns> 
+        </member>
     </members>
 </doc>
