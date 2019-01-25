@@ -46,7 +46,7 @@ export class LoginPage {
         console.log(data.user, 'User profile returned from the login service');
         this.navCtrl.push(TabsPage);
       } else {
-        window.alert(data.errorMessage);
+        window.alert(data.message);
       }
     });
 

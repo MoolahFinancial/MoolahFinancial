@@ -19,7 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpClientModule } from '@angular/common/http';
 
-// Import our providers
+// Import our providers/services
 import { PortfolioProvider } from '../providers/portfolio/portfolio.service';
 import { UserProvider } from '../providers/user/user.service';
 import { EmailValidator } from '../validators/emailValidator';

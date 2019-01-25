@@ -1,7 +1,7 @@
 import { DateTime } from "ionic-angular";
 
 export interface User {
-    userID: number,
+    userId: number,
     firstName: string,
     middleName?: string,
     lastName: string,

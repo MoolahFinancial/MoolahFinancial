@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PortfolioProvider {
 
-  apiUrl = 'https://moolah-financial-api.azurewebsites.net/api';
+  readonly ROOT_URL = 'https://moolah-financial-api.azurewebsites.net/api';
 
   constructor(public http: HttpClient) {
     console.log('Hello PortfolioProvider Provider');
@@ -18,7 +18,7 @@ export class PortfolioProvider {
 
   getPortfolios() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/Portfolios').subscribe(data => {
+      this.http.get(this.ROOT_URL+'/Portfolios').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
