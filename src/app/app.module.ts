@@ -13,6 +13,8 @@ import { PerformancePage } from '../pages/performance/performance';
 import { RegisterPage } from '../pages/register/register';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignupPage } from '../pages/signup/signup';
+import { QuestionPage } from '../pages/quest/quest';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,7 +37,8 @@ import { EmailValidator } from '../validators/emailValidator';
     PerformancePage,
     RegisterPage,
     TabsPage,
-    SignupPage
+    SignupPage,
+    QuestionPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { EmailValidator } from '../validators/emailValidator';
     PerformancePage,
     RegisterPage,
     TabsPage,
-    SignupPage
+    SignupPage,
+    QuestionPage
   ],
   providers: [
     StatusBar,

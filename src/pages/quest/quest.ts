@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
-import { InvestPage } from '../invest/invest';
-import { QuestionPage } from '../quest/quest';
+//import { InvestPage } from '../invest/invest';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'signup.html'
+  templateUrl: 'quest.html'
 })
-export class SignupPage {
+export class QuestionPage {
 
   constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider) {
 
@@ -18,11 +17,7 @@ export class SignupPage {
     console.log("Selected Item", item);
   }
 
-  continue(){
-    this.navCtrl.push(InvestPage);
-  }
-
-  questionaire(){
-    this.navCtrl.push(QuestionPage);
-  }
+  // continue(){
+  //   this.navCtrl.push(InvestPage);
+  // }
 }
