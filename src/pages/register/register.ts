@@ -21,7 +21,7 @@ import { SignupPage } from '../signup/signup';
 })
 export class RegisterPage {
 
-  // Variables to hold values inside the register form
+  // Variables to hold values inside the register form (these are set by the user)
   registerForm: FormGroup;
   post: any; // A reference for our submitted form
   firstName: string = '';
@@ -29,7 +29,6 @@ export class RegisterPage {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder, public userProvider: UserProvider, public emailValidator: EmailValidator) {
@@ -51,13 +50,22 @@ export class RegisterPage {
   }
 
   registerUser(post) {
+    //variables we currently set
     this.firstName = post.firstName.toLowerCase();
     this.lastName = post.lastName.toLowerCase();
     this.email = post.email.toLowerCase();
     this.password = post.password;
-    this.confirmPassword = post.confirmPassword;
 
-    console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
+    delete post['confirmPassword'];
+
+    //this.confirmPassword = post.confirmPassword;
+    console.log(JSON.stringify(post));
+
+    this.userProvider.registerUser(post).then((result) => {
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   register(){
