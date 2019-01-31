@@ -37,8 +37,8 @@ export class RegisterPage {
       'lastName': [null, Validators.required],
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       // ,emailValidator.checkEmail.bind(emailValidator)],
-      'password': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])],
-      'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(255)])]
+      'password': [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(255)])],
+      'confirmPassword': [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(255)])]
     }, {
       validator: PasswordValidator.confirmPasswordMatch.bind(this)
     });
@@ -56,12 +56,19 @@ export class RegisterPage {
     this.email = post.email.toLowerCase();
     this.password = post.password;
 
-    delete post['confirmPassword'];
+    //delete post['confirmPassword'];
 
-    //this.confirmPassword = post.confirmPassword;
-    console.log(JSON.stringify(post));
+    var jsonData = {
+                      "first_name": post.firstName,
+                      "last_name": post.lastName,
+                      "email": post.email,
+                      "password": post.password
+                   };
 
-    this.userProvider.registerUser(post).then((result) => {
+    console.log(jsonData, "jsonData");
+    console.log(JSON.stringify(post), "JSON.stringify(post)");
+
+    this.userProvider.registerUser(jsonData).then((result) => {
       console.log(result);
     }, (err) => {
       console.log(err);

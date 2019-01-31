@@ -37,6 +37,10 @@ export class UserProvider {
   }
 //firstName: string, lastName: string, email: string, password: string
 
+  registerUser2(data: JSON) {
+    console.log(data);
+  }
+
   registerUser(data) {
       return new Promise((resolve, reject) => {
         this.http.post(this.ROOT_URL+'/users/register', data,
