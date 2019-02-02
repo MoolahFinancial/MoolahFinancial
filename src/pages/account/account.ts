@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { App, NavController} from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { UserProvider } from '../../providers/user/user.service';
 
 @Component({
   selector: 'page-home',
@@ -8,7 +9,7 @@ import { LoginPage } from '../login/login';
 })
 export class AccountPage {
 
-  constructor(public navCtrl: NavController, public app: App) {
+  constructor(public navCtrl: NavController, public app: App, public userProvider: UserProvider) {
 
   }
 
@@ -21,7 +22,9 @@ export class AccountPage {
   }
 
   logout() {
-    console.log("Logout");
+    console.log(this.userProvider.currentUser, "current user in logout");
+    this.userProvider.currentUser = null; // Set the current user to null
+    // Navigate back to the login page
     var nav = this.app.getRootNav();
     nav.setRoot(LoginPage);
   }

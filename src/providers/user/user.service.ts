@@ -13,12 +13,14 @@ interface loginData {
 
 @Injectable()
 export class UserProvider {
-  readonly ROOT_URL = 'https://moolah-financial-api.azurewebsites.net/api';
+  readonly ROOT_URL = 'https://moolah-financial-api.azurewebsites.net/api'; // Base url for api calls
+  currentUser: User; // Variable being used to store the current user
 
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
   }
 
+  // TODO: Mark for deletion once development is done
   getUsers(): Promise<User[]> {
     return new Promise(resolve => {
       this.http.get<User[]>(this.ROOT_URL+'/users').subscribe(data => {

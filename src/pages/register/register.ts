@@ -54,7 +54,7 @@ export class RegisterPage {
                    };
 
     this.userProvider.registerUser(jsonData).then((result) => {
-      console.log(result);
+      console.log(result, "register result");
     }, (err) => {
       console.log(err);
     });

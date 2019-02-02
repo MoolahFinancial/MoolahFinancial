@@ -3,16 +3,16 @@
     <img class="displayed" src="assets/imgs/moolahName.png" padding-top height="65px">
   </ion-navbar>
   <ion-navbar color="secondary">
-    <ion-title height>Home</ion-title>
+    <ion-title height> Welcome {{ this.userProvider.currentUser.first_name }}! </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list inset>
-    <ion-item *ngFor="let user of users">
+    <!-- <ion-item *ngFor="let user of users">
       <h2>{{user.first_name}}</h2>
       <p>{{user.email}}</p>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 
   <ion-card>

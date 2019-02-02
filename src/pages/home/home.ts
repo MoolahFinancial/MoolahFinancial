@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { App, NavController } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
 import { UserProvider } from '../../providers/user/user.service';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -19,12 +20,21 @@ export class HomePage {
   myTitle: any;
   myHoldings: any;
 
-  constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider, public userProvider: UserProvider) {
-    this.getUsers();
-    this.getPortfolios();
+  constructor(public navCtrl: NavController, public app: App, public portfolioProvider: PortfolioProvider, public userProvider: UserProvider) {
+    // If the current user is either null or undefined, return to the login screen
+    if(this.userProvider.currentUser == null)
+    {
+      var nav = this.app.getRootNav();
+      nav.setRoot(LoginPage);
+    } else {
+      console.log(this.userProvider.currentUser, "current user on home page");
 
-    //this.myPortfolio = this.portfolio[0];
-    //console.log(this.myPortfolio);
+      //this.getUsers();
+      this.getPortfolios();
+
+      //this.myPortfolio = this.portfolio[0];
+      //console.log(this.myPortfolio);
+    }
   }
 
   ionViewDidLoad() {
@@ -63,6 +73,7 @@ export class HomePage {
     });
   }
 
+  // TODO: Marked for deletion once development is done (only used for testing)
   getUsers() {
     this.userProvider.getUsers()
     .then(data => {
