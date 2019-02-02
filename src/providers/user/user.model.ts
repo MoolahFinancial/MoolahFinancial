@@ -1,18 +1,18 @@
 import { DateTime } from "ionic-angular";
 
 export interface User {
-    userId: number,
-    firstName: string,
-    middleName?: string,
-    lastName: string,
+    user_id: number,
+    first_name: string,
+    middle_name?: string,
+    last_name: string,
     email: string,
     password: string,
-    dateOfBirth?: DateTime,
+    date_of_birth?: DateTime,
     citizenship?: string,
-    notificationPreference: number,
+    notification_preference: number,
     ssn?: number,
-    primaryPhone?: string,
-    secondaryPhone?: string,
-    isDeleted: boolean,
+    primary_phone?: string,
+    secondary_phone?: string,
+    is_deleted: boolean,
     risk?: number
 }

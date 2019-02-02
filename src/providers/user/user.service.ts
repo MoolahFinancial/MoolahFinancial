@@ -15,17 +15,11 @@ interface loginData {
 export class UserProvider {
   readonly ROOT_URL = 'https://moolah-financial-api.azurewebsites.net/api';
 
-  users: Observable<User[]>;
-
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
   }
 
-  // getUsers() {
-  //   return this.http.get<User[]>(this.ROOT_URL + '/users');
-  // }
-
-  getUsers() {
+  getUsers(): Promise<User[]> {
     return new Promise(resolve => {
       this.http.get<User[]>(this.ROOT_URL+'/users').subscribe(data => {
         resolve(data);
@@ -35,13 +29,8 @@ export class UserProvider {
       });
     });
   }
-//firstName: string, lastName: string, email: string, password: string
 
-  registerUser2(data: JSON) {
-    console.log(data);
-  }
-
-  registerUser(data) {
+  registerUser(data: any): Promise<any> {
       return new Promise((resolve, reject) => {
         this.http.post(this.ROOT_URL+'/users/register', data,
         {headers:{'Content-Type': 'application/json'}})

@@ -24,11 +24,6 @@ export class RegisterPage {
   // Variables to hold values inside the register form (these are set by the user)
   registerForm: FormGroup;
   post: any; // A reference for our submitted form
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder, public userProvider: UserProvider, public emailValidator: EmailValidator) {
@@ -49,24 +44,14 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
-  registerUser(post) {
-    //variables we currently set
-    this.firstName = post.firstName.toLowerCase();
-    this.lastName = post.lastName.toLowerCase();
-    this.email = post.email.toLowerCase();
-    this.password = post.password;
-
-    //delete post['confirmPassword'];
-
+  registerUser(post: any) {
+    // The json object we will pass into the body of the RegisterUser api call (need to manually map each component due to different naming conventions)
     var jsonData = {
                       "first_name": post.firstName,
                       "last_name": post.lastName,
                       "email": post.email,
                       "password": post.password
                    };
-
-    console.log(jsonData, "jsonData");
-    console.log(JSON.stringify(post), "JSON.stringify(post)");
 
     this.userProvider.registerUser(jsonData).then((result) => {
       console.log(result);
