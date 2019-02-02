@@ -24,8 +24,8 @@ export class HomePage {
     // If the current user is either null or undefined, return to the login screen
     if(this.userProvider.currentUser == null)
     {
-      var nav = this.app.getRootNav();
-      nav.setRoot(LoginPage);
+      // var nav = this.app.getRootNav();
+      // nav.setRoot(LoginPage);
     } else {
       console.log(this.userProvider.currentUser, "current user on home page");
 
