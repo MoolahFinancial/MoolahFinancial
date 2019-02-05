@@ -1,5 +1,17 @@
 import { DateTime } from "ionic-angular";
 
+// Interface to represent basic json that is returned with multiple moolah APIs
+export interface ApiData {
+    success: string;
+    message: string;
+}
+
+// Interface to represent the json data that is retrieved from either the login or register apis
+export interface LoginData extends ApiData{
+    user: User;
+}
+
+// An interface that represents a user
 export interface User {
     user_id: number,
     first_name: string,

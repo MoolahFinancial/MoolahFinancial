@@ -1,15 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { User } from './user.model'; // Our custom interface used to represent a user (to allow static typing)
+import { User, LoginData } from './user.model'; // Our custom interface used to represent a user (to allow static typing)
 import 'rxjs/add/operator/map';
-
-// The interface used to represent the json data that is returned from the login function
-interface loginData {
-  success: string;
-  message: string;
-  user: User;
-}
+import { stringify } from '@angular/compiler/src/util';
 
 @Injectable()
 export class UserProvider {
@@ -32,9 +26,9 @@ export class UserProvider {
     });
   }
 
-  registerUser(data: any): Promise<any> {
+  registerUser(data: any): Promise<LoginData> {
       return new Promise((resolve, reject) => {
-        this.http.post(this.ROOT_URL+'/users/register', data,
+        this.http.post<LoginData>(this.ROOT_URL+'/users/register', data,
         {headers:{'Content-Type': 'application/json'}})
         .subscribe(res => {
             resolve(res);
@@ -58,11 +52,11 @@ export class UserProvider {
   }
 
   // Returns user info if the email and password are correct
-  loginUser(email: string, password: string): Observable<loginData> {
+  loginUser(email: string, password: string): Observable<LoginData> {
 
     // Add the email and password params to the url for the api call
     const params = new HttpParams().set('email', email).set('password', password);
 
-    return this.http.get<loginData>(this.ROOT_URL + '/users/login', { params } );
+    return this.http.get<LoginData>(this.ROOT_URL + '/users/login', { params } );
   }
 }

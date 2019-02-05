@@ -7,6 +7,7 @@ import { EmailValidator } from '../../validators/emailValidator';
 import { PasswordValidator } from '../../validators/passwordValidator';
 import { SignupPage } from '../signup/signup';
 
+
 /**
  * Generated class for the RegisterPage page.
  *
@@ -54,21 +55,23 @@ export class RegisterPage {
                    };
 
     this.userProvider.registerUser(jsonData).then((result) => {
-      console.log(result, "register result");
+      if(result.success) {
+        this.userProvider.currentUser = result.user; // Set the current user to the logged in user
+        this.navCtrl.push(SignupPage);
+      } else {
+        this.registerError("Something went wrong");
+      }
     }, (err) => {
       console.log(err);
+      this.registerError("Email is already registered");
     });
   }
 
-  register(){
-    this.navCtrl.push(SignupPage);
+  // Method that is called when the registration api is not successful 
+  registerError(errorMessage: string) {
+    console.log(errorMessage);
+    this.userProvider.currentUser = null;
+    window.alert(errorMessage);
   }
-  // registerUser(){
-  //   //console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
-
-  //   // this.userProvider.registerUser(this.firstName, this.lastName, this.email, this.password);
-
-  //   //this.navCtrl.push(TabsPage);
-  // }
 
 }
