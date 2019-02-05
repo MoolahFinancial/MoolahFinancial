@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User, LoginData } from './user.model'; // Our custom interface used to represent a user (to allow static typing)
 import 'rxjs/add/operator/map';
-import { stringify } from '@angular/compiler/src/util';
 
 @Injectable()
 export class UserProvider {

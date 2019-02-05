@@ -488,6 +488,13 @@
             <param name="id"></param>  
             <returns></returns> 
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.PortfoliosController.GetBestPortfolio(System.Int32)">
+            <summary>  
+            Returns the portfolio that is the best suited for a given user
+            </summary>  
+            <param name="userId"></param>  
+            <returns></returns> 
+        </member>
         <member name="T:MoolahFinancialBackend.Controllers.UsersController">
             <summary>
             The User Controller class.
@@ -555,6 +562,15 @@
             </summary>  
             <param name="userInput"></param>  
             <param name="md5"></param>  
+            <returns></returns> 
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.VerifyPassword(System.Security.Cryptography.MD5,System.String,System.String)">
+            <summary>  
+            Verifies that the usser's passed in password matches with the hashed password stored in the database
+            </summary>  
+            <param name="md5"></param>  
+            <param name="userInput"></param>  
+            <param name="storedHash"></param>  
             <returns></returns> 
         </member>
     </members>
