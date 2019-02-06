@@ -9,9 +9,7 @@ export class UserProvider {
   readonly ROOT_URL = 'https://moolah-financial-api.azurewebsites.net/api'; // Base url for api calls
   currentUser: User; // Variable being used to store the current user
 
-  constructor(public http: HttpClient) {
-    console.log('Hello UserProvider Provider');
-  }
+  constructor(public http: HttpClient) { }
 
   // TODO: Mark for deletion once development is done
   getUsers(): Promise<User[]> {

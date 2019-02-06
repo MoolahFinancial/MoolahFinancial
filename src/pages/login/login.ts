@@ -24,10 +24,6 @@ export class LoginPage {
   // Variables to hold values inside the login form
   loginForm: FormGroup;
 
-  // Variables to toggle the password from being hidden or visible
-  passwordType: string = 'password';
-  passwordIcon: string = 'eye-off';
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private formProvider: FormProvider,
     public userProvider: UserProvider, private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
@@ -36,12 +32,7 @@ export class LoginPage {
     });
   }
 
-  // Toggles the password text and icon depending on whether the password is hidden or visible
-  public togglePassword(){
-    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
-  }
-
+  // Login method
   loginUser(post: any){
     this.userProvider.loginUser(post.email.toLowerCase(), post.password).subscribe(data => {
       if(data.success) {

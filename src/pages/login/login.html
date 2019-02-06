@@ -26,8 +26,8 @@
       </ion-item>
       <ion-item>
         <!-- <ion-label><ion-icon name="eye" (click)="togglePassword()"></ion-icon></ion-label> -->
-        <ion-icon [name]="passwordIcon" class="passwordIcon" item-start (click)="togglePassword()"></ion-icon>
-        <ion-input [type]="passwordType" class="no-margin" formControlName="password" placeholder="Password"></ion-input>
+        <ion-icon [name]="formProvider.passwordIcon" class="passwordIcon" item-start (click)="formProvider.togglePassword()"></ion-icon>
+        <ion-input [type]="formProvider.passwordType" class="no-margin" formControlName="password" placeholder="Password"></ion-input>
       </ion-item>
     </ion-list>
     <!--Button is disabled until all of the validation checks (in register.ts) are passed-->

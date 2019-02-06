@@ -6,6 +6,10 @@ import { AlertController } from 'ionic-angular';
 @Injectable()
 export class FormProvider {
 
+  // Variables to toggle the password from being hidden or visible
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
   constructor(public http: HttpClient, private alertCtrl: AlertController) { }
 
   // Displays an alert to the user
@@ -17,4 +21,11 @@ export class FormProvider {
     });
     alert.present();
   }
+
+  // Toggles the password text and icon depending on whether the password is hidden or visible
+  public togglePassword(){
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+  
 }

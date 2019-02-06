@@ -14,9 +14,7 @@ export class PortfolioProvider {
 
   readonly ROOT_URL = 'https://moolah-financial-api.azurewebsites.net/api';
 
-  constructor(public http: HttpClient) {
-    console.log('Hello PortfolioProvider Provider');
-  }
+  constructor(public http: HttpClient) { }
 
   getPortfolios() {
     return new Promise(resolve => {
