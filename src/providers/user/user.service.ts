@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { User, LoginData } from './user.model'; // Our custom interface used to represent a user (to allow static typing)
+import { User, LoginData } from '../models'; // Our custom interface used to represent a user (to allow static typing)
 import 'rxjs/add/operator/map';
 
 @Injectable()

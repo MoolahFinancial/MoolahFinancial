@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { PortfolioData } from '../models';
 
 /*
   Generated class for the PortfolioProvider provider.
@@ -24,6 +26,11 @@ export class PortfolioProvider {
         console.log(err);
       });
     });
+  }
+
+  // Returns one portfolio based on what we believe is the best recommendation for the current user
+  getBestPortfolio(userId: number): Observable<PortfolioData> {
+    return this.http.get<PortfolioData>(this.ROOT_URL + '/Portfolios/bestPortfolio/' + userId);
   }
 
 }

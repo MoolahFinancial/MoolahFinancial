@@ -11,6 +11,10 @@ export interface LoginData extends ApiData{
     user: User;
 }
 
+export interface PortfolioData extends ApiData{
+    portfolio: Portfolio;
+}
+
 // An interface that represents a user
 export interface User {
     user_id: number,
@@ -27,4 +31,27 @@ export interface User {
     secondary_phone?: string,
     is_deleted: boolean,
     risk?: number
+}
+
+// An interface that represents a portfolio
+export interface Portfolio {
+    portfolio_id: number,
+    title: string,
+    description?: string,
+    created_at: DateTime,
+    updated_at: DateTime,
+    is_active: number, //todo: change to bit in database
+    is_deleted: boolean,
+    expected_return: number,
+    risk: number
+    holdings: Holding[]
+}
+
+// An interface that represents a holding
+export interface Holding {
+    holding_id: number,
+    holding_name: string,
+    weight: number,
+    fees_per_year: number,
+    portfolio_id: number
 }
