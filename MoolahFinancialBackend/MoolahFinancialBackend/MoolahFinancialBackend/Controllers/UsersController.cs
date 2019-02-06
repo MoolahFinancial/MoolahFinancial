@@ -42,7 +42,7 @@ namespace MoolahFinancialBackend.Controllers
         [Route("activeUsers")]
         public IQueryable<user> GetAllActiveUsers()
         { 
-            return db.users.Where(c => c.is_deleted == false);
+            return db.users.Where(c => c.is_deactivated == false);
         }
 
         /// <summary>  
@@ -108,7 +108,7 @@ namespace MoolahFinancialBackend.Controllers
                 return Ok(new { success = false, message = "No matching account found" });
             }
             // If the account has already been deactivated, throw an error message
-            else if (matchingUser.is_deleted)
+            else if (matchingUser.is_deactivated)
             {
                 return Ok(new { success = false, message = "This account has been deactivated" });
             }
@@ -146,7 +146,7 @@ namespace MoolahFinancialBackend.Controllers
 
             user matchingUser = db.users.Find(id);
 
-            matchingUser.is_deleted = true;
+            matchingUser.is_deactivated = true;
 
             db.SaveChanges();
 

@@ -34,7 +34,8 @@ namespace MoolahFinancialBackend.Models
         public Nullable<int> ssn { get; set; }
         public string primary_phone { get; set; }
         public string secondary_phone { get; set; }
-        public bool is_deleted { get; set; }
+        public bool is_deactivated { get; set; }
+        public bool email_validated { get; set; }
         public Nullable<decimal> risk { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

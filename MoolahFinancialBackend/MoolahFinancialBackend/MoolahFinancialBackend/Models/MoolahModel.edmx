@@ -119,7 +119,8 @@
           <Property Name="ssn" Type="int" />
           <Property Name="primary_phone" Type="nvarchar" MaxLength="30" />
           <Property Name="secondary_phone" Type="nvarchar" MaxLength="30" />
-          <Property Name="is_deleted" Type="bit" Nullable="false" />
+          <Property Name="is_deactivated" Type="bit" Nullable="false" />
+          <Property Name="email_validated" Type="bit" Nullable="false" />
           <Property Name="risk" Type="decimal" Precision="2" Scale="2" />
         </EntityType>
         <EntityType Name="user_tag">
@@ -552,7 +553,8 @@
           <Property Name="ssn" Type="Int32" />
           <Property Name="primary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="secondary_phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
+          <Property Name="is_deactivated" Type="Boolean" Nullable="false" />
+          <Property Name="email_validated" Type="Boolean" Nullable="false" />
           <Property Name="risk" Type="Decimal" Precision="2" Scale="2" />
           <NavigationProperty Name="addresses" Relationship="MoolahModel.FK_address_user" FromRole="user" ToRole="address" />
           <NavigationProperty Name="transactions" Relationship="MoolahModel.FK_transaction_user" FromRole="user" ToRole="transaction" />
@@ -720,7 +722,8 @@
             <EntityTypeMapping TypeName="MoolahModel.user">
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="risk" ColumnName="risk" />
-                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+                <ScalarProperty Name="email_validated" ColumnName="email_validated" />
+                <ScalarProperty Name="is_deactivated" ColumnName="is_deactivated" />
                 <ScalarProperty Name="secondary_phone" ColumnName="secondary_phone" />
                 <ScalarProperty Name="primary_phone" ColumnName="primary_phone" />
                 <ScalarProperty Name="ssn" ColumnName="ssn" />
