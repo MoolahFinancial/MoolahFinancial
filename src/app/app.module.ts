@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PortfolioProvider } from '../providers/portfolio/portfolio.service';
 import { UserProvider } from '../providers/user/user.service';
 import { EmailValidator } from '../validators/emailValidator';
+import { FormProvider } from '../providers/form/form.service';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { EmailValidator } from '../validators/emailValidator';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PortfolioProvider,
     UserProvider,
-    EmailValidator // Needs to be included as a provider since it is an injectable
+    EmailValidator,
+    FormProvider // Needs to be included as a provider since it is an injectable
   ]
 })
 export class AppModule {}

@@ -69,7 +69,6 @@ export class RegisterPage {
 
   // Method that is called when the registration api is not successful 
   registerError(errorMessage: string) {
-    console.log(errorMessage);
     this.userProvider.currentUser = null;
     window.alert(errorMessage);
   }

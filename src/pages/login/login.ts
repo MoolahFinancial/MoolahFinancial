@@ -4,6 +4,8 @@ import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserProvider } from '../../providers/user/user.service';
+import { FormProvider } from '../../providers/form/form.service';
+//import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,7 +28,8 @@ export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formProvider: FormProvider,
+    public userProvider: UserProvider, private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'password': [null, Validators.required]
@@ -47,13 +50,11 @@ export class LoginPage {
       } else {
         // If an error occurs during the login, the current user should be null
         this.userProvider.currentUser = null;
-        window.alert(data.message);
+        
+        // Display an alert telling the user of a failed login
+        this.formProvider.loginAlert('No Matching Account', 'Please confirm your email or password');
       }
     });
-
-
-
-    // this.navCtrl.push(TabsPage);
   }
 
   // Navigates users to the Register page upon pressing the 'Sign Up' button
