@@ -50,9 +50,20 @@ export class LoginPage {
       } else {
         // If an error occurs during the login, the current user should be null
         this.userProvider.currentUser = null;
-        
-        // Display an alert telling the user of a failed login
-        this.formProvider.loginAlert('No Matching Account', 'Please confirm your email or password');
+        console.log(data.message, "Error msg");
+        // Display different errors to the user depending on what error message we received from the server
+        if(data.message.includes("deactivated")) {
+          // Deactivated Account
+          this.formProvider.loginAlert('Deactivated Account', 'This account has been deactivated');
+        } 
+        else if(data.message.includes("No matching")) {
+          // Email and Password don't correspond with an existing user
+          this.formProvider.loginAlert('No Matching Account', 'Please confirm your email or password');
+        }
+        else {
+          // Something else went wrong (blame it on them)
+          this.formProvider.loginAlert('No Connection', 'Please check your network connection');
+        }
       }
     });
   }
