@@ -54,7 +54,7 @@ namespace MoolahFinancialBackend.Controllers
             //TODO: Change this (currently gives 1 static portfolio as a recommendation)
             var bestPortfolio = db.portfolios.FirstOrDefault(u => u.title.Contains("Smart Beta"));
 
-            return Ok(new { success = true, message = "Found suggested portfolio", potfolio = bestPortfolio });
+            return Ok(new { success = true, message = "Found suggested portfolio", portfolio = bestPortfolio });
         }
 
         // PUT: api/Portfolio/5

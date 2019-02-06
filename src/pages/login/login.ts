@@ -27,7 +27,6 @@ export class LoginPage {
   passwordIcon: string = 'eye-off';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, private formBuilder: FormBuilder) {
-    console.log(this.userProvider.currentUser, "current user in LOGIN");
     this.loginForm = this.formBuilder.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'password': [null, Validators.required]
@@ -41,7 +40,6 @@ export class LoginPage {
   }
 
   loginUser(post: any){
-
     this.userProvider.loginUser(post.email.toLowerCase(), post.password).subscribe(data => {
       if(data.success) {
         this.userProvider.currentUser = data.user; // Set the current user to the logged in user

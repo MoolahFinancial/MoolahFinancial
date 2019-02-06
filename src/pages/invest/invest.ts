@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
+import { UserProvider } from '../../providers/user/user.service';
 import { TabsPage } from '../tabs/tabs';
+import { Portfolio, PortfolioData } from '../../providers/models';
 
 @Component({
   selector: 'page-home',
@@ -10,10 +12,12 @@ import { TabsPage } from '../tabs/tabs';
 export class InvestPage {
 
   portfolio: any;
+  recommendedPortfolio: Portfolio;
 
   //public technologies : Array<any>;
-  constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider) {
-    this.getPortfolios();
+  constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider, public userProvider: UserProvider) {
+    this.getBestPortfolio();
+    // this.getPortfolios();
   }
 
   getPortfolios() {
@@ -26,6 +30,15 @@ export class InvestPage {
 
   chooseInvestment() {
     this.navCtrl.push(TabsPage);
+  }
+
+  // Calls the api to get the recommended portfolio for the current user
+  getBestPortfolio(){
+    this.portfolioProvider.getBestPortfolio(this.userProvider.currentUser.user_id).subscribe((data: PortfolioData) => {
+      if(data.success) {
+        this.recommendedPortfolio = <Portfolio>data.portfolio;
+      }
+    });
   }
 
   //ionViewDidLoad() {

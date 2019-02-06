@@ -11,6 +11,7 @@ export interface LoginData extends ApiData{
     user: User;
 }
 
+// Interface to represent some of the response data that involves retrieving portfolios
 export interface PortfolioData extends ApiData{
     portfolio: Portfolio;
 }

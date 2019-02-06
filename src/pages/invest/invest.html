@@ -23,12 +23,17 @@
   </ion-item>
 </ion-list> -->
 
+  <ion-card (click)="chooseInvestment()">
+    <img src="assets/imgs/card-amsterdam.png"/>
+    <div class="card-title">{{recommendedPortfolio?.title}}</div>
+    <div class="card-subtitle">{{recommendedPortfolio?.risk}}</div>
+  </ion-card>
 
-  <ion-card *ngFor="let port of portfolio" (click)="chooseInvestment()">
+  <!-- <ion-card *ngFor="let port of portfolio" (click)="chooseInvestment()">
     <img src="assets/imgs/card-amsterdam.png"/>
     <div class="card-title">{{port.title}}</div>
     <div class="card-subtitle">{{port.risk}}</div>
-  </ion-card>
+  </ion-card> -->
 
 
 <!--<ion-card *ngFor="let technology of technologies">
