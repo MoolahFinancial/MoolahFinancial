@@ -74,6 +74,7 @@
           </Key>
           <Property Name="question_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="question_text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="json_possible_answers" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -219,7 +220,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_user_tag_question">
-          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="question" Type="Self.question" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="question">
@@ -343,9 +346,9 @@
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="tag_id" Type="Int32" Nullable="false" />
           <Property Name="question_answer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="question" Relationship="MoolahModel.FK_user_tag_question" FromRole="user_tag" ToRole="question" />
           <NavigationProperty Name="tag" Relationship="MoolahModel.FK_user_tag_tag" FromRole="user_tag" ToRole="tag" />
           <NavigationProperty Name="user" Relationship="MoolahModel.FK_user_tag_user" FromRole="user_tag" ToRole="user" />
+          <NavigationProperty Name="question" Relationship="MoolahModel.FK_user_tag_question" FromRole="user_tag" ToRole="question" />
         </EntityType>
         <EntityContainer Name="MoolahEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -354,7 +357,6 @@
           <EntitySet Name="news" EntityType="MoolahModel.news" />
           <EntitySet Name="addresses" EntityType="MoolahModel.address" />
           <EntitySet Name="portfolios" EntityType="MoolahModel.portfolio" />
-          <EntitySet Name="questions" EntityType="MoolahModel.question" />
           <EntitySet Name="tags" EntityType="MoolahModel.tag" />
           <AssociationSet Name="FK_news_portfolio" Association="MoolahModel.FK_news_portfolio">
             <End Role="portfolio" EntitySet="portfolios" />
@@ -363,10 +365,6 @@
           <AssociationSet Name="FK_transaction_portfolio" Association="MoolahModel.FK_transaction_portfolio">
             <End Role="portfolio" EntitySet="portfolios" />
             <End Role="transaction" EntitySet="transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_tag_question" Association="MoolahModel.FK_user_tag_question">
-            <End Role="question" EntitySet="questions" />
-            <End Role="user_tag" EntitySet="user_tag" />
           </AssociationSet>
           <AssociationSet Name="FK_user_tag_tag" Association="MoolahModel.FK_user_tag_tag">
             <End Role="tag" EntitySet="tags" />
@@ -392,6 +390,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_user_tag_user" Association="MoolahModel.FK_user_tag_user">
             <End Role="user" EntitySet="users" />
+            <End Role="user_tag" EntitySet="user_tag" />
+          </AssociationSet>
+          <EntitySet Name="questions" EntityType="MoolahModel.question" />
+          <AssociationSet Name="FK_user_tag_question" Association="MoolahModel.FK_user_tag_question">
+            <End Role="question" EntitySet="questions" />
             <End Role="user_tag" EntitySet="user_tag" />
           </AssociationSet>
           </EntityContainer>
@@ -446,14 +449,6 @@
           <NavigationProperty Name="tags" Relationship="MoolahModel.portfolio_tag" FromRole="portfolio" ToRole="tag" />
           <NavigationProperty Name="holdings" Relationship="MoolahModel.FK_holding_portfolio" FromRole="portfolio" ToRole="holding" />
         </EntityType>
-        <EntityType Name="question">
-          <Key>
-            <PropertyRef Name="question_id" />
-          </Key>
-          <Property Name="question_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="question_text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="user_tag" Relationship="MoolahModel.FK_user_tag_question" FromRole="question" ToRole="user_tag" />
-        </EntityType>
         <EntityType Name="tag">
           <Key>
             <PropertyRef Name="tag_id" />
@@ -484,18 +479,6 @@
             </Principal>
             <Dependent Role="transaction">
               <PropertyRef Name="portfolio_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_tag_question">
-          <End Type="MoolahModel.question" Role="question" Multiplicity="0..1" />
-          <End Type="MoolahModel.user_tag" Role="user_tag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="question">
-              <PropertyRef Name="question_id" />
-            </Principal>
-            <Dependent Role="user_tag">
-              <PropertyRef Name="question_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -598,6 +581,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="question_id" />
+          </Key>
+          <Property Name="question_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question_text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="json_possible_answers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="user_tag" Relationship="MoolahModel.FK_user_tag_question" FromRole="question" ToRole="user_tag" />
+        </EntityType>
+        <Association Name="FK_user_tag_question">
+          <End Type="MoolahModel.question" Role="question" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MoolahModel.user_tag" Role="user_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="question_id" />
+            </Principal>
+            <Dependent Role="user_tag">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -685,14 +691,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="questions">
-            <EntityTypeMapping TypeName="MoolahModel.question">
-              <MappingFragment StoreEntitySet="question">
-                <ScalarProperty Name="question_text" ColumnName="question_text" />
-                <ScalarProperty Name="question_id" ColumnName="question_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tags">
             <EntityTypeMapping TypeName="MoolahModel.tag">
               <MappingFragment StoreEntitySet="tag">
@@ -739,6 +737,15 @@
                 <ScalarProperty Name="middle_name" ColumnName="middle_name" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="MoolahModel.question">
+              <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="json_possible_answers" ColumnName="json_possible_answers" />
+                <ScalarProperty Name="question_text" ColumnName="question_text" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

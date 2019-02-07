@@ -22,6 +22,7 @@ namespace MoolahFinancialBackend.Models
     
         public int question_id { get; set; }
         public string question_text { get; set; }
+        public string json_possible_answers { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user_tag> user_tag { get; set; }
