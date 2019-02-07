@@ -536,7 +536,7 @@
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.DeactivateUser(System.Int32)">
             <summary>  
             Sets an existing user as being deleted. This API doesn't delete a user from the table
-            but sets is_deactivated as being true (don't want to actually delete users).
+            but sets is_deleted as being true (don't want to actually delete users).
             </summary>  
             <param name="id"></param>
             <returns></returns>

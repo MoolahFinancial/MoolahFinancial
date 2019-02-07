@@ -20,7 +20,7 @@
         <AssociationConnector Association="MoolahModel.portfolio_tag" />
         <EntityTypeShape EntityType="MoolahModel.holding" Width="1.5" PointX="3" PointY="8" />
         <AssociationConnector Association="MoolahModel.FK_holding_portfolio" />
-        <EntityTypeShape EntityType="MoolahModel.user" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="MoolahModel.user" Width="1.5" PointX="3" PointY="2.25" />
         <AssociationConnector Association="MoolahModel.FK_address_user" />
         <AssociationConnector Association="MoolahModel.FK_transaction_user" />
         <AssociationConnector Association="MoolahModel.FK_user_tag_user" />
