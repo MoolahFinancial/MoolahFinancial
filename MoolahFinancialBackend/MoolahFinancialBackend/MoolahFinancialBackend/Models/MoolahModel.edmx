@@ -17,7 +17,7 @@
           <Property Name="city" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="state" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="postal_code" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="is_deleted" Type="bit" Nullable="false" />
+          <Property Name="is_deactivated" Type="bit" Nullable="false" />
           <Property Name="is_primary_address" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="holding">
@@ -361,7 +361,6 @@
           <EntitySet Name="transactions" EntityType="Self.transaction" />
           <EntitySet Name="user_tag" EntityType="Self.user_tag" />
           <EntitySet Name="news" EntityType="MoolahModel.news" />
-          <EntitySet Name="addresses" EntityType="MoolahModel.address" />
           <EntitySet Name="tags" EntityType="MoolahModel.tag" />
           <AssociationSet Name="FK_user_tag_tag" Association="MoolahModel.FK_user_tag_tag">
             <End Role="tag" EntitySet="tags" />
@@ -369,10 +368,6 @@
           </AssociationSet>
           <EntitySet Name="holdings" EntityType="MoolahModel.holding" />
           <EntitySet Name="users" EntityType="MoolahModel.user" />
-          <AssociationSet Name="FK_address_user" Association="MoolahModel.FK_address_user">
-            <End Role="user" EntitySet="users" />
-            <End Role="address" EntitySet="addresses" />
-          </AssociationSet>
           <AssociationSet Name="FK_transaction_user" Association="MoolahModel.FK_transaction_user">
             <End Role="user" EntitySet="users" />
             <End Role="transaction" EntitySet="transactions" />
@@ -403,6 +398,11 @@
             <End Role="portfolio" EntitySet="portfolios" />
             <End Role="tag" EntitySet="tags" />
           </AssociationSet>
+          <EntitySet Name="addresses" EntityType="MoolahModel.address" />
+          <AssociationSet Name="FK_address_user" Association="MoolahModel.FK_address_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="address" EntitySet="addresses" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="news">
           <Key>
@@ -419,22 +419,6 @@
           <Property Name="article_url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="portfolio" Relationship="MoolahModel.FK_news_portfolio" FromRole="news" ToRole="portfolio" />
-        </EntityType>
-        <EntityType Name="address">
-          <Key>
-            <PropertyRef Name="address_id" />
-          </Key>
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="address_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="first_line" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="second_line" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="suite_number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="postal_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
-          <Property Name="is_primary_address" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="user" Relationship="MoolahModel.FK_address_user" FromRole="address" ToRole="user" />
         </EntityType>
         <EntityType Name="tag">
           <Key>
@@ -488,22 +472,10 @@
           <Property Name="email_is_validated" Type="Boolean" Nullable="false" />
           <Property Name="has_completed_questionnaire" Type="Boolean" Nullable="false" />
           <Property Name="risk" Type="Decimal" Precision="2" Scale="2" />
-          <NavigationProperty Name="addresses" Relationship="MoolahModel.FK_address_user" FromRole="user" ToRole="address" />
           <NavigationProperty Name="transactions" Relationship="MoolahModel.FK_transaction_user" FromRole="user" ToRole="transaction" />
           <NavigationProperty Name="user_tag" Relationship="MoolahModel.FK_user_tag_user" FromRole="user" ToRole="user_tag" />
+          <NavigationProperty Name="addresses" Relationship="MoolahModel.FK_address_user" FromRole="user" ToRole="address" />
         </EntityType>
-        <Association Name="FK_address_user">
-          <End Type="MoolahModel.user" Role="user" Multiplicity="1" />
-          <End Type="MoolahModel.address" Role="address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="address">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_transaction_user">
           <End Type="MoolahModel.user" Role="user" Multiplicity="1" />
           <End Type="MoolahModel.transaction" Role="transaction" Multiplicity="*" />
@@ -614,6 +586,34 @@
           <End Type="MoolahModel.portfolio" Role="portfolio" Multiplicity="*" />
           <End Type="MoolahModel.tag" Role="tag" Multiplicity="*" />
         </Association>
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_line" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="second_line" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="suite_number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="postal_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="is_deactivated" Type="Boolean" Nullable="false" />
+          <Property Name="is_primary_address" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="MoolahModel.FK_address_user" FromRole="address" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_address_user">
+          <End Type="MoolahModel.user" Role="user" Multiplicity="1" />
+          <End Type="MoolahModel.address" Role="address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -666,22 +666,6 @@
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="news_id" ColumnName="news_id" />
                 <ScalarProperty Name="portfolio_id" ColumnName="portfolio_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="addresses">
-            <EntityTypeMapping TypeName="MoolahModel.address">
-              <MappingFragment StoreEntitySet="address">
-                <ScalarProperty Name="is_primary_address" ColumnName="is_primary_address" />
-                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="suite_number" ColumnName="suite_number" />
-                <ScalarProperty Name="second_line" ColumnName="second_line" />
-                <ScalarProperty Name="first_line" ColumnName="first_line" />
-                <ScalarProperty Name="address_id" ColumnName="address_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -759,6 +743,22 @@
               <ScalarProperty Name="portfolio_id" ColumnName="portfolio_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="addresses">
+            <EntityTypeMapping TypeName="MoolahModel.address">
+              <MappingFragment StoreEntitySet="address">
+                <ScalarProperty Name="is_primary_address" ColumnName="is_primary_address" />
+                <ScalarProperty Name="is_deactivated" ColumnName="is_deactivated" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="suite_number" ColumnName="suite_number" />
+                <ScalarProperty Name="second_line" ColumnName="second_line" />
+                <ScalarProperty Name="first_line" ColumnName="first_line" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
