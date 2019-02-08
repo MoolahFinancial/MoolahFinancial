@@ -30,7 +30,7 @@ export interface User {
     ssn?: number,
     primary_phone?: string,
     secondary_phone?: string,
-    is_deleted: boolean,
+    is_deactivated: boolean,
     risk?: number
 }
 
@@ -41,8 +41,8 @@ export interface Portfolio {
     description?: string,
     created_at: DateTime,
     updated_at: DateTime,
-    is_active: number, //todo: change to bit in database
-    is_deleted: boolean,
+    is_active: boolean,
+    is_deactivated: boolean,
     expected_return: number,
     risk: number
     holdings: Holding[]
@@ -55,4 +55,26 @@ export interface Holding {
     weight: number,
     fees_per_year: number,
     portfolio_id: number
+}
+
+// An interface that represents a question
+export interface Question {
+    question_id: number,
+    question_text: string,
+    question_type: string, // What type of question it is (free form, multiple choice, etc)
+    json_possible_answers: JSON //JSON that contains all of the possible answers to a question
+}
+
+// An interface that represents a UserTag (links a user and a tag together)
+export interface UserTag {
+    question_id: number,
+    user_id: number,
+    tag_id: number,
+    question_answer: string // Stores a user's answer to a question here
+}
+
+// An interface that represents a Tag
+export interface Tag {
+    tag_id: number,
+    tag_name: string
 }
