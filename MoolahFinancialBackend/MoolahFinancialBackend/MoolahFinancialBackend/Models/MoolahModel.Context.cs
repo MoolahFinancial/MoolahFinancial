@@ -32,8 +32,8 @@ namespace MoolahFinancialBackend.Models
         public virtual DbSet<tag> tags { get; set; }
         public virtual DbSet<holding> holdings { get; set; }
         public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<question> questions { get; set; }
         public virtual DbSet<portfolio> portfolios { get; set; }
         public virtual DbSet<address> addresses { get; set; }
+        public virtual DbSet<question> questions { get; set; }
     }
 }
