@@ -15,8 +15,6 @@
         <EntityTypeShape EntityType="MoolahModel.user" Width="1.5" PointX="3" PointY="2.25" />
         <AssociationConnector Association="MoolahModel.FK_transaction_user" />
         <AssociationConnector Association="MoolahModel.FK_user_tag_user" />
-        <EntityTypeShape EntityType="MoolahModel.question" Width="1.5" PointX="8.375" PointY="5.875" />
-        <AssociationConnector Association="MoolahModel.FK_user_tag_question" />
         <EntityTypeShape EntityType="MoolahModel.portfolio" Width="1.5" PointX="0.75" PointY="10.25" />
         <AssociationConnector Association="MoolahModel.FK_holding_portfolio" />
         <AssociationConnector Association="MoolahModel.FK_news_portfolio" />
@@ -24,6 +22,8 @@
         <AssociationConnector Association="MoolahModel.portfolio_tag" />
         <EntityTypeShape EntityType="MoolahModel.address" Width="1.5" PointX="5.25" PointY="1" />
         <AssociationConnector Association="MoolahModel.FK_address_user" />
+        <EntityTypeShape EntityType="MoolahModel.question" Width="1.5" PointX="7.375" PointY="0.875" />
+        <AssociationConnector Association="MoolahModel.FK_user_tag_question" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
