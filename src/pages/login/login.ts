@@ -26,10 +26,13 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formProvider: FormProvider,
     public userProvider: UserProvider, private formBuilder: FormBuilder) {
-    this.loginForm = this.formBuilder.group({
-      'email': [null, Validators.compose([Validators.required, Validators.email])],
-      'password': [null, Validators.required]
-    });
+      // Call API to speedup login/register api when called (since the first api call takes longer)
+      this.userProvider.setupAPIConnection();
+
+      this.loginForm = this.formBuilder.group({
+        'email': [null, Validators.compose([Validators.required, Validators.email])],
+        'password': [null, Validators.required]
+      });
   }
 
   // Login method

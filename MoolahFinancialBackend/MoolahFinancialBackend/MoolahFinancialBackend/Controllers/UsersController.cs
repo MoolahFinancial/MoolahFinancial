@@ -26,6 +26,17 @@ namespace MoolahFinancialBackend.Controllers
         private MoolahEntities db = new MoolahEntities();
 
         /// <summary>  
+        /// Dummy API which can be called to speed up subsequent API calls. This is useful since
+        /// the first API call tends to take longer than subsequent calls (in a short duration of time)
+        /// </summary> 
+        [HttpGet]
+        [Route("setupConnection")]
+        public IHttpActionResult SetupAPIConnection()
+        {
+            return Ok();
+        }
+
+        /// <summary>  
         /// Returns all of the users stored in the database (both deleted an non-deleted users)
         /// </summary> 
         [HttpGet]

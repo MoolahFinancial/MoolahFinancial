@@ -11,6 +11,14 @@ export class UserProvider {
 
   constructor(public http: HttpClient) { }
 
+  /*
+  * Dummy API which can be called to speed up subsequent API calls. This is useful since
+  * the first API call tends to take longer than subsequent calls (in a short duration of time)
+  */
+  setupAPIConnection(): void {
+    this.http.get(this.ROOT_URL + '/users/setupConnection');
+  }
+
   // TODO: Mark for deletion once development is done
   getUsers(): Promise<User[]> {
     return new Promise(resolve => {

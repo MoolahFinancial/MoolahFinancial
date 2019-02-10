@@ -506,6 +506,12 @@
             Contains all APIs for interacting with the User table.
             </summary>
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.SetupAPIConnection">
+            <summary>  
+            Dummy API which can be called to speed up subsequent API calls. This is useful since
+            the first API call tends to take longer than subsequent calls (in a short duration of time)
+            </summary> 
+        </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.GetAllUsers">
             <summary>  
             Returns all of the users stored in the database (both deleted an non-deleted users)
