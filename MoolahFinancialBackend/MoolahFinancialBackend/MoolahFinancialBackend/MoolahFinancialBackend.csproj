@@ -200,6 +200,9 @@
     <Compile Include="Models\address.cs">
       <DependentUpon>MoolahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\answer.cs">
+      <DependentUpon>MoolahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\holding.cs">
       <DependentUpon>MoolahModel.tt</DependentUpon>
     </Compile>

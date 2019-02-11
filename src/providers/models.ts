@@ -62,7 +62,14 @@ export interface Question {
     question_id: number,
     question_text: string,
     question_type: string, // What type of question it is (free form, multiple choice, etc)
-    json_possible_answers: JSON //JSON that contains all of the possible answers to a question
+    json_possible_answers: Answer[]
+}
+
+// An interface that represents an answer which belongs to a question
+export interface Answer {
+    answer_id: number,
+    answer_text: string,
+    question_id: number
 }
 
 // An interface that represents a UserTag (links a user and a tag together)

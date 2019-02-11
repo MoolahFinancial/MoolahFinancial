@@ -22,7 +22,9 @@
         <AssociationConnector Association="MoolahModel.portfolio_tag" />
         <EntityTypeShape EntityType="MoolahModel.address" Width="1.5" PointX="5.25" PointY="1" />
         <AssociationConnector Association="MoolahModel.FK_address_user" />
+        <EntityTypeShape EntityType="MoolahModel.answer" Width="1.5" PointX="9.625" PointY="1" />
         <EntityTypeShape EntityType="MoolahModel.question" Width="1.5" PointX="7.375" PointY="0.875" />
+        <AssociationConnector Association="MoolahModel.FK_answer_question" />
         <AssociationConnector Association="MoolahModel.FK_user_tag_question" />
         </Diagram>
     </edmx:Diagrams>

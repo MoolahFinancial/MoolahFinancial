@@ -20,6 +20,14 @@
           <Property Name="is_deactivated" Type="bit" Nullable="false" />
           <Property Name="is_primary_address" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="answer">
+          <Key>
+            <PropertyRef Name="answer_id" />
+          </Key>
+          <Property Name="answer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="answer_text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="question_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="holding">
           <Key>
             <PropertyRef Name="holding_id" />
@@ -75,7 +83,6 @@
           <Property Name="question_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="question_text" Type="nvarchar(max)" Nullable="false" />
           <Property Name="question_type" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="json_possible_answers" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -145,6 +152,20 @@
             </Principal>
             <Dependent Role="address">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_answer_question">
+          <End Role="question" Type="Self.question" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="answer" Type="Self.answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="question_id" />
+            </Principal>
+            <Dependent Role="answer">
+              <PropertyRef Name="question_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -227,9 +248,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_user_tag_question">
-          <End Role="question" Type="Self.question" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
           <End Role="user_tag" Type="Self.user_tag" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="question">
@@ -266,6 +285,7 @@
         </Association>
         <EntityContainer Name="MoolahModelStoreContainer">
           <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="answer" EntityType="Self.answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="holding" EntityType="Self.holding" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="portfolio" EntityType="Self.portfolio" Schema="dbo" store:Type="Tables" />
@@ -279,6 +299,10 @@
           <AssociationSet Name="FK_address_user" Association="Self.FK_address_user">
             <End Role="user" EntitySet="user" />
             <End Role="address" EntitySet="address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_answer_question" Association="Self.FK_answer_question">
+            <End Role="question" EntitySet="question" />
+            <End Role="answer" EntitySet="answer" />
           </AssociationSet>
           <AssociationSet Name="FK_holding_portfolio" Association="Self.FK_holding_portfolio">
             <End Role="portfolio" EntitySet="portfolio" />
@@ -399,7 +423,12 @@
             <End Role="user" EntitySet="users" />
             <End Role="address" EntitySet="addresses" />
           </AssociationSet>
+          <EntitySet Name="answers" EntityType="MoolahModel.answer" />
           <EntitySet Name="questions" EntityType="MoolahModel.question" />
+          <AssociationSet Name="FK_answer_question" Association="MoolahModel.FK_answer_question">
+            <End Role="question" EntitySet="questions" />
+            <End Role="answer" EntitySet="answers" />
+          </AssociationSet>
           <AssociationSet Name="FK_user_tag_question" Association="MoolahModel.FK_user_tag_question">
             <End Role="question" EntitySet="questions" />
             <End Role="user_tag" EntitySet="user_tag" />
@@ -592,6 +621,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="answer">
+          <Key>
+            <PropertyRef Name="answer_id" />
+          </Key>
+          <Property Name="answer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="answer_text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="question_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="question" Relationship="MoolahModel.FK_answer_question" FromRole="answer" ToRole="question" />
+        </EntityType>
         <EntityType Name="question">
           <Key>
             <PropertyRef Name="question_id" />
@@ -599,13 +637,25 @@
           <Property Name="question_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="question_text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="question_type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="json_possible_answers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="answers" Relationship="MoolahModel.FK_answer_question" FromRole="question" ToRole="answer" />
           <NavigationProperty Name="user_tag" Relationship="MoolahModel.FK_user_tag_question" FromRole="question" ToRole="user_tag" />
         </EntityType>
-        <Association Name="FK_user_tag_question">
-          <End Type="MoolahModel.question" Role="question" Multiplicity="0..1">
+        <Association Name="FK_answer_question">
+          <End Type="MoolahModel.question" Role="question" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
+          <End Type="MoolahModel.answer" Role="answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="question_id" />
+            </Principal>
+            <Dependent Role="answer">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_tag_question">
+          <End Type="MoolahModel.question" Role="question" Multiplicity="0..1" />
           <End Type="MoolahModel.user_tag" Role="user_tag" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="question">
@@ -752,10 +802,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="answers">
+            <EntityTypeMapping TypeName="MoolahModel.answer">
+              <MappingFragment StoreEntitySet="answer">
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="answer_text" ColumnName="answer_text" />
+                <ScalarProperty Name="answer_id" ColumnName="answer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="questions">
             <EntityTypeMapping TypeName="MoolahModel.question">
               <MappingFragment StoreEntitySet="question">
-                <ScalarProperty Name="json_possible_answers" ColumnName="json_possible_answers" />
                 <ScalarProperty Name="question_type" ColumnName="question_type" />
                 <ScalarProperty Name="question_text" ColumnName="question_text" />
                 <ScalarProperty Name="question_id" ColumnName="question_id" />
