@@ -28,3 +28,11 @@ GET http://moolah-financial-api.azurewebsites.net/api/users
       pm.expect(pm.response.responseTime).to.be.below(10000);
     });
     
+POST http://moolah-financial-api.azurewebsites.net/api/users/register
+  Tests:
+    pm.test("Response time is less than 10000ms", function () {
+      pm.expect(pm.response.responseTime).to.be.below(10000);
+  });
+    pm.test("Status code is 405", function () {
+      pm.response.to.have.status(405);
+  });
