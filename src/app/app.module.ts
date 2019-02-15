@@ -14,6 +14,8 @@ import { RegisterPage } from '../pages/register/register';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignupPage } from '../pages/signup/signup';
 import { QuestionPage } from '../pages/quest/quest';
+import { SECPage } from '../pages/secforms/secforms';
+import { BankingPage } from '../pages/banking/banking';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -40,7 +42,9 @@ import { QuestionnaireProvider } from '../providers/questionnaire/questionnaire.
     RegisterPage,
     TabsPage,
     SignupPage,
-    QuestionPage
+    QuestionPage,
+    SECPage,
+    BankingPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,9 @@ import { QuestionnaireProvider } from '../providers/questionnaire/questionnaire.
     RegisterPage,
     TabsPage,
     SignupPage,
-    QuestionPage
+    QuestionPage,
+    SECPage,
+    BankingPage
   ],
   providers: [
     StatusBar,

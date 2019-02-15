@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { InvestPage } from '../invest/invest';
 import { QuestionPage } from '../quest/quest';
+import { SECPage } from '../secforms/secforms';
+import { BankingPage } from '../banking/banking';
 
 @Component({
   selector: 'page-home',
@@ -21,5 +23,12 @@ export class SignupPage {
 
   questionaire(){
     this.navCtrl.push(QuestionPage);
+  }
+
+  secforms(){
+    this.navCtrl.push(SECPage);
+  }
+  banking(){
+    this.navCtrl.push(BankingPage);
   }
 }
