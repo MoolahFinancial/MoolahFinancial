@@ -8,10 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-list inset>
-    <ion-item *ngFor="let question of questions">
-      <h2>{{question.question_text}}</h2>
-    </ion-item>
-  </ion-list> -->
+  <ion-list>
+    <ion-item>
+        <ion-label>How Much Money Do You Make?</ion-label>
+        <ion-select [(ngModel)]="income" multiple="false" cancelText="Cancel" okText="Save">
+          <ion-option value="9k" selected="true">Less Than $9,999</ion-option>
+          <ion-option value="10k">$10,000-$19,000</ion-option>
+          <ion-option value="20k">$20,000-$29,000</ion-option>
+          <ion-option value="30k">$30,000-$39,000</ion-option>
+          <ion-option value="40k">$40,000-$49,000</ion-option>
+          <ion-option value="50k">$50,000-$59,000</ion-option>
+          <ion-option value="60k">$60,000-$69,000</ion-option>
+          <ion-option value="70k">$70,000-$79,000</ion-option>
+          <ion-option value="80k">$80,000-$89,000</ion-option>
+          <ion-option value="90k">More Than $90,000</ion-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
 
 </ion-content>
