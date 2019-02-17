@@ -13,10 +13,15 @@ export class SECPage {
 
   // Holds all of the questions that we've retrieved from the database
   //questions: Question[];
+  masks: any;
+  phoneNumber: any ="";
 
   constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider, public questionnaireProvider: QuestionnaireProvider) {
     // console.log("On question Page");
     // this.getQuestions();
+    this.masks = {
+            phoneNumber: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+    };
   }
 
   // Retrieve all of the questions stored in the database

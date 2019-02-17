@@ -10,7 +10,7 @@
 <ion-content>
   <ion-list>
     <ion-item>
-        <ion-label>How Much Money Do You Make?</ion-label>
+        <ion-label>How Much Money <br>Do You Make?</ion-label>
         <ion-select [(ngModel)]="income" multiple="false" cancelText="Cancel" okText="Save">
           <ion-option value="9k" selected="true">Less Than $9,999</ion-option>
           <ion-option value="10k">$10,000-$19,000</ion-option>
@@ -24,6 +24,121 @@
           <ion-option value="90k">More Than $90,000</ion-option>
         </ion-select>
       </ion-item>
-  </ion-list>
+
+  <ion-item>
+      <ion-label>Date Of Birth</ion-label>
+      <ion-select [(ngModel)]="month">
+        <ion-option value="01" selected="true">January</ion-option>
+        <ion-option value="02">February</ion-option>
+        <ion-option value="03">March</ion-option>
+        <ion-option value="04">April</ion-option>
+        <ion-option value="05">May</ion-option>
+        <ion-option value="06">June</ion-option>
+        <ion-option value="07">July</ion-option>
+        <ion-option value="08">August</ion-option>
+        <ion-option value="09">September</ion-option>
+        <ion-option value="10">October</ion-option>
+        <ion-option value="11">November</ion-option>
+        <ion-option value="12">December</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="day">
+        <ion-option value="01" selected="true">1</ion-option>
+        <ion-option value="02">2</ion-option>
+        <ion-option value="03">3</ion-option>
+        <ion-option value="04">4</ion-option>
+        <ion-option value="05">5</ion-option>
+        <ion-option value="06">6</ion-option>
+        <ion-option value="07">7</ion-option>
+        <ion-option value="08">8</ion-option>
+        <ion-option value="09">9</ion-option>
+        <ion-option value="10">10</ion-option>
+        <ion-option value="11">11</ion-option>
+        <ion-option value="12">12</ion-option>
+        <ion-option value="13">13</ion-option>
+        <ion-option value="14">14</ion-option>
+        <ion-option value="15">15</ion-option>
+        <ion-option value="16">16</ion-option>
+        <ion-option value="17">17</ion-option>
+        <ion-option value="18">18</ion-option>
+        <ion-option value="19">19</ion-option>
+        <ion-option value="20">20</ion-option>
+        <ion-option value="21">21</ion-option>
+        <ion-option value="22">22</ion-option>
+        <ion-option value="23">23</ion-option>
+        <ion-option value="24">24</ion-option>
+        <ion-option value="25">25</ion-option>
+        <ion-option value="26">26</ion-option>
+        <ion-option value="27">27</ion-option>
+        <ion-option value="28">28</ion-option>
+        <ion-option value="29">29</ion-option>
+        <ion-option value="30">30</ion-option>
+        <ion-option value="31">31</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="year">
+        <ion-option selected="true">1989</ion-option>
+        <ion-option>1990</ion-option>
+        <ion-option>1991</ion-option>
+        <ion-option>1992</ion-option>
+        <ion-option>1993</ion-option>
+        <ion-option>1994</ion-option>
+        <ion-option>1995</ion-option>
+        <ion-option>1996</ion-option>
+        <ion-option>1997</ion-option>
+        <ion-option>1998</ion-option>
+        <ion-option>1999</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>How Much Investment <br>Experience Do You Have?</ion-label>
+        <ion-select [(ngModel)]="experience" multiple="false" cancelText="Cancel" okText="Save">
+          <ion-option value="none" selected="true">None</ion-option>
+          <ion-option value="notmuch">Not Much</ion-option>
+          <ion-option value="some">I know what I am doing</ion-option>
+          <ion-option value="alot">I am an expert</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Are you Employed?</ion-label>
+          <ion-select [(ngModel)]="experience" multiple="false" cancelText="Cancel" okText="Save">
+            <ion-option value="unemploy" selected="true">Unemployed</ion-option>
+            <ion-option value="employ">Employed</ion-option>
+            <ion-option value="selfemploy">Self-Employed</ion-option>
+            <ion-option value="retire">Retired</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Are You or A Family Member a <br> Senior Executive or 10% Share Holder <br>at A Publicaly Traded Company?</ion-label>
+            <ion-select [(ngModel)]="shareholder" multiple="false" cancelText="Cancel" okText="Save">
+              <ion-option value="no" selected="true">No</ion-option>
+              <ion-option value="yes">Yes</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+              <ion-label>Do You or A Family Member Work<br> For Another Brokerage?</ion-label>
+              <ion-select [(ngModel)]="broker" multiple="false" cancelText="Cancel" okText="Save">
+                <ion-option value="no" selected="true">No</ion-option>
+                <ion-option value="yes">Yes</ion-option>
+              </ion-select>
+            </ion-item>
+      <ion-item>
+        <ion-label>Phone Number</ion-label>
+        <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
+      </ion-item>
+    </ion-list>
+
+  <!-- //dob
+  //adderess
+  //citizen
+  //social-
+  //invest experien <none, not much, i know what, im expert,
+  //employed
+  //are you or a family mem a senior exec or 10% share holder a publicaly traded company?class=
+  //do you or a family member work for another brokerage
+  // -->
+
 
 </ion-content>
