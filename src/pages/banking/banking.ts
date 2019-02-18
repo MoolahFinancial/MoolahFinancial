@@ -32,7 +32,11 @@ export class BankingPage {
     console.log("Selected Item", item);
   }
 
-  // continue(){
-  //   this.navCtrl.push(InvestPage);
-  // }
+  submit(){
+    //console.log(this.userProvider.currentUser, "current user in logout");
+    //this.userProvider.currentUser = null; // Set the current user to null
+    // Navigate back to the login page
+    this.navCtrl.pop();
+    console.log("Previous Page");
+  }
 }

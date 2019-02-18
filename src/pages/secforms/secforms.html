@@ -128,17 +128,13 @@
         <ion-label>Phone Number</ion-label>
         <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label>SSN</ion-label>
+        <ion-input [(ngModel)]="social"></ion-input>
+      </ion-item>
     </ion-list>
 
-  <!-- //dob
-  //adderess
-  //citizen
-  //social-
-  //invest experien <none, not much, i know what, im expert,
-  //employed
-  //are you or a family mem a senior exec or 10% share holder a publicaly traded company?class=
-  //do you or a family member work for another brokerage
-  // -->
 
+      <button ion-button (click)="submit()" class="submit-button">Submit</button>
 
 </ion-content>
