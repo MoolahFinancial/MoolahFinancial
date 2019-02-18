@@ -8,10 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-list inset>
-    <ion-item *ngFor="let question of questions">
-      <h2>{{question.question_text}}</h2>
-    </ion-item>
+  <ion-list>
+    <ion-item>
+        <ion-label>How Much Investment <br>Experience Do You Have?</ion-label>
+        <ion-select [(ngModel)]="experience" multiple="false" cancelText="Cancel" okText="Save">
+          <ion-option value="none" selected="true">None</ion-option>
+          <ion-option value="notmuch">Not Much</ion-option>
+          <ion-option value="some">I know what I am doing</ion-option>
+          <ion-option value="alot">I am an expert</ion-option>
+        </ion-select>
+      </ion-item>
   </ion-list>
 
   <button ion-button (click)="submit()" class="submit-button">Submit</button>
