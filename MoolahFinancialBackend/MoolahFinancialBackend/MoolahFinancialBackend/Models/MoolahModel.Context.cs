@@ -27,7 +27,6 @@ namespace MoolahFinancialBackend.Models
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<transaction> transactions { get; set; }
-        public virtual DbSet<user_tag> user_tag { get; set; }
         public virtual DbSet<news> news { get; set; }
         public virtual DbSet<tag> tags { get; set; }
         public virtual DbSet<holding> holdings { get; set; }
@@ -36,5 +35,6 @@ namespace MoolahFinancialBackend.Models
         public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<answer> answers { get; set; }
         public virtual DbSet<question> questions { get; set; }
+        public virtual DbSet<user_tag> user_tag { get; set; }
     }
 }

@@ -17,16 +17,16 @@ namespace MoolahFinancialBackend.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tag()
         {
-            this.user_tag = new HashSet<user_tag>();
             this.portfolios = new HashSet<portfolio>();
+            this.user_tag = new HashSet<user_tag>();
         }
     
         public int tag_id { get; set; }
         public string tag_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user_tag> user_tag { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<portfolio> portfolios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<user_tag> user_tag { get; set; }
     }
 }

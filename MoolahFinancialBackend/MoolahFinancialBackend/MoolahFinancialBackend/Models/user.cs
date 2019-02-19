@@ -18,8 +18,8 @@ namespace MoolahFinancialBackend.Models
         public user()
         {
             this.transactions = new HashSet<transaction>();
-            this.user_tag = new HashSet<user_tag>();
             this.addresses = new HashSet<address>();
+            this.user_tag = new HashSet<user_tag>();
         }
     
         public int user_id { get; set; }
@@ -42,8 +42,8 @@ namespace MoolahFinancialBackend.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<transaction> transactions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user_tag> user_tag { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<address> addresses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<user_tag> user_tag { get; set; }
     }
 }

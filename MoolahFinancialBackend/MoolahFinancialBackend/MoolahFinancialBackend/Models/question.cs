@@ -18,7 +18,6 @@ namespace MoolahFinancialBackend.Models
         public question()
         {
             this.answers = new HashSet<answer>();
-            this.user_tag = new HashSet<user_tag>();
         }
     
         public int question_id { get; set; }
@@ -27,7 +26,5 @@ namespace MoolahFinancialBackend.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<answer> answers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user_tag> user_tag { get; set; }
     }
 }

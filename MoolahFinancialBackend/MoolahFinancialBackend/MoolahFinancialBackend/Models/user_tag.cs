@@ -14,13 +14,12 @@ namespace MoolahFinancialBackend.Models
     
     public partial class user_tag
     {
-        public Nullable<int> question_id { get; set; }
         public int user_id { get; set; }
         public int tag_id { get; set; }
+        public string question_text { get; set; }
         public string question_answer { get; set; }
     
         public virtual tag tag { get; set; }
         public virtual user user { get; set; }
-        public virtual question question { get; set; }
     }
 }

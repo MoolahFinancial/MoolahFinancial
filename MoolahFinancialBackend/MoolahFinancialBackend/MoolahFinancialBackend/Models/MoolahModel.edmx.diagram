@@ -7,14 +7,11 @@
       <Diagram DiagramId="183f171279314906a9a44f1230e53bba" Name="Diagram1">
         <EntityTypeShape EntityType="MoolahModel.sysdiagram" Width="1.5" PointX="7.75" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MoolahModel.transaction" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoolahModel.user_tag" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MoolahModel.news" Width="1.5" PointX="3" PointY="15.5" />
         <EntityTypeShape EntityType="MoolahModel.tag" Width="1.5" PointX="3" PointY="11.125" />
-        <AssociationConnector Association="MoolahModel.FK_user_tag_tag" />
         <EntityTypeShape EntityType="MoolahModel.holding" Width="1.5" PointX="3" PointY="8" />
         <EntityTypeShape EntityType="MoolahModel.user" Width="1.5" PointX="3" PointY="2.25" />
         <AssociationConnector Association="MoolahModel.FK_transaction_user" />
-        <AssociationConnector Association="MoolahModel.FK_user_tag_user" />
         <EntityTypeShape EntityType="MoolahModel.portfolio" Width="1.5" PointX="0.75" PointY="10.25" />
         <AssociationConnector Association="MoolahModel.FK_holding_portfolio" />
         <AssociationConnector Association="MoolahModel.FK_news_portfolio" />
@@ -25,7 +22,9 @@
         <EntityTypeShape EntityType="MoolahModel.answer" Width="1.5" PointX="9.625" PointY="1" />
         <EntityTypeShape EntityType="MoolahModel.question" Width="1.5" PointX="7.375" PointY="0.875" />
         <AssociationConnector Association="MoolahModel.FK_answer_question" />
-        <AssociationConnector Association="MoolahModel.FK_user_tag_question" />
+        <EntityTypeShape EntityType="MoolahModel.user_tag" Width="1.5" PointX="5.25" PointY="9.5" />
+        <AssociationConnector Association="MoolahModel.FK_user_tag_tag" />
+        <AssociationConnector Association="MoolahModel.FK_user_tag_user" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
