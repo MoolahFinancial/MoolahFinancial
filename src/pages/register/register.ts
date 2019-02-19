@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
@@ -26,7 +26,7 @@ export class RegisterPage {
   registerForm: FormGroup;
   post: any; // A reference for our submitted form
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingController: LoadingController,
     private formBuilder: FormBuilder, public userProvider: UserProvider, public emailValidator: EmailValidator) {
     this.registerForm = this.formBuilder.group({
       'firstName': [null, Validators.required],
@@ -46,6 +46,14 @@ export class RegisterPage {
   }
 
   registerUser(post: any) {
+    // Loading component which gets displayed while waiting for a response from the login api
+    let registerLoadingController = this.loadingController.create({
+      content: "Registering new account..."
+    });
+
+    // Display the register loading dialogue
+    registerLoadingController.present();
+
     // The json object we will pass into the body of the RegisterUser api call (need to manually map each component due to different naming conventions)
     var jsonData = {
                       "first_name": post.firstName,
@@ -55,6 +63,9 @@ export class RegisterPage {
                    };
 
     this.userProvider.registerUser(jsonData).then((result) => {
+      // Hide the register dialogue since the api has returned a response
+      registerLoadingController.dismiss();
+
       if(result.success) {
         this.userProvider.currentUser = result.user; // Set the current user to the logged in user
         this.navCtrl.push(SignupPage);
@@ -62,6 +73,9 @@ export class RegisterPage {
         this.registerError("Something went wrong");
       }
     }, (err) => {
+      // Hide the register dialogue since the api has returned a response
+      registerLoadingController.dismiss();
+      
       console.log(err);
       this.registerError("Email is already registered");
     });

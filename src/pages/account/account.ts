@@ -29,4 +29,11 @@ export class AccountPage {
     nav.setRoot(LoginPage);
   }
 
+  // Swipe Left to go to home tab
+  swipe(event: any) {
+    if(event.direction === 4) {
+      this.navCtrl.parent.select(1);
+    }
+  }
+
 }

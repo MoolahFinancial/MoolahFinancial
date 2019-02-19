@@ -82,4 +82,11 @@ export class HomePage {
     });
   }
 
+  // Swipe Right to go to account tab
+  swipe(event: any) {
+    if(event.direction === 2) {
+      this.navCtrl.parent.select(4);
+    }
+  }
+
 }
