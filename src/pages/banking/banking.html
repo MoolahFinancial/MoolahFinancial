@@ -8,10 +8,27 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-list inset>
-    <ion-item *ngFor="let question of questions">
-      <h2>{{question.question_text}}</h2>
-    </ion-item>
-  </ion-list> -->
+    <div>
+      <ion-item>
+        <ion-label>Credit Card Type</ion-label>
+        <ion-input type="text" [(ngModel)]="cardType"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Credit Card Number</ion-label>
+        <ion-input type="number" [(ngModel)]="cardNumber"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Expiry Month</ion-label>
+        <ion-input type="text" [(ngModel)]="expiryMonth" placeholder="MM"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Expiry Year</ion-label>
+        <ion-input type="text" [(ngModel)]="expiryYear" placeholder="YY"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>CVV</ion-label>
+        <ion-input type="text" [(ngModel)]="cvv"></ion-input>
+      </ion-item>
+    </div>
   <button ion-button (click)="submit()" class="submit-button">Submit</button>
 </ion-content>
