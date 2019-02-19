@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -25,7 +25,7 @@ export class LoginPage {
   loginForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formProvider: FormProvider,
-    public userProvider: UserProvider, private formBuilder: FormBuilder) {
+    public userProvider: UserProvider, private formBuilder: FormBuilder, public loadingController: LoadingController) {
     this.loginForm = this.formBuilder.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'password': [null, Validators.required]
@@ -34,7 +34,17 @@ export class LoginPage {
 
   // Login method
   loginUser(post: any){
+    // Loading component which gets displayed while waiting for a response from the login api
+    let loginLoadingController = this.loadingController.create({
+      content: "Logging In..."
+    });
+
+    // Display the login loading dialogue
+    loginLoadingController.present();
+
     this.userProvider.loginUser(post.email.toLowerCase(), post.password).subscribe(data => {
+      // Hide the login dialogue since the api has returned a response
+      loginLoadingController.dismiss();
       if(data.success) {
         this.userProvider.currentUser = data.user; // Set the current user to the logged in user
         this.navCtrl.push(TabsPage);
