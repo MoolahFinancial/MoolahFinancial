@@ -24,6 +24,8 @@ namespace MoolahFinancialBackend.Controllers
         /// <summary>  
         /// Returns all of tags stored in the database
         /// </summary> 
+        [HttpGet]
+        [Route("")]
         public IQueryable<tag> GetTags()
         {
             return db.tags;
@@ -32,72 +34,11 @@ namespace MoolahFinancialBackend.Controllers
         /// <summary>  
         /// Returns all of the user tags in the database
         /// </summary> 
+        [HttpGet]
+        [Route("usertags")]
         public IQueryable<user_tag> GetUserTags()
         {
             return db.user_tag;
-        }
-
-        // GET: api/Tags/5
-        [ResponseType(typeof(tag))]
-        public IHttpActionResult GetTag(int id)
-        {
-            tag tag = db.tags.Find(id);
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(tag);
-        }
-
-        // PUT: api/Tags/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Puttag(int id, tag tag)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != tag.tag_id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(tag).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tagExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Tags
-        [ResponseType(typeof(tag))]
-        public IHttpActionResult Posttag(tag tag)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.tags.Add(tag);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = tag.tag_id }, tag);
         }
 
         /// <summary>  
@@ -124,22 +65,6 @@ namespace MoolahFinancialBackend.Controllers
             user_tag = db.user_tag.FirstOrDefault(c => c.question_text.Contains(user_tag.question_text));
 
             return Ok(new { success = true, message = "Successfully created a new user tag", user_tag });
-        }
-
-        // DELETE: api/Tags/5
-        [ResponseType(typeof(tag))]
-        public IHttpActionResult Deletetag(int id)
-        {
-            tag tag = db.tags.Find(id);
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            db.tags.Remove(tag);
-            db.SaveChanges();
-
-            return Ok(tag);
         }
 
         protected override void Dispose(bool disposing)
