@@ -208,32 +208,6 @@ namespace MoolahFinancialBackend.Controllers
         }
 
         /// <summary>  
-        /// Creates a new user tag
-        /// </summary>
-        /// <param name="user_tag"></param> 
-        /// <returns></returns>
-        [HttpPost]
-        [Route("userTag", Name = "NewUserTag")]
-        [ResponseType(typeof(user_tag))]
-        public IHttpActionResult NewUserTag(user_tag user_tag)
-        {
-            // If the user tag already exists for a given question, return a conflict
-            if (db.user_tag.Any(c => c.question_text.Contains(user_tag.question_text)))
-            {
-                return Conflict();
-            }
-
-            // Add the tag and save the changes in the database
-            db.user_tag.Add(user_tag);
-            db.SaveChanges();
-
-            // Retrieve the newly created user tag from the database
-            user_tag = db.user_tag.FirstOrDefault(c => c.question_text.Contains(user_tag.question_text));
-
-            return Ok(new { success = true, message = "Successfully created a new user tag", user_tag });
-        }
-
-        /// <summary>  
         /// Creates a new user
         /// </summary>
         /// <param name="user"></param> 
