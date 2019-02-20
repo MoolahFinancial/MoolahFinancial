@@ -560,6 +560,13 @@
             <param name="user"></param> 
             <returns></returns> 
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.NewUserTag(MoolahFinancialBackend.Models.user_tag)">
+            <summary>  
+            Creates a new user
+            </summary>
+            <param name="user_tag"></param> 
+            <returns></returns>
+        </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.RegisterUser(MoolahFinancialBackend.Models.user)">
             <summary>  
             Creates a new user
