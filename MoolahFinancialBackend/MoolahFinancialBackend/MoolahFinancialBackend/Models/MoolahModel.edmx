@@ -137,10 +137,11 @@
           <Key>
             <PropertyRef Name="user_id" />
             <PropertyRef Name="tag_id" />
+            <PropertyRef Name="question_text" />
           </Key>
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="tag_id" Type="int" Nullable="false" />
-          <Property Name="question_text" Type="nvarchar" MaxLength="255" />
+          <Property Name="question_text" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="question_answer" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <Association Name="FK_address_user">
@@ -600,10 +601,11 @@
           <Key>
             <PropertyRef Name="user_id" />
             <PropertyRef Name="tag_id" />
+            <PropertyRef Name="question_text" />
           </Key>
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="tag_id" Type="Int32" Nullable="false" />
-          <Property Name="question_text" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="question_text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="question_answer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tag" Relationship="MoolahModel.FK_user_tag_tag" FromRole="user_tag" ToRole="tag" />
           <NavigationProperty Name="user" Relationship="MoolahModel.FK_user_tag_user" FromRole="user_tag" ToRole="user" />
