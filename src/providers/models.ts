@@ -37,6 +37,8 @@ export interface User {
     primary_phone?: string,
     secondary_phone?: string,
     is_deactivated: boolean,
+    email_is_validated: boolean,
+    has_completed_questionnaire: boolean,
     risk?: number
 }
 
