@@ -6,6 +6,12 @@ export interface ApiData {
     message: string;
 }
 
+// Interface to represent the json data that is retrieved from the getBestPortfolioIno api
+export interface BestPortfolioInfo extends ApiData {
+    portfolio_id: number,
+    common_tags: number
+}
+
 // Interface to represent the json data that is retrieved from either the login or register apis
 export interface LoginData extends ApiData{
     user: User;

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { PortfolioData } from '../models';
+import { PortfolioData, BestPortfolioInfo, Portfolio } from '../models';
 
 /*
   Generated class for the PortfolioProvider provider.
@@ -26,9 +26,20 @@ export class PortfolioProvider {
     });
   }
 
+  // Retrieves a specific portfolio based on the passed in id
+  getPortfolioById(userId: number): Observable<Portfolio> {
+    return this.http.get<Portfolio>(this.ROOT_URL + '/Portfolios/' + userId);
+  }
+
   // Returns one portfolio based on what we believe is the best recommendation for the current user
+  // (Uses a dummy API that returns the same portfolio no matter what)
   getBestPortfolio(userId: number): Observable<PortfolioData> {
     return this.http.get<PortfolioData>(this.ROOT_URL + '/Portfolios/bestPortfolio/' + userId);
+  }
+
+  // Finds the portfolio_id & the number of tags shared between the best portfolio and the current user
+  getBestPortfolioInfo(userId: number): Observable<BestPortfolioInfo> {
+    return this.http.get<BestPortfolioInfo>(this.ROOT_URL + '/Portfolios/bestPortfolioInfo/' + userId);
   }
 
 }
