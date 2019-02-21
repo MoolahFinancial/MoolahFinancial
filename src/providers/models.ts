@@ -17,13 +17,18 @@ export interface BestPortfolioInfoResult {
 }
 
 // Interface to represent the json data that is retrieved from either the login or register apis
-export interface LoginData extends ApiData{
+export interface LoginData extends ApiData {
     user: User;
 }
 
 // Interface to represent some of the response data that involves retrieving portfolios
-export interface PortfolioData extends ApiData{
+export interface PortfolioData extends ApiData {
     portfolio: Portfolio;
+}
+
+// Interface to represent some of the response data that involves retrieving user tags
+export interface UserTagData extends ApiData{
+    userTag: UserTag;
 }
 
 // An interface that represents a user
