@@ -33,7 +33,7 @@ export class PortfolioProvider {
 
   // Returns one portfolio based on what we believe is the best recommendation for the current user
   // (Uses a dummy API that returns the same portfolio no matter what)
-  getBestPortfolio(userId: number): Observable<PortfolioData> {
+  getDummyBestPortfolio(userId: number): Observable<PortfolioData> {
     return this.http.get<PortfolioData>(this.ROOT_URL + '/Portfolios/bestPortfolio/' + userId);
   }
 

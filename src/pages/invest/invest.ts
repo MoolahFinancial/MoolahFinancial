@@ -33,8 +33,8 @@ export class InvestPage {
   }
 
   // Calls the api to retrieve a dummy recommended portfolio
-  getBestPortfolio() {
-    this.portfolioProvider.getBestPortfolio(this.userProvider.currentUser.user_id).subscribe((data: PortfolioData) => {
+  getDummyBestPortfolio() {
+    this.portfolioProvider.getDummyBestPortfolio(this.userProvider.currentUser.user_id).subscribe((data: PortfolioData) => {
       if(data.success) {
         this.recommendedPortfolio = <Portfolio>data.portfolio;
       }
@@ -57,7 +57,7 @@ export class InvestPage {
       else 
       {
         console.log("Dummy recommended Portfolio");
-        this.getBestPortfolio();
+        this.getDummyBestPortfolio();
       }
     });
   }
