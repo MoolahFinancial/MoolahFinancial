@@ -8,6 +8,10 @@ export interface ApiData {
 
 // Interface to represent the json data that is retrieved from the getBestPortfolioIno api
 export interface BestPortfolioInfo extends ApiData {
+    result: BestPortfolioInfoResult[]
+}
+
+export interface BestPortfolioInfoResult {
     portfolio_id: number,
     common_tags: number
 }

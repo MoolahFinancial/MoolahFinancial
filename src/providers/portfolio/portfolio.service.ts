@@ -39,6 +39,7 @@ export class PortfolioProvider {
 
   // Finds the portfolio_id & the number of tags shared between the best portfolio and the current user
   getBestPortfolioInfo(userId: number): Observable<BestPortfolioInfo> {
+    console.log("getBestPortfolioInfo called in portfolio.sertice.ts");
     return this.http.get<BestPortfolioInfo>(this.ROOT_URL + '/Portfolios/bestPortfolioInfo/' + userId);
   }
 

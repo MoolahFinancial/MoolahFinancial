@@ -51,8 +51,7 @@ namespace MoolahFinancialBackend.Controllers
         [ResponseType(typeof(portfolio))]
         public IHttpActionResult GetBestDummyPortfolio(int userId)
         {
-            //TODO: Change this (currently gives 1 static portfolio as a recommendation)
-            var bestPortfolio = db.portfolios.FirstOrDefault(u => u.title.Contains("Smart Beta"));
+            var bestPortfolio = db.portfolios.FirstOrDefault(u => u.title.Contains("Ethical"));
 
             return Ok(new { success = true, message = "Found suggested portfolio", portfolio = bestPortfolio });
         }

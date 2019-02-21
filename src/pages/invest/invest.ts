@@ -45,11 +45,18 @@ export class InvestPage {
   getBestPortfolioInfo() {
     // Retrieve the portfolio id for the recommended portfolio
     this.portfolioProvider.getBestPortfolioInfo(this.userProvider.currentUser.user_id).subscribe((data: BestPortfolioInfo) => {
-      if(data.success && data.portfolio_id != null)
+      // console.log("Data from getBestPortfolioInfo: ", data);
+      // console.log(data.result[0]);
+      // console.log(data.result[0].portfolio_id);
+
+      // Retrieve the recommended portfolio
+      var bestPortfolioId = data.result[0].portfolio_id;
+      
+      if(data.success && bestPortfolioId != null)
       {
         console.log("Real Portfolio is getting recommended");
         // Retrieve the recommended portfolio based on the retrieved id
-        this.portfolioProvider.getPortfolioById(data.portfolio_id).subscribe((portfolio: Portfolio) => {
+        this.portfolioProvider.getPortfolioById(bestPortfolioId).subscribe((portfolio: Portfolio) => {
           this.recommendedPortfolio = portfolio;
         });
       } 
