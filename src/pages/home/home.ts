@@ -3,6 +3,7 @@ import { App, NavController } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
 import { UserProvider } from '../../providers/user/user.service';
+import { NewsProvider } from '../../providers/news/news.service';
 import { LoginPage } from '../login/login';
 
 @Component({
@@ -19,8 +20,9 @@ export class HomePage {
   myPortfolio: any;
   myTitle: any;
   myHoldings: any;
+  news: any;
 
-  constructor(public navCtrl: NavController, public app: App, public portfolioProvider: PortfolioProvider, public userProvider: UserProvider) {
+  constructor(public navCtrl: NavController, public app: App, public portfolioProvider: PortfolioProvider, public userProvider: UserProvider, public newsProvider: NewsProvider) {
     // If the current user is either null or undefined, return to the login screen
     if(this.userProvider.currentUser == null)
     {
@@ -31,6 +33,7 @@ export class HomePage {
 
       //this.getUsers();
       this.getPortfolios();
+      this.getNews();
 
       //this.myPortfolio = this.portfolio[0];
       //console.log(this.myPortfolio);
@@ -71,6 +74,16 @@ export class HomePage {
       this.myHoldings = this.myPortfolio.holdings;
       console.log(this.myPortfolio);
     });
+  }
+
+  //relevant news for portfolio
+  getNews()
+  {
+    this.newsProvider.getNews()
+    .then(data => {
+      this.news = data;
+      console.log(this.news);
+    })
   }
 
   // TODO: Marked for deletion once development is done (only used for testing)

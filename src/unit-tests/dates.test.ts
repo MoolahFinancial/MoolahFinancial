@@ -54,7 +54,7 @@ describe('Dates service', () =>
       expect.assertions(1);
       let currentMonth        = date.returnCurrentMonth();
 
-      expect(currentMonth).toBe("November");
+      expect(currentMonth).toBe("February");
    });
 
 
@@ -69,8 +69,5 @@ describe('Dates service', () =>
    	let timestamp         = date.returnCurrentTimestamp();
    	expect(timestamp).toBeGreaterThanOrEqual(Math.floor(Date.now()/1000));
    });
-
-
-
 
 });

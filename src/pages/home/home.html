@@ -26,6 +26,21 @@
       <canvas #doughnutCanvas></canvas>
     </ion-card-content>
   </ion-card>
+
+  <ion-list inset>
+    <<ion-item *ngFor="let article of news">
+      <h2>{{article.headline}}</h2>
+      <<h6>{{article.source}}</h6>
+      <p>{{article.summary}}</p>
+      <p>{{article.url}}</p>
+    </ion-item>
+  </ion-list>
+
+  <p>Data provided for free by
+    <a href="https://iextrading.com/developer/">IEX</a>. View
+    <a href="https://iextrading.com/api-exhibit-a/">EX’s Terms of Use</a>I.
+  </p>
+
 </ion-content>
 <!--
 <ion-card-header>

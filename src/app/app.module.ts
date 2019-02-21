@@ -29,6 +29,7 @@ import { UserProvider } from '../providers/user/user.service';
 import { EmailValidator } from '../validators/emailValidator';
 import { FormProvider } from '../providers/form/form.service';
 import { QuestionnaireProvider } from '../providers/questionnaire/questionnaire.service';
+import { NewsProvider } from '../providers/news/news.service';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { QuestionnaireProvider } from '../providers/questionnaire/questionnaire.
     UserProvider,
     EmailValidator,
     FormProvider,
+    NewsProvider,
     QuestionnaireProvider // Needs to be included as a provider since it is an injectable
   ]
 })

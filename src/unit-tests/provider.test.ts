@@ -37,4 +37,11 @@ describe('Rest Provider', () =>
 
       expect(users).toBeDefined();
    });
+   test('Connected to the Portfolio API', () =>
+   {
+      expect.assertions(1);
+      let portfolios = provider.getPortfolios();
+
+      expect(portfolios).toBeDefined();
+   });
 });
