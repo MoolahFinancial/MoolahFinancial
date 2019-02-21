@@ -46,15 +46,31 @@ namespace MoolahFinancialBackend.Controllers
         /// </summary>  
         /// <param name="userId"></param>  
         /// <returns></returns> 
-        [HttpGet]
+        //[HttpGet]
         [Route("api/Portfolios/bestPortfolio/{userId:int:min(1)}")]
         [ResponseType(typeof(portfolio))]
-        public IHttpActionResult GetBestPortfolio(int userId)
+        public IHttpActionResult GetBestDummyPortfolio(int userId)
         {
             //TODO: Change this (currently gives 1 static portfolio as a recommendation)
             var bestPortfolio = db.portfolios.FirstOrDefault(u => u.title.Contains("Smart Beta"));
 
             return Ok(new { success = true, message = "Found suggested portfolio", portfolio = bestPortfolio });
+        }
+
+        /// <summary>  
+        /// Returns the portfolio that is the best suited for a given user
+        /// </summary>  
+        /// <param name="userId"></param>  
+        /// <returns></returns> 
+        [HttpGet]
+        [Route("api/Portfolios/bestPortfolioInfo/{userId:int:min(1)}")]
+        [ResponseType(typeof(portfolio))]
+        public IHttpActionResult GetBestPortfolio(int userId)
+        {
+            // Use the stored procedure to retrieve the best portfolio's id & the number of common tags
+            var result = db.get_best_portfolio_info(userId);
+
+            return Ok(new { success = true, message = "Found suggested portfolio", result });
         }
 
         // PUT: api/Portfolio/5

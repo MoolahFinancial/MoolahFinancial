@@ -488,6 +488,13 @@
             <param name="id"></param>  
             <returns></returns> 
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.PortfoliosController.GetBestDummyPortfolio(System.Int32)">
+            <summary>  
+            Returns the portfolio that is the best suited for a given user
+            </summary>  
+            <param name="userId"></param>  
+            <returns></returns> 
+        </member>
         <member name="M:MoolahFinancialBackend.Controllers.PortfoliosController.GetBestPortfolio(System.Int32)">
             <summary>  
             Returns the portfolio that is the best suited for a given user
@@ -499,6 +506,29 @@
             <summary>  
             Returns all of the questions stored in the database
             </summary> 
+        </member>
+        <member name="T:MoolahFinancialBackend.Controllers.TagsController">
+            <summary>
+            The Tag Controller class.
+            Contains all APIs for tags, user_tags, and portfolio_tags
+            </summary>
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.TagsController.GetTags">
+            <summary>  
+            Returns all of tags stored in the database
+            </summary> 
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.TagsController.GetUserTags">
+            <summary>  
+            Returns all of the user tags in the database
+            </summary> 
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.TagsController.NewUserTag(MoolahFinancialBackend.Models.user_tag)">
+            <summary>  
+            Creates a new user tag
+            </summary>
+            <param name="user_tag"></param> 
+            <returns></returns>
         </member>
         <member name="T:MoolahFinancialBackend.Controllers.UsersController">
             <summary>
@@ -559,13 +589,6 @@
             <param name="id"></param>  
             <param name="user"></param> 
             <returns></returns> 
-        </member>
-        <member name="M:MoolahFinancialBackend.Controllers.UsersController.NewUserTag(MoolahFinancialBackend.Models.user_tag)">
-            <summary>  
-            Creates a new user
-            </summary>
-            <param name="user_tag"></param> 
-            <returns></returns>
         </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.RegisterUser(MoolahFinancialBackend.Models.user)">
             <summary>  

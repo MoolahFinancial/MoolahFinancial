@@ -272,6 +272,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="get_best_portfolio_info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="MoolahModelStoreContainer">
           <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="answer" EntityType="Self.answer" Schema="dbo" store:Type="Tables" />
@@ -401,6 +404,9 @@
             <End Role="user" EntitySet="users" />
             <End Role="user_tag" EntitySet="user_tag" />
           </AssociationSet>
+          <FunctionImport Name="get_best_portfolio_info" ReturnType="Collection(MoolahModel.get_best_portfolio_info_Result)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="news">
           <Key>
@@ -634,6 +640,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="get_best_portfolio_info_Result">
+          <Property Type="Int32" Name="portfolio_id" Nullable="true" />
+          <Property Type="Int32" Name="common_tags" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -788,6 +798,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="get_best_portfolio_info" FunctionName="MoolahModel.Store.get_best_portfolio_info">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MoolahModel.get_best_portfolio_info_Result">
+                <ScalarProperty Name="portfolio_id" ColumnName="portfolio_id" />
+                <ScalarProperty Name="common_tags" ColumnName="common_tags" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
