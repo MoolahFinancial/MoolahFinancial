@@ -30,7 +30,7 @@ import { EmailValidator } from '../validators/emailValidator';
 import { FormProvider } from '../providers/form/form.service';
 import { QuestionnaireProvider } from '../providers/questionnaire/questionnaire.service';
 import { NewsProvider } from '../providers/news/news.service';
-import { TagProvider } from '../providers/tag/tag';
+import { TagProvider } from '../providers/tag/tag.service';
 
 
 @NgModule({
