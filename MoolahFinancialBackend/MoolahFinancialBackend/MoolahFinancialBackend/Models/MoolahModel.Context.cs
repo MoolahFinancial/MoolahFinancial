@@ -12,6 +12,8 @@ namespace MoolahFinancialBackend.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MoolahEntities : DbContext
     {
@@ -36,5 +38,14 @@ namespace MoolahFinancialBackend.Models
         public virtual DbSet<answer> answers { get; set; }
         public virtual DbSet<question> questions { get; set; }
         public virtual DbSet<user_tag> user_tag { get; set; }
+    
+        public virtual ObjectResult<get_best_portfolio_info_Result> get_best_portfolio_info(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("userID", userID) :
+                new ObjectParameter("userID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_best_portfolio_info_Result>("get_best_portfolio_info", userIDParameter);
+        }
     }
 }

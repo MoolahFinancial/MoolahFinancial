@@ -27,10 +27,19 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card>
+    <ion-card-header>
+      {{myTitle}}
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
   <ion-list inset>
-    <<ion-item *ngFor="let article of news">
+    <ion-item *ngFor="let article of news">
       <h2>{{article.headline}}</h2>
-      <<h6>{{article.source}}</h6>
+      <h6>{{article.source}}</h6>
       <p>{{article.summary}}</p>
       <p>{{article.url}}</p>
     </ion-item>
@@ -38,7 +47,7 @@
 
   <p>Data provided for free by
     <a href="https://iextrading.com/developer/">IEX</a>. View
-    <a href="https://iextrading.com/api-exhibit-a/">EX’s Terms of Use</a>I.
+    <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
   </p>
 
 </ion-content>

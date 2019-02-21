@@ -5,6 +5,7 @@ import { TabsPage } from '../tabs/tabs';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserProvider } from '../../providers/user/user.service';
 import { FormProvider } from '../../providers/form/form.service';
+import { SignupPage } from '../signup/signup';
 //import { AlertController } from 'ionic-angular';
 
 /**
@@ -50,7 +51,16 @@ export class LoginPage {
       loginLoadingController.dismiss();
       if(data.success) {
         this.userProvider.currentUser = data.user; // Set the current user to the logged in user
-        this.navCtrl.push(TabsPage);
+
+        // If the user still needs to fill out the questionnaire, take them to the signup page
+        if(!this.userProvider.currentUser.has_completed_questionnaire)
+        {
+          this.navCtrl.push(SignupPage);
+        }
+        else{
+          // If the user has already filled out the questions, take them to the home page
+          this.navCtrl.push(TabsPage);
+        }
       } else {
         // If an error occurs during the login, the current user should be null
         this.userProvider.currentUser = null;
