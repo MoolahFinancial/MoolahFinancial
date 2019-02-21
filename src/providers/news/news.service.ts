@@ -17,9 +17,13 @@ export class NewsProvider {
 
   //currently only gets news relevant to APPL
   //update to get other news later
+  //currently only gets news relevant to APPL
+  //update to get other news later
+  //change so that we can do multiple companies (the JSON separates them by company)
+  // /stock/market/batch?symbols=fb,snap,googl&types=news&last=3
   getNews() {
     return new Promise(resolve => {
-      this.http.get(this.ROOT_URL+'/stock/aapl/news/last/3').subscribe(data => {
+      this.http.get(this.ROOT_URL+'/stock/googl/news/last/3').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
