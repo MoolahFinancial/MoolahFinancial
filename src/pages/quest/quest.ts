@@ -33,6 +33,28 @@ export class QuestionPage {
     });
   }
 
+  generateNewUserTag(questionText: string, questionAnswer: string, tagId: number) {
+    // The json object representing the new user_tag we will insert into the database
+    var newUserTagJson = {
+      "user_id": this.userProvider.currentUser.user_id,
+      "tag_id": tagId,
+      "question_text": questionText,
+      "question_answer": questionAnswer
+    };
+
+    // Generate a new user tag based on the passed in json object
+    this.tagProvider.generateUserTag(newUserTagJson).then((result) => {
+      if(result.success)
+      {
+        console.log(result);
+      } else {
+        console.log("Error while generating new tag (result.success = false): ", result);
+      }
+    }, (err) => {
+      console.log("Error while generating new tag: ", err);
+    });
+  }
+
   evalUserAnswer(questionText: string, questionAnswer: string, tagId: number) {
     this.tagProvider.checkForUserTag(questionText)
     .subscribe(userTagExists => {
@@ -47,7 +69,7 @@ export class QuestionPage {
           if(data.success)
           {
             console.log("The tag got deleted", data);
-
+            this.generateNewUserTag(questionText, questionAnswer, tagId);
           }
           else {
             console.log("ERROR", data);
@@ -57,26 +79,7 @@ export class QuestionPage {
       } else {
         console.log("The tag does not exist...", userTagExists);
 
-        // If the user_tag doesn't exist, simpily create a new user_tag
-        // The json object representing the new user_tag we will insert into the database
-        var newUserTagJson = {
-          "user_id": this.userProvider.currentUser.user_id,
-          "tag_id": tagId,
-          "question_text": questionText,
-          "question_answer": questionAnswer
-        };
-
-        // Generate a new user tag based on the passed in json object
-        this.tagProvider.generateUserTag(newUserTagJson).then((result) => {
-          if(result.success)
-          {
-            console.log(result);
-          } else {
-            console.log("Error while generating new tag: ", result);
-          }
-        }, (err) => {
-          console.log("Error while generating new tag: ", err);
-        });
+        this.generateNewUserTag(questionText, questionAnswer, tagId);
       }
 
     });
@@ -91,7 +94,7 @@ export class QuestionPage {
   // Called when the submit button is pressed
   submit(){
     
-    this.evalUserAnswer("What Is Your Marital Status?","Single", 1);
+    this.evalUserAnswer("What Is Your Marital Status?","Single", 6);
 
     // Navigate back to the sign-up page
     this.navCtrl.pop();
