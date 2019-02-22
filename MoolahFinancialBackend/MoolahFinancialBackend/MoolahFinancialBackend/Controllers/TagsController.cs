@@ -99,6 +99,27 @@ namespace MoolahFinancialBackend.Controllers
             return Ok(new { success = true, message = "Deleted user_tag", user_tag = userTag });
         }
 
+        /// <summary>  
+        /// Verifies if a user_tag exists based on the passed in user_id and question_text
+        /// </summary>
+        /// <param name="user_id"></param> 
+        /// <param name="question_text"></param> 
+        /// <returns></returns>
+        [HttpGet]
+        [Route("checkForUserTag", Name = "CheckForUserTag")]
+        [ResponseType(typeof(bool))]
+        public bool CheckForUserTag(int user_id, string question_text)
+        {
+            if(UserTagExists(user_id, question_text))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -107,6 +128,17 @@ namespace MoolahFinancialBackend.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /// <summary>  
+        /// Checks if a user_tag exists based off of the user_id and the question_text
+        /// </summary>
+        /// <param name="userId"></param> 
+        /// <param name="questionText"></param> 
+        /// <returns></returns>
+        private bool UserTagExists(int userId, string questionText)
+        {
+            return db.user_tag.Count(e => e.user_id == userId && string.Compare(e.question_text, questionText, true) == 0) > 0;
         }
 
         private bool tagExists(int id)
