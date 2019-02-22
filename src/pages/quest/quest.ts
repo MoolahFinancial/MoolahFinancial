@@ -53,6 +53,8 @@ export class QuestionPage {
     }, (err) => {
       console.log("Error while generating new tag: ", err);
     });
+
+
   }
 
   evalUserAnswer(questionText: string, questionAnswer: string, tagId: number) {
@@ -87,15 +89,46 @@ export class QuestionPage {
     
   }
 
-  itemSelected(item: string) {
-    console.log("Selected Item", item);
+  /* Available Tags:
+  * 6: Very Low
+  * 7: Low
+  * 8: Conservative
+  * 9: Moderate
+  * 10: Risky
+  */
+  itemSelected(question: string, item: string) {
+    console.log(question, item);
+
+    switch(question) {
+      case "Marital": {
+        switch(item) {
+          case "single": {
+            this.evalUserAnswer(question, item, 10);
+          }
+          case "married": {
+            this.evalUserAnswer(question, item, 6);
+          }
+          case "seperated": {
+            
+          }
+          case "divorce": {
+            
+          }
+          case "widow": {
+            
+          }
+          default: {
+
+          }
+        }
+        break;
+      }
+
+    }
   }
 
   // Called when the submit button is pressed
   submit(){
-    
-    this.evalUserAnswer("What Is Your Marital Status?","Single", 6);
-
     // Navigate back to the sign-up page
     this.navCtrl.pop();
     console.log("Previous Page");

@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
         <ion-label>How Much Investment <br>Experience Do You Have?</ion-label>
-        <ion-select [(ngModel)]="experience" (ngModelChange)="itemSelected(experience)" multiple="false" cancelText="Cancel" okText="Save">
+        <ion-select [(ngModel)]="experience" (ngModelChange)="itemSelected('Experience',experience)" multiple="false" cancelText="Cancel" okText="Save">
           <ion-option value="none" selected="true">None</ion-option>
           <ion-option value="notmuch">Not Much</ion-option>
           <ion-option value="some">I know what I am doing</ion-option>
@@ -21,7 +21,7 @@
 
       <ion-item>
           <ion-label>What Is Your Marital Status?</ion-label>
-          <ion-select [(ngModel)]="marital" (ngModelChange)="itemSelected(marital)" multiple="false" cancelText="Cancel" okText="Save">
+          <ion-select [(ngModel)]="marital" (ngModelChange)="itemSelected('Marital', marital)" multiple="false" cancelText="Cancel" okText="Save">
             <ion-option value="single" selected="true">Single</ion-option>
             <ion-option value="married">Married</ion-option>
             <ion-option value="seperated">Seperated</ion-option>
@@ -32,7 +32,7 @@
 
         <ion-item>
             <ion-label>How Many Dependents Do You Have?</ion-label>
-            <ion-select [(ngModel)]="dependents" (ngModelChange)="itemSelected(income)" multiple="false" cancelText="Cancel" okText="Save">
+            <ion-select [(ngModel)]="dependents" (ngModelChange)="itemSelected('Dependents', dependents)" multiple="false" cancelText="Cancel" okText="Save">
               <ion-option value="00" selected="true">0</ion-option>
               <ion-option value="01">1</ion-option>
               <ion-option value="02">2</ion-option>
@@ -43,7 +43,7 @@
 
         <ion-item>
             <ion-label>How Much Does Liquidity Matter To You?</ion-label>
-            <ion-select [(ngModel)]="liquidity" (ngModelChange)="itemSelected(liquidity)" multiple="false" cancelText="Cancel" okText="Save">
+            <ion-select [(ngModel)]="liquidity" (ngModelChange)="itemSelected('Liquidity', liquidity)" multiple="false" cancelText="Cancel" okText="Save">
               <ion-option value="not" selected="true">Not Really</ion-option>
               <ion-option value="little">A Little</ion-option>
               <ion-option value="some">Some</ion-option>
@@ -53,7 +53,7 @@
 
           <ion-item>
               <ion-label>What Is The Value Of Your Relevant Assets?</ion-label>
-              <ion-select [(ngModel)]="assets" (ngModelChange)="itemSelected(assets)" multiple="false" cancelText="Cancel" okText="Save">
+              <ion-select [(ngModel)]="assets" (ngModelChange)="itemSelected('Assets', assets)" multiple="false" cancelText="Cancel" okText="Save">
                 <ion-option value="9k" selected="true">Less Than $9,999</ion-option>
                 <ion-option value="10k">$10,000-$19,000</ion-option>
                 <ion-option value="20k">$20,000-$29,000</ion-option>
@@ -68,7 +68,7 @@
           </ion-item>
           <ion-item>
               <ion-label>What Is Your Net Worth?</ion-label>
-              <ion-select [(ngModel)]="networth" (ngModelChange)="itemSelected(networth)" multiple="false" cancelText="Cancel" okText="Save">
+              <ion-select [(ngModel)]="networth" (ngModelChange)="itemSelected('Networth', networth)" multiple="false" cancelText="Cancel" okText="Save">
                 <ion-option value="9k" selected="true">Less Than $9,999</ion-option>
                 <ion-option value="10k">$10,000-$19,000</ion-option>
                 <ion-option value="20k">$20,000-$29,000</ion-option>
