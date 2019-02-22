@@ -71,6 +71,35 @@ namespace MoolahFinancialBackend.Controllers
             return Ok(new { success = true, message = "Successfully created a new user tag", user_tag });
         }
 
+        /// <summary>  
+        /// Deletes an exising user_tag (based on the question text and the user id
+        /// </summary>
+        /// <param name="user_id"></param> 
+        /// <param name="question_text"></param> 
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("deleteUserTag", Name = "DeleteUserTag")]
+        [ResponseType(typeof(bool))]
+        public IHttpActionResult DeleteUserTag(int user_id, string question_text)
+        {
+            // Try to retrieve the matching user_tag
+            user_tag userTag = db.user_tag.FirstOrDefault(c => string.Compare(c.question_text, question_text, true) == 0 &&
+                                                          c.user_id == user_id);
+
+            // If we find no matching user tag, simpily return
+            if(userTag == null)
+            {
+                return Ok(new { success = false, message = "No matching user_tag found for deletion" });
+            }
+
+            // Delete the user_tag and save our changes
+            db.user_tag.Remove(userTag);
+            db.SaveChanges();
+
+            return Ok(new { success = true, message = "Deleted user_tag", user_tag = userTag });
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

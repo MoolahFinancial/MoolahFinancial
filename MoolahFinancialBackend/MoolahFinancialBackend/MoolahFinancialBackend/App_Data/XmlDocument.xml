@@ -530,6 +530,14 @@
             <param name="user_tag"></param> 
             <returns></returns>
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.TagsController.DeleteUserTag(System.Int32,System.String)">
+            <summary>  
+            Deletes an exising user_tag (based on the question text and the user id
+            </summary>
+            <param name="user_id"></param> 
+            <param name="question_text"></param> 
+            <returns></returns>
+        </member>
         <member name="T:MoolahFinancialBackend.Controllers.UsersController">
             <summary>
             The User Controller class.
