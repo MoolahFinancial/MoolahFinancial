@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
 import { QuestionnaireProvider } from '../../providers/questionnaire/questionnaire.service';
 import { Question } from '../../providers/models';
@@ -23,64 +23,6 @@ export class QuestionPage {
 
   }
 
-  generateNewUserTag(questionText: string, questionAnswer: string, tagId: number) {
-    // The json object representing the new user_tag we will insert into the database
-    var newUserTagJson = {
-      "user_id": this.userProvider.currentUser.user_id,
-      "tag_id": tagId,
-      "question_text": questionText,
-      "question_answer": questionAnswer
-    };
-
-    // Generate a new user tag based on the passed in json object
-    this.tagProvider.generateUserTag(newUserTagJson).then((result) => {
-      if(result.success)
-      {
-        console.log(result);
-        // Display a toast telling the user their response was saved
-        this.formProvider.showToast("Response Saved", 4000);
-      } else {
-        console.log("Error while generating new tag (result.success = false): ", result);
-      }
-    }, (err) => {
-      console.log("Error while generating new tag: ", err);
-    });
-
-
-  }
-
-  evalUserAnswer(questionText: string, questionAnswer: string, tagId: number) {
-    this.tagProvider.checkForUserTag(questionText)
-    .subscribe(userTagExists => {
-      // Check whether the user tag already exists or not
-      if(userTagExists) {
-        
-        console.log("The tag exists!", userTagExists);
-
-        // If the user_tag does exist, delete it (since the user is changing their previous answer)
-        this.tagProvider.deleteUserTag(questionText)
-        .subscribe(data => {
-          if(data.success)
-          {
-            console.log("The tag got deleted", data);
-            this.generateNewUserTag(questionText, questionAnswer, tagId);
-          }
-          else {
-            console.log("ERROR", data);
-          }
-        });
-
-      } else {
-        console.log("The tag does not exist...", userTagExists);
-
-        this.generateNewUserTag(questionText, questionAnswer, tagId);
-      }
-
-    });
-    
-    
-  }
-
   /* Available Tags:
   * 6: Very Low
   * 7: Low
@@ -95,23 +37,23 @@ export class QuestionPage {
       case "Marital": {
         switch(item) {
           case "single": {
-            this.evalUserAnswer(question, item, 10);
+            this.tagProvider.evalUserAnswer(question, item, 10);
             break;
           }
           case "married": {
-            this.evalUserAnswer(question, item, 6);
+            this.tagProvider.evalUserAnswer(question, item, 6);
             break;
           }
           case "seperated": {
-            this.evalUserAnswer(question, item, 8);
+            this.tagProvider.evalUserAnswer(question, item, 8);
             break;
           }
           case "divorce": {
-            this.evalUserAnswer(question, item, 8);
+            this.tagProvider.evalUserAnswer(question, item, 8);
             break;
           }
           case "widow": {
-            this.evalUserAnswer(question, item, 8);
+            this.tagProvider.evalUserAnswer(question, item, 8);
             break;
           }
           default: {
