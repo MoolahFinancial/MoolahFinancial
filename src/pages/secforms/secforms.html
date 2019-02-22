@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
         <ion-label>How Much Money <br>Do You Make?</ion-label>
-        <ion-select [(ngModel)]="income" multiple="false" cancelText="Cancel" okText="Save">
+        <ion-select [(ngModel)]="income" (ngModelChange)="itemSelected(income)" multiple="false" cancelText="Cancel" okText="Save">
           <ion-option value="9k" selected="true">Less Than $9,999</ion-option>
           <ion-option value="10k">$10,000-$19,000</ion-option>
           <ion-option value="20k">$20,000-$29,000</ion-option>
@@ -27,7 +27,7 @@
 
   <ion-item>
       <ion-label>Date Of Birth</ion-label>
-      <ion-select [(ngModel)]="month">
+      <ion-select [(ngModel)]="month" (ngModelChange)="itemSelected(month)">
         <ion-option value="01" selected="true">January</ion-option>
         <ion-option value="02">February</ion-option>
         <ion-option value="03">March</ion-option>
@@ -41,7 +41,7 @@
         <ion-option value="11">November</ion-option>
         <ion-option value="12">December</ion-option>
       </ion-select>
-      <ion-select [(ngModel)]="day">
+      <ion-select [(ngModel)]="day" (ngModelChange)="itemSelected(day)">
         <ion-option value="01" selected="true">1</ion-option>
         <ion-option value="02">2</ion-option>
         <ion-option value="03">3</ion-option>
@@ -74,7 +74,7 @@
         <ion-option value="30">30</ion-option>
         <ion-option value="31">31</ion-option>
       </ion-select>
-      <ion-select [(ngModel)]="year">
+      <ion-select [(ngModel)]="year" (ngModelChange)="itemSelected(year)">
         <ion-option selected="true">1989</ion-option>
         <ion-option>1990</ion-option>
         <ion-option>1991</ion-option>
@@ -91,7 +91,7 @@
 
     <ion-item>
         <ion-label>How Much Investment <br>Experience Do You Have?</ion-label>
-        <ion-select [(ngModel)]="experience" multiple="false" cancelText="Cancel" okText="Save">
+        <ion-select [(ngModel)]="experience" (ngModelChange)="itemSelected(experience)" multiple="false" cancelText="Cancel" okText="Save">
           <ion-option value="none" selected="true">None</ion-option>
           <ion-option value="notmuch">Not Much</ion-option>
           <ion-option value="some">I know what I am doing</ion-option>
@@ -101,7 +101,7 @@
 
       <ion-item>
           <ion-label>Are you Employed?</ion-label>
-          <ion-select [(ngModel)]="experience" multiple="false" cancelText="Cancel" okText="Save">
+          <ion-select [(ngModel)]="job" (ngModelChange)="itemSelected(job)" multiple="false" cancelText="Cancel" okText="Save">
             <ion-option value="unemploy" selected="true">Unemployed</ion-option>
             <ion-option value="employ">Employed</ion-option>
             <ion-option value="selfemploy">Self-Employed</ion-option>
@@ -111,7 +111,7 @@
 
         <ion-item>
             <ion-label>Are You or A Family Member a <br> Senior Executive or 10% Share Holder <br>at A Publicaly Traded Company?</ion-label>
-            <ion-select [(ngModel)]="shareholder" multiple="false" cancelText="Cancel" okText="Save">
+            <ion-select [(ngModel)]="shareholder" (ngModelChange)="itemSelected(shareholder)" multiple="false" cancelText="Cancel" okText="Save">
               <ion-option value="no" selected="true">No</ion-option>
               <ion-option value="yes">Yes</ion-option>
             </ion-select>
@@ -119,18 +119,18 @@
 
           <ion-item>
               <ion-label>Do You or A Family Member Work<br> For Another Brokerage?</ion-label>
-              <ion-select [(ngModel)]="broker" multiple="false" cancelText="Cancel" okText="Save">
+              <ion-select [(ngModel)]="broker" (ngModelChange)="itemSelected(broker)" multiple="false" cancelText="Cancel" okText="Save">
                 <ion-option value="no" selected="true">No</ion-option>
                 <ion-option value="yes">Yes</ion-option>
               </ion-select>
             </ion-item>
       <ion-item>
         <ion-label>Phone Number</ion-label>
-        <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
+        <ion-input type="tel" [(ngModel)]="phoneNumber" (ngModelChange)="itemSelected(phoneNumber)"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>SSN</ion-label>
-        <ion-input [(ngModel)]="social"></ion-input>
+        <ion-input [(ngModel)]="social" (ngModelChange)="itemSelected(social)"></ion-input>
       </ion-item>
     </ion-list>
 
