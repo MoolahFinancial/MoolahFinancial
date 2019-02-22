@@ -111,7 +111,7 @@ export class HomePage {
   //relevant news for portfolio
   getNews()
   {
-    this.newsProvider.getNews()
+    this.newsProvider.getNews('googl')
     .then(data => {
       this.news = data;
       console.log(this.news);
