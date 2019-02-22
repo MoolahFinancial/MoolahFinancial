@@ -104,21 +104,26 @@ export class QuestionPage {
         switch(item) {
           case "single": {
             this.evalUserAnswer(question, item, 10);
+            break;
           }
           case "married": {
             this.evalUserAnswer(question, item, 6);
+            break;
           }
           case "seperated": {
-            
+            this.evalUserAnswer(question, item, 8);
+            break;
           }
           case "divorce": {
-            
+            this.evalUserAnswer(question, item, 8);
+            break;
           }
           case "widow": {
-            
+            this.evalUserAnswer(question, item, 8);
+            break;
           }
           default: {
-
+            break;
           }
         }
         break;
