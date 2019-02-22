@@ -27,10 +27,18 @@ export class TagProvider {
   // Calls the api to delete an existing user tag (based on the user_id & the question_text)
   deleteUserTag(user_id: number, question_text: string): Observable<UserTagData> {
 
-    // Add the email and password params to the url for the api call
+    // Add the user_id and question_text params to the url for the api call
     const params = new HttpParams().set('user_id', String(user_id)).set('question_text', question_text);
 
     return this.http.get<UserTagData>(this.ROOT_URL + '/tags/deleteUserTag', { params } );
+  }
+
+  // Checks if a user_tag with the same user_id and question_text already exists or not
+  checkForUserTag(user_id: number, question_text: string): Observable<boolean> {
+    // Add the user_id and question_text params to the url for the api call
+    const params = new HttpParams().set('user_id', String(user_id)).set('question_text', question_text);
+
+    return this.http.get<boolean>(this.ROOT_URL + '/tags/checkForUserTag', { params } );
   }
 
 }
