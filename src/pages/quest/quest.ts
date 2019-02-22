@@ -3,6 +3,8 @@ import { NavController} from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
 import { QuestionnaireProvider } from '../../providers/questionnaire/questionnaire.service';
 import { Question } from '../../providers/models';
+import { TagProvider } from '../../providers/tag/tag.service';
+import { UserProvider } from '../../providers/user/user.service';
 //import { InvestPage } from '../invest/invest';
 
 @Component({
@@ -14,11 +16,14 @@ export class QuestionPage {
   // Holds all of the questions that we've retrieved from the database
   questions: Question[];
 
-  constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider, public questionnaireProvider: QuestionnaireProvider) {
+  constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider, 
+    public questionnaireProvider: QuestionnaireProvider, 
+    public tagProvider: TagProvider, public userProvider: UserProvider) {
     console.log("On question Page");
-    this.getQuestions();
+
   }
 
+  //TODO: Mark for deletion, we are no longer pulling questions from the database
   // Retrieve all of the questions stored in the database
   getQuestions() {
     this.questionnaireProvider.getQuestions()
@@ -28,14 +33,67 @@ export class QuestionPage {
     });
   }
 
+  evalUserAnswer(questionText: string, questionAnswer: string, tagId: number) {
+    this.tagProvider.checkForUserTag(questionText)
+    .subscribe(userTagExists => {
+      // Check whether the user tag already exists or not
+      if(userTagExists) {
+        
+        console.log("The tag exists!", userTagExists);
+
+        // If the user_tag does exist, delete it (since the user is changing their previous answer)
+        this.tagProvider.deleteUserTag(questionText)
+        .subscribe(data => {
+          if(data.success)
+          {
+            console.log("The tag got deleted", data);
+
+          }
+          else {
+            console.log("ERROR", data);
+          }
+        });
+
+      } else {
+        console.log("The tag does not exist...", userTagExists);
+
+        // If the user_tag doesn't exist, simpily create a new user_tag
+        // The json object representing the new user_tag we will insert into the database
+        var newUserTagJson = {
+          "user_id": this.userProvider.currentUser.user_id,
+          "tag_id": tagId,
+          "question_text": questionText,
+          "question_answer": questionAnswer
+        };
+
+        // Generate a new user tag based on the passed in json object
+        this.tagProvider.generateUserTag(newUserTagJson).then((result) => {
+          if(result.success)
+          {
+            console.log(result);
+          } else {
+            console.log("Error while generating new tag: ", result);
+          }
+        }, (err) => {
+          console.log("Error while generating new tag: ", err);
+        });
+      }
+
+    });
+    
+    
+  }
+
   itemSelected(item: string) {
     console.log("Selected Item", item);
   }
 
+  // Called when the submit button is pressed
   submit(){
-    //console.log(this.userProvider.currentUser, "current user in logout");
-    //this.userProvider.currentUser = null; // Set the current user to null
-    // Navigate back to the login page
+    
+    this.evalUserAnswer("What Is Your Marital Status?","Single", 1);
+
+    // Navigate back to the sign-up page
     this.navCtrl.pop();
     console.log("Previous Page");
   }
