@@ -52,7 +52,11 @@ namespace MoolahFinancialBackend.Controllers
         public IHttpActionResult NewUserTag(user_tag user_tag)
         {
             // If the user tag already exists for a given question, return a conflict
-            if (db.user_tag.Any(c => c.question_text.Contains(user_tag.question_text)))
+            // The user_id, the tag_id, and the question_text all have to be the same for there to be a conflict
+            // since all 3 are primary keys
+            if (db.user_tag.Any(c => c.question_text.Contains(user_tag.question_text) &&
+                c.tag_id == user_tag.tag_id &&
+                c.user_id == user_tag.user_id))
             {
                 return Conflict();
             }
