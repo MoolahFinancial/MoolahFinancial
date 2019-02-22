@@ -34,6 +34,7 @@ export class QuestionPage {
     console.log(question, item);
 
     switch(question) {
+      // What Is Your Marital Status?
       case "Marital": {
         switch(item) {
           case "single": {
@@ -61,6 +62,142 @@ export class QuestionPage {
           }
         }
         break;
+      }
+      // How Many Dependents Do You Have?
+      case "Dependents": {
+        switch(item) {
+          case "00": {
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "01":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "02":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "03":{
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+          case "04":{
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+        }
+      }
+      // How Much Does Liquidity Matter To You?
+      case "Liquidity": {
+        switch(item) {
+          case "not": {
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "little":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "some":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "very":{
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+        }
+      }
+      // What Is The Value Of Your Relevant Assets?
+      case "Assets": {
+        switch(item) {
+          case "9k": {
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+          case "10k":{
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+          case "20k":{
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+          case "30k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "40k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "50k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "60k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "70k":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "80k":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "90k":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+        }
+      }
+      // What Is Your Net Worth?
+      case "Networth": {
+        switch(item) {
+          case "9k": {
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+          case "10k":{
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+          case "20k":{
+            this.tagProvider.evalUserAnswer(question, item, 6);
+            break;
+          }
+          case "30k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "40k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "50k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "60k":{
+            this.tagProvider.evalUserAnswer(question, item, 8);
+            break;
+          }
+          case "70k":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "80k":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+          case "90k":{
+            this.tagProvider.evalUserAnswer(question, item, 10);
+            break;
+          }
+        }
       }
 
     }
