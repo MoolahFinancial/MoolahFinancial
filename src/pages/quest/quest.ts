@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
+import { NavController, ToastController, ToastOptions } from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
 import { QuestionnaireProvider } from '../../providers/questionnaire/questionnaire.service';
 import { Question } from '../../providers/models';
@@ -18,7 +18,8 @@ export class QuestionPage {
 
   constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider, 
     public questionnaireProvider: QuestionnaireProvider, 
-    public tagProvider: TagProvider, public userProvider: UserProvider) {
+    public tagProvider: TagProvider, public userProvider: UserProvider,
+    private toastController: ToastController) {
     console.log("On question Page");
 
   }
@@ -31,6 +32,15 @@ export class QuestionPage {
       this.questions = data;
       console.log(this.questions, "quest");
     });
+  }
+
+  // Displays a toast message
+  showToast(message: string, duration: number) {
+    let toastOptions = {
+      message: message,
+      duration: duration
+    }
+    this.toastController.create(toastOptions).present();
   }
 
   generateNewUserTag(questionText: string, questionAnswer: string, tagId: number) {
@@ -47,6 +57,8 @@ export class QuestionPage {
       if(result.success)
       {
         console.log(result);
+        // Display a toast telling the user their response was saved
+        this.showToast("Response Saved", 4000);
       } else {
         console.log("Error while generating new tag (result.success = false): ", result);
       }
