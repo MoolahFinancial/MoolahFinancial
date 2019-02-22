@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, ToastOptions } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
 import { QuestionnaireProvider } from '../../providers/questionnaire/questionnaire.service';
 import { Question } from '../../providers/models';
 import { TagProvider } from '../../providers/tag/tag.service';
 import { UserProvider } from '../../providers/user/user.service';
-//import { InvestPage } from '../invest/invest';
+import { FormProvider } from '../../providers/form/form.service';
 
 @Component({
   selector: 'page-home',
@@ -18,29 +18,9 @@ export class QuestionPage {
 
   constructor(public navCtrl: NavController, public portfolioProvider: PortfolioProvider, 
     public questionnaireProvider: QuestionnaireProvider, 
-    public tagProvider: TagProvider, public userProvider: UserProvider,
-    private toastController: ToastController) {
+    public tagProvider: TagProvider, public userProvider: UserProvider, public formProvider: FormProvider) {
     console.log("On question Page");
 
-  }
-
-  //TODO: Mark for deletion, we are no longer pulling questions from the database
-  // Retrieve all of the questions stored in the database
-  getQuestions() {
-    this.questionnaireProvider.getQuestions()
-    .subscribe(data => {
-      this.questions = data;
-      console.log(this.questions, "quest");
-    });
-  }
-
-  // Displays a toast message
-  showToast(message: string, duration: number) {
-    let toastOptions = {
-      message: message,
-      duration: duration
-    }
-    this.toastController.create(toastOptions).present();
   }
 
   generateNewUserTag(questionText: string, questionAnswer: string, tagId: number) {
@@ -58,7 +38,7 @@ export class QuestionPage {
       {
         console.log(result);
         // Display a toast telling the user their response was saved
-        this.showToast("Response Saved", 4000);
+        this.formProvider.showToast("Response Saved", 4000);
       } else {
         console.log("Error while generating new tag (result.success = false): ", result);
       }
