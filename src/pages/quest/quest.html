@@ -81,8 +81,28 @@
                 <ion-option value="90k">More Than $90,000</ion-option>
               </ion-select>
             </ion-item>
+
+            <ion-item>
+                <ion-label>What is your main reason for investing?</ion-label>
+                <ion-select [(ngModel)]="reason" (ngModelChange)="itemSelected('Reason',reason)" multiple="false" cancelText="Cancel" okText="Save">
+                  <ion-option value="fingoals" selected="true">To meet Financial Goals</ion-option>
+                  <ion-option value="retire">save For Retirement</ion-option>
+                  <ion-option value="returns">Earn High Returns</ion-option>
+                  <ion-option value="grow">To Grow Your Money</ion-option>
+                </ion-select>
+              </ion-item>
+
+            <ion-item>
+                  <ion-label>When Do You Plan on Retiring?</ion-label>
+                  <ion-select [(ngModel)]="retire" (ngModelChange)="itemSelected('Retire',retire)" multiple="false" cancelText="Cancel" okText="Save">
+                    <ion-option value="0" selected="true">I am already retired</ion-option>
+                    <ion-option value="1to5">In about 1-7 years from now</ion-option>
+                    <ion-option value="6to10">In about 8-15 years from now</ion-option>
+                    <ion-option value="20+">More than 20 years from now</ion-option>
+                  </ion-select>
+            </ion-item>
   </ion-list>
 
-  <button ion-button (click)="submit()" class="submit-button">Continue</button>
+  <button ion-button (click)="submit()" class="submit-button">Submit</button>
 
 </ion-content>
