@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { User, LoginData } from '../models'; // Our custom interface used to represent a user (to allow static typing)
+import { User, LoginData, ApiData } from '../models'; // Our custom interface used to represent a user (to allow static typing)
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -63,5 +63,12 @@ export class UserProvider {
     const params = new HttpParams().set('email', email).set('password', password);
 
     return this.http.get<LoginData>(this.ROOT_URL + '/users/login', { params } );
+  }
+
+  // Calls the api to update the has_completed_questionnaire column in the database
+  // Tells us the user has filled out the questionnaire
+  updateHasFilledOutQuestionnaire(): Observable<ApiData> {
+    var data = {};
+    return this.http.put<ApiData>(this.ROOT_URL + '/users/filledOutQuestionnaire/' + this.currentUser.user_id, data);
   }
 }

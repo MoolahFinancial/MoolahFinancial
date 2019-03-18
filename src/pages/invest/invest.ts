@@ -3,7 +3,7 @@ import { NavController} from 'ionic-angular';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
 import { UserProvider } from '../../providers/user/user.service';
 import { TabsPage } from '../tabs/tabs';
-import { Portfolio, PortfolioData, BestPortfolioInfo } from '../../providers/models';
+import { Portfolio, PortfolioData, BestPortfolioInfo, ApiData } from '../../providers/models';
 
 @Component({
   selector: 'page-home',
@@ -29,8 +29,14 @@ export class InvestPage {
   }
 
   chooseInvestment() {
-    // this.userProvider.currentUser.has_completed_questionnaire = true
-    
+    // Mark that the user has successfully filled out the questionnaire
+    this.userProvider.updateHasFilledOutQuestionnaire().subscribe((data: ApiData) => {
+      if(data.success) {
+        // Update the local object representing the user as well
+        this.userProvider.currentUser.has_completed_questionnaire = true;
+        console.log("User has successfully filled out the questionnaire!", this.userProvider);
+      }
+    });
 
     this.navCtrl.push(TabsPage);
   }
