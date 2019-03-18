@@ -29,6 +29,9 @@ export class InvestPage {
   }
 
   chooseInvestment() {
+    // this.userProvider.currentUser.has_completed_questionnaire = true
+    
+
     this.navCtrl.push(TabsPage);
   }
 

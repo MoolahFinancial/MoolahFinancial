@@ -538,6 +538,22 @@
             <param name="question_text"></param> 
             <returns></returns>
         </member>
+        <member name="M:MoolahFinancialBackend.Controllers.TagsController.CheckForUserTag(System.Int32,System.String)">
+            <summary>  
+            Verifies if a user_tag exists based on the passed in user_id and question_text
+            </summary>
+            <param name="user_id"></param> 
+            <param name="question_text"></param> 
+            <returns></returns>
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.TagsController.UserTagExists(System.Int32,System.String)">
+            <summary>  
+            Checks if a user_tag exists based off of the user_id and the question_text
+            </summary>
+            <param name="userId"></param> 
+            <param name="questionText"></param> 
+            <returns></returns>
+        </member>
         <member name="T:MoolahFinancialBackend.Controllers.UsersController">
             <summary>
             The User Controller class.
@@ -581,6 +597,13 @@
             <param name="email">The email that the user is using to login </param>  
             <param name="password">The corresponding needed for a user to login </param>  
             <returns></returns> 
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.HasfilledOutQuestionnaire(System.Int32)">
+            <summary>  
+            Updates the has_completed_questionnaire column to true
+            </summary>  
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="M:MoolahFinancialBackend.Controllers.UsersController.DeactivateUser(System.Int32)">
             <summary>  

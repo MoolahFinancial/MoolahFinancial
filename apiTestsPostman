@@ -21,7 +21,7 @@ GET http://moolah-financial-api.azurewebsites.net/api/users
       pm.expect(users[0]).to.have.property('notification_preference');
       pm.expect(users[0]).to.have.property('primary_phone');
       pm.expect(users[0]).to.have.property('secondary_phone');
-      pm.expect(users[0]).to.have.property('is_deleted');
+      pm.expect(users[0]).to.have.property('is_deactivated');
       pm.expect(users[0]).to.have.property('risk');
     });
     pm.test("Response time is less than 10000ms", function () {

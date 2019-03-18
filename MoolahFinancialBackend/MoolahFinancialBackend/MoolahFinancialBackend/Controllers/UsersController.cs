@@ -140,6 +140,31 @@ namespace MoolahFinancialBackend.Controllers
         }
 
         /// <summary>  
+        /// Updates the has_completed_questionnaire column to true
+        /// </summary>  
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        [Route("filledOutQuestionnaire/{id:int:min(1)}")]
+        public IHttpActionResult UpdateHasFilledOutQuestionnaire(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            user matchingUser = db.users.Find(id);
+
+            matchingUser.has_completed_questionnaire = true;
+
+            db.SaveChanges();
+
+            // Returns a 200 http status with a success message
+            return Ok(new { success = true, message = "User has_completed_questionnaire column updated" });
+        }
+
+        /// <summary>  
         /// Sets an existing user as being deleted. This API doesn't delete a user from the table
         /// but sets is_deleted as being true (don't want to actually delete users).
         /// </summary>  
