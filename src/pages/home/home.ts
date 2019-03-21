@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { App, NavController } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { PortfolioProvider } from '../../providers/portfolio/portfolio.service';
@@ -31,8 +31,6 @@ export class HomePage {
   holdingWeights: [number];
   colors: [string];
   hexColors: [string];
-  zone: NgZone;
-  dataLoaded: boolean;
 
   constructor(public navCtrl: NavController, public app: App, public portfolioProvider: PortfolioProvider, public userProvider: UserProvider, public newsProvider: NewsProvider) {
     // If the current user is either null or undefined, return to the login screen
@@ -44,54 +42,118 @@ export class HomePage {
       console.log(this.userProvider.currentUser, "current user on home page");
       this.dataLoaded = false;
 
+      // Initialize donut chart variables here
       this.chartLabels = [""];
       this.holdingWeights = [0];
       this.colors = [""];
       this.hexColors = [""];
 
 
-      //this.getUsers();
-      this.getPortfolios();
       this.getNews();
 
-      console.log(this.userPortfolio);
-      //console.log("nav control" + navCtrl);
-
-
-
-
-
-      //this.myPortfolio = this.portfolio[0];
-      //console.log(this.myPortfolio);
     }
   }
 
-  ionViewWillEnter() {
-    //this.getPortfolios();
-    this.createDoughnutChart();
-
-  }
 
   ionViewDidLoad() {
+    // Get portfolio and holding information, then create doughnut chart.
     this.getPortfolios();
-    //var chartLabels = [];
-    // var holding: any;
-    // var hold: Holding;
-    // for (holding in this.userPortfolio.holdings) {
-    //   hold = <Holding>holding;
-    //   chartLabels.push(hold.holding_name);
-    // }
-    // console.log(chartLabels);
 
-    //this.createDoughnutChart();
+    // Create line chart for portfolio performance
+    this.createLineChart();
+  }
 
+  getPortfolios() {
+    this.portfolioProvider.getBestPortfolioInfo(this.userProvider.currentUser.user_id).subscribe((data: BestPortfolioInfo) => {
+
+      // Store user's portfolio ID number
+      this.portfolioId = <number>data.result[0].portfolio_id;
+
+      if (data.success && this.portfolioId != null) {
+        this.portfolioProvider.getPortfolioById(this.portfolioId).subscribe((portfolio: Portfolio) => {
+          this.userPortfolio = portfolio;
+          this.myTitle = this.userProvider.currentUser.first_name + '\'s Portfolio';
+
+          var hold: Holding;
+          var i = 0;
+
+          // Get all of the holdings in this portfolio and store them in a list of holdings
+          for (i=0; i < portfolio.holdings.length; i++) {
+            hold = <Holding>(portfolio.holdings[i]);
+
+            // Calculate an RGBA color value for each holding
+            var colorVal = 'rgba(';
+            var rgba;
+            for (var j = 0; j < 3; j++) {
+              var val = Math.floor((Math.random() *255));
+              if (j == 0) {
+                rgba = [val];
+              } else {
+                rgba.push(val);
+              }
+              colorVal += val;
+              colorVal += ',';
+            }
+            colorVal += '0.2)';
+
+            // If we're at the first element, we want to create a new list.
+            if (i==0) {
+              this.chartLabels = [hold.holding_name];
+              this.holdingWeights = [Math.round((hold.weight*100)*100)/100];
+
+              // Set the rgba color values in the chart to the random one calculated
+              this.colors = [colorVal];
+
+              // Set the hex color values in the chart to the rgba->hex color with stronger alpha value
+              this.hexColors = [this.rgbaToHexA(rgba)];
+            } else {
+              this.chartLabels.push(hold.holding_name);
+              this.holdingWeights.push(((hold.weight*100)*100)/100);
+
+              // Set the rgba color values in the chart to the random one calculated
+              this.colors.push(colorVal);
+
+              // Set the hex color values in the chart to the rgba->hex color with stronger alpha value
+              this.hexColors.push(this.rgbaToHexA(rgba));
+            }
+          }
+
+          this.createDoughnutChart();
+        });
+      }
+    });
+  }
+
+  createDoughnutChart() {
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        labels: this.chartLabels,
+        datasets: [{
+          label: 'Portfolio Breakdown',
+          data: this.holdingWeights,
+          backgroundColor: this.colors,
+          hoverBackgroundColor: this.hexColors,
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: this.myTitle,
+          fontSize: 18,
+        },
+        maintainAspectRatio: false,
+      }
+    });
+  }
+
+  createLineChart() {
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-
       type: 'line',
       data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        labels: ["Jan-18", "Feb-18", "Mar-18", "Apr-18", "May-18", "June-18", "July-18", "Aug-18", "Sept-18", "Oct-18", "Nov-18", "Dec-18"],
         datasets: [{
-          label: 'Portfolio Performance',
+          label: this.userProvider.currentUser.first_name + '\'s Portfolio',
           fill: false,
           lineTension: 0.1,
           backgroundColor: "rgba(75,192,192,0.4)",
@@ -109,137 +171,20 @@ export class HomePage {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [10,13,7,9,14,22,19,25,15,18,22,27],
+          data: [100,105,102,110,125,127,130,128,117,112,114,121],
           spanGaps: false,
-        }]
-      }
-    });
-  }
-
-  createDoughnutChart() {
-    console.log(this.chartLabels);
-
-    console.log("Creating doughnut chart")
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-
-      type: 'doughnut',
-      data: {
-        labels: this.chartLabels,//["Snapchat", "Facebook", "Google"], //
-        datasets: [{
-          label: 'Portfolio Breakdown',
-          data: this.holdingWeights, //[5,15,10],
-          backgroundColor: this.colors,
-            // 'rgba(255,255,102,0.2)',
-            // 'rgba(0,102,255,0.2)',
-            // 'rgba(255,0,102,0.2)',
-          hoverBackgroundColor: this.hexColors,
-            // "#FFFF66",
-            // "0066FF",
-            // "FF0066",
         }]
       },
       options: {
-        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: 'Portfolio Performance',
+          fontSize: 18,
+        },
       }
     });
   }
 
-  getPortfolios() {
-    this.portfolioProvider.getBestPortfolioInfo(this.userProvider.currentUser.user_id).subscribe((data: BestPortfolioInfo) => {
-      console.log(data);
-      console.log(data.result[0].portfolio_id);
-      this.portfolioId = <number>data.result[0].portfolio_id;
-
-      if (data.success && this.portfolioId != null) {
-        this.portfolioProvider.getPortfolioById(this.portfolioId).subscribe((portfolio: Portfolio) => {
-          console.log(portfolio);
-          this.userPortfolio = portfolio;
-          console.log(this.userPortfolio);
-          this.myTitle = portfolio.title;
-
-          var holding: any;
-          var hold: Holding;
-          var i = 0;
-          //var chartLabel = [];
-          for (i=0; i < portfolio.holdings.length; i++) {
-            hold = <Holding>(portfolio.holdings[i]);
-            console.log(hold);
-            console.log(hold.holding_name);
-
-            var colorVal = 'rgba(';
-            var rgba;
-            for (var j = 0; j < 3; j++) {
-              var val = Math.floor((Math.random() *255));
-              if (j == 0) {
-                rgba = [val];
-              } else {
-                rgba.push(val);
-              }
-              colorVal += val;//Math.floor((Math.random() *255));
-              colorVal += ',';
-            }
-            colorVal += '0.2)';
-
-            if (i==0) {
-              this.chartLabels = [hold.holding_name];
-              this.holdingWeights = [hold.weight*100];
-
-              this.colors = [colorVal];
-
-              this.hexColors = [this.rgbaToHexA(rgba)];
-            } else {
-              this.chartLabels.push(hold.holding_name);
-              this.holdingWeights.push(hold.weight*100);
-
-              this.colors.push(colorVal);
-              //this.colors.push('rgba(255,255,102,0.2)');
-              this.hexColors.push(this.rgbaToHexA(rgba));
-            }
-          }
-          this.dataLoaded = true;
-          console.log(this.dataLoaded);
-
-          //this.chartLabels = chartLabel;
-          console.log(this.chartLabels);
-          console.log(this.holdingWeights);
-          console.log(this.colors);
-          console.log(this.hexColors);
-          this.createDoughnutChart();
-
-          if (this.doughnutChart != null) {
-            //this.doughnutChart.update();
-            console.log("Updated chart");
-          }
-
-          // let active = this.navCtrl.getActive();
-          // this.navCtrl.pop();
-          // this.navCtrl.push(active.component);
-
-        });
-      }
-
-    });
-
-
-
-
-    //this.myHoldings = this.myPortfolio.holdings;
-
-    //console.log(this.userPortfolio);
-    //console.log(this.myHoldings);
-
-
-
-    // .then(data => {
-    //   this.portfolio = data;
-    //   console.log(this.portfolio);
-    //   this.myPortfolio = this.portfolio[0];
-    //   this.myTitle = this.myPortfolio.title;
-    //   this.myHoldings = this.myPortfolio.holdings;
-    //   console.log(this.myPortfolio);
-    //   console.log(this.myHoldings);
-    //});
-  }
 
   rgbaToHexA(rgb) {
     var r = rgb[0].toString(16);
