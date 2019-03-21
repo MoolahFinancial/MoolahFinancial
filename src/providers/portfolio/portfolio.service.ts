@@ -12,8 +12,6 @@ import { PortfolioData, BestPortfolioInfo, Portfolio } from '../models';
 @Injectable()
 export class PortfolioProvider {
 
-  portfolio: Portfolio
-
   readonly ROOT_URL = 'https://moolah-financial-api.azurewebsites.net/api';
 
   constructor(public http: HttpClient) { }
@@ -31,16 +29,6 @@ export class PortfolioProvider {
   // Retrieves a specific portfolio based on the passed in id
   getPortfolioById(userId: number): Observable<Portfolio> {
     return this.http.get<Portfolio>(this.ROOT_URL + '/Portfolios/' + userId);
-  }
-
-  getUserPortfolioInfo(userId: number) {
-    return new Promise(resolve => {
-      this.http.get<BestPortfolioInfo>(this.ROOT_URL + '/Portfolios/bestPortfolioInfo/' + userId).subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
-    });
   }
 
   // Returns one portfolio based on what we believe is the best recommendation for the current user

@@ -15,9 +15,26 @@
     </ion-item> -->
   </ion-list>
 
-  <canvas #doughnutCanvas></canvas>
+  <ion-card>
+    <!-- <ion-card-header>
+      {{port.title}}
+    </ion-card-header> -->
+    <ion-card-header>
+      {{myTitle}}
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
-  <canvas #lineCanvas></canvas>
+  <ion-card>
+    <ion-card-header>
+      {{myTitle}}
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
   <ion-list inset>
     <ion-item *ngFor="let article of news">
