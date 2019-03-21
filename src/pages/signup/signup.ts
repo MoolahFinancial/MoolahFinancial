@@ -4,7 +4,7 @@ import { InvestPage } from '../invest/invest';
 import { QuestionPage } from '../quest/quest';
 import { SECPage } from '../secforms/secforms';
 import { BankingPage } from '../banking/banking';
-import { HomePage } from '../home/home';
+import {TabsPage} from '../tabs/tabs';
 
 @Component({
   selector: 'page-home',
@@ -19,7 +19,7 @@ export class SignupPage {
   }
 
   continue(){
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push(TabsPage);   
   }
 
   questionaire(){
