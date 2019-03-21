@@ -40,7 +40,6 @@ export class HomePage {
       nav.setRoot(LoginPage);
     } else {
       console.log(this.userProvider.currentUser, "current user on home page");
-      this.dataLoaded = false;
 
       // Initialize donut chart variables here
       this.chartLabels = [""];
