@@ -598,7 +598,7 @@
             <param name="password">The corresponding needed for a user to login </param>  
             <returns></returns> 
         </member>
-        <member name="M:MoolahFinancialBackend.Controllers.UsersController.HasfilledOutQuestionnaire(System.Int32)">
+        <member name="M:MoolahFinancialBackend.Controllers.UsersController.UpdateHasFilledOutQuestionnaire(System.Int32)">
             <summary>  
             Updates the has_completed_questionnaire column to true
             </summary>  
@@ -643,6 +643,19 @@
             <param name="md5"></param>  
             <param name="userInput"></param>  
             <param name="storedHash"></param>  
+            <returns></returns> 
+        </member>
+        <member name="T:MoolahFinancialBackend.Controllers.UserTagController">
+            <summary>
+            The User Tag Controller class.
+            Contains all APIs for interacting with the UserTag junction table
+            </summary>
+        </member>
+        <member name="M:MoolahFinancialBackend.Controllers.UserTagController.GetNumQuestionsAnswered(System.Int32)">
+            <summary>  
+            Returns the number of tags a user has (number of questions a user has answered)
+            </summary>  
+            <param name="userId">  </param>  
             <returns></returns> 
         </member>
     </members>
