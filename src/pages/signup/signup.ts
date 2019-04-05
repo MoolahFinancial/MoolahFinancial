@@ -31,14 +31,7 @@ export class SignupPage {
     // Display the loading message
     LoadingController.present();
 
-    // Mark that the user has successfully filled out the questionnaire
-    this.userProvider.updateHasFilledOutQuestionnaire().subscribe((data: ApiData) => {
-      if(data.success) {
-        // Update the local object representing the user as well
-        this.userProvider.currentUser.has_completed_questionnaire = true;
-        console.log("User has successfully filled out the questionnaire!", this.userProvider);
-      }
-    });
+    
 
     // Check that users have filled out at least one question
     this.userProvider.getNumberQuestionsAnswered().subscribe((data: number) => {
@@ -49,6 +42,14 @@ export class SignupPage {
         console.log("The User has not filled out enough questions to continue");
         this.formProvider.loginAlert('Action Required', 'Please fill out the remaining questions');
       } else {
+        // Mark that the user has successfully filled out the questionnaire
+        this.userProvider.updateHasFilledOutQuestionnaire().subscribe((data: ApiData) => {
+          if(data.success) {
+            // Update the local object representing the user as well
+            this.userProvider.currentUser.has_completed_questionnaire = true;
+            console.log("User has successfully filled out the questionnaire!", this.userProvider);
+          }
+        });
         this.navCtrl.push(TabsPage);   
       }
     });   
