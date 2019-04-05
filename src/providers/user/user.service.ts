@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User, LoginData, ApiData } from '../models'; // Our custom interface used to represent a user (to allow static typing)
 import 'rxjs/add/operator/map';
+import { resolve } from 'path';
 
 @Injectable()
 export class UserProvider {
@@ -63,6 +64,11 @@ export class UserProvider {
     const params = new HttpParams().set('email', email).set('password', password);
 
     return this.http.get<LoginData>(this.ROOT_URL + '/users/login', { params } );
+  }
+
+  // Returns the number of user tags a user has saved (# questions answered)
+  getNumberQuestionsAnswered(): Observable<number> {
+    return this.http.get<number>(this.ROOT_URL + '/users/GetNumQuestionsAnswered/' + this.currentUser.user_id);
   }
 
   // Calls the api to update the has_completed_questionnaire column in the database
